@@ -341,6 +341,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\js\validaciones.js" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Global.asax" />
@@ -439,6 +440,7 @@
     <Content Include="Views\Persona\Registros.cshtml" />
     <Content Include="Views\Persona\Editar.cshtml" />
     <Content Include="Views\Graficas\Create.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -449,10 +451,8 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-
     <Compile Include="Controllers\GraficasController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Helpers\ChallengeResult.cs" />
     <Compile Include="Infraestructure\AutomaperWebProfile.cs" />
@@ -465,8 +465,11 @@
     <Compile Include="ViewModels\EstrategiaVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\PersonaVM.cs" />
+    <Compile Include="ViewModels\RolVM.cs" />
     <Compile Include="ViewModels\SeccionVM.cs" />
     <Compile Include="ViewModels\TelefonoVM.cs" />
+    <Compile Include="ViewModels\UsuarioRolVM.cs" />
+    <Compile Include="ViewModels\UsuarioVM.cs" />
     <Compile Include="ViewModels\ZonaVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -597,7 +600,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdminCampana_2020.Business\AdminCampana_2020.Business.csproj">
