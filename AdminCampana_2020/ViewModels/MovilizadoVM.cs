@@ -23,7 +23,10 @@ namespace AdminCampana_2020.ViewModels
         [DataType(DataType.EmailAddress)]
         public string StrEmail { get; set; }
         public string StrObservaciones { get; set; }
-        public DireccionVM DireccionVM { get; set; }
-        public TelefonoVM TelefonoVM { get; set; }
+        public int idUsuario { get; set; }
+        public int idStatus { get; set; }
+        public DireccionVM Direccion { get; set; }
+        public TelefonoVM Telefono { get; set; }
+        public StatusVM Status { get; set; }
     }
 }

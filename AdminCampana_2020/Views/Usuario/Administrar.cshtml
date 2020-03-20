@@ -1,0 +1,115 @@
+﻿@model List<AdminCampana_2020.ViewModels.UsuarioVM>
+
+<div class="bs-container" style="min-height:960px;">
+<section class="content-header">
+    <h1>
+        Administrar Movilizados
+        <small>(Consultar)</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"> <i class="fa fa-dashboard"></i> Inicio </a></li>
+        <li> <a href="#">Administrar</a></li>
+        <li class="active">Movilizados</li>
+    </ol>
+</section>
+<br />
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h5 class="box-title">
+                    <label class="text-success emailtitleletter">
+                        <i class="text-success fa fa-graduation-cap"></i>
+                        Octavio Vargas Soto
+                    </label>&nbsp;
+                </h5>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre(s)</th>
+                                    <th>Apellidos</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Nombres</td>
+                                    <td>@item.Apellidos</td>
+                                    <td>@item.Email</td>
+                                    @foreach (var rol in item.UsuarioRoles)
+                                    {
+                                        <td>@rol.Rol.Nombre</td>
+                                    }
+
+                                <td><button class="btn btn-sm btn-default" onclick="display(@item.Id)"><span class="fas fa-search"></span></button>&nbsp;<button class="btn btn-sm btn-default" onclick="display(@item.Id)"><span class="fas fa-exchange-alt"></span></button>&nbsp;<button class="btn btn-sm btn-default" onclick="update(@item.Id)"><span class="fas fa-user-edit "></span></button>&nbsp;<button class="btn btn-sm btn-default"><span class="fas fa-user-times "></span></button></td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Movilizado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Registro", "Movilizado", FormMethod.Post))
+            {
+                <div class="modal-body" id="data">
+
+                </div>
+                <div class="modal-footer" id="footer">
+                    <button type="submit" class="btn btn-sm btn-success" id="btnSave">Guardar Cambios</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function display(id)
+    {
+        const url = "/Usuario/GetUsuario?id=" + id + "&&type=1";
+        $('#data').load(url, function ()
+        {
+            $("#footer").remove();
+            $('#modalData').modal("show");
+        });
+    }
+
+    function update(id)
+    {
+         const url = "/Usuario/GetUsuario?id=" + id + "&&type=2";
+        $('#data').load(url, function ()
+        {
+            $('#modalData').modal("show");
+        });
+    }
+
+</script>

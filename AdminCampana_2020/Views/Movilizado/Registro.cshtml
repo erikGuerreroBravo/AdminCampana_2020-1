@@ -63,26 +63,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Telefono Celular:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.TelefonoVM.StrNumeroCelular, new { @class = "form-control input-sm", placeholder = "El Número Celular", required = "", type = "number", id = "Tel" })
-                                    @Html.ValidationMessageFor(model => model.TelefonoVM.StrNumeroCelular, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(model => model.Telefono.StrNumeroCelular, new { @class = "form-control input-sm", placeholder = "El Número Celular", required = "", type = "number", id = "Tel" })
+                                    @Html.ValidationMessageFor(model => model.Telefono.StrNumeroCelular, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label>Calle:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.DireccionVM.StrCalle, new { @class = "form-control input-sm", placeholder = "La Dirección:Calle", id = "Dir" })
-                                    @Html.ValidationMessageFor(model => model.DireccionVM.StrCalle, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(model => model.Direccion.StrCalle, new { @class = "form-control input-sm", placeholder = "La Dirección:Calle", id = "Dir" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.StrCalle, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label>Colonia:&nbsp;&nbsp;</label>
-                                    @Html.DropDownList("IdColonia", null, new { @class = "form-control input-sm", id = "IdColonia" })
+                                    @Html.DropDownListFor(model => model.Direccion.idColonia, null, new { @class = "form-control input-sm", id = "IdColonia" })
                                 </div>
                                 <div class="form-group">
-                                    <label>Número:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.DireccionVM.StrNumeroInterior, new { @class = "form-control input-sm", placeholder = "La Dirección:Número Interior", id = "NumExt" })
-                                    @Html.ValidationMessageFor(model => model.DireccionVM.StrNumeroInterior, "", new { @class = "text-danger" })
+                                    <label>Número Ext:&nbsp;&nbsp;</label>
+                                    @Html.TextBoxFor(model => model.Direccion.StrNumeroExterior, new { @class = "form-control input-sm", placeholder = "La Dirección:Número Interior", id = "NumExt" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.StrNumeroInterior, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Guardar" class="btn btn-success" id="btnEnviar" />
-                                    @*<a href="@Url.Action("Registro","Persona")" class="btn btn-info">Regresar</a>*@
+                                    <input type="submit" value="Guardar" class="btn btn-sm btn-success" id="btnEnviar" />
                                 </div>
                             </div>
                         </div>
@@ -105,7 +104,6 @@
     <script src="~/Content/js/validaciones.js?v=12"></script>
     
 }
-    <script src="~/Scripts/jquery-1.7.js"></script>
 
 <script>
     $(document).ready(function () {

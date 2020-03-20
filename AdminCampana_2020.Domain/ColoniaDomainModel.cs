@@ -14,7 +14,7 @@ namespace AdminCampana_2020.Domain
         public string StrTipoDeAsentamiento { get; set; }
         public string StrAsentamiento { get; set; }
 
-        public SeccionDomainModel SeccionDomainModel { get; set; }
+        public SeccionDomainModel Seccion { get; set; }
 
         public List<DireccionDomainModel> DireccionDomainModels { get; set; }
     }

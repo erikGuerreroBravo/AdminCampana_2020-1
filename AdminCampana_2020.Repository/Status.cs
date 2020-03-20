@@ -17,8 +17,8 @@ namespace AdminCampana_2020.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Status()
         {
-            this.Movilizado = new HashSet<Movilizado>();
             this.Usuario = new HashSet<Usuario>();
+            this.Movilizado = new HashSet<Movilizado>();
         }
     
         public int id { get; set; }
@@ -26,8 +26,8 @@ namespace AdminCampana_2020.Repository
         public string strDescripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Movilizado> Movilizado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movilizado> Movilizado { get; set; }
     }
 }

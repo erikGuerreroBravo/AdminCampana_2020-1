@@ -22,7 +22,6 @@ namespace AdminCampana_2020.Repository
         public string strObservaciones { get; set; }
         public Nullable<int> idTelefono { get; set; }
         public Nullable<int> idDireccion { get; set; }
-        public Nullable<int> idEstrategia { get; set; }
         public string strClaveElector { get; set; }
         public string strCurp { get; set; }
         public Nullable<int> idUsuario { get; set; }

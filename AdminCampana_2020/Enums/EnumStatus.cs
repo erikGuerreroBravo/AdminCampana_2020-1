@@ -5,10 +5,10 @@ using System.Web;
 
 namespace AdminCampana_2020.Enums
 {
-    public enum PerfilesEnum
+    public enum EnumStatus
     {
-        Multinivel = 1,
-        Campaña = 2,
-        EquipoTrabajo = 3
+        ALTA = 1,
+        BAJA = 2
     }
+
 }

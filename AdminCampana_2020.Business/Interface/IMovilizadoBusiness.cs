@@ -9,7 +9,7 @@ namespace AdminCampana_2020.Business.Interface
 {
     public interface IMovilizadoBusiness
     {
-        string AddUpdateMovilizado(MovilizadoDomainModel personaDM);
+        bool AddUpdateMovilizado(MovilizadoDomainModel personaDM);
         List<MovilizadoDomainModel> GetAllMovilizados();
         MovilizadoDomainModel GetMovilizadoById(int id);
         string UpdateMovilizado(MovilizadoDomainModel personaDM);

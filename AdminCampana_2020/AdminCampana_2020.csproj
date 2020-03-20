@@ -442,6 +442,9 @@
     <Content Include="Views\Error\NoScript.cshtml" />
     <Content Include="Views\Movilizado\Configuracion.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Movilizado\_Display.cshtml" />
+    <Content Include="Views\Movilizado\_Update.cshtml" />
+    <Content Include="Views\Usuario\Administrar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -458,7 +461,7 @@
     <Compile Include="Controllers\MetaController.cs" />
     <Compile Include="Controllers\MovilizadoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="Enums\PerfilesEnum.cs" />
+    <Compile Include="Enums\EnumStatus.cs" />
     <Compile Include="Helpers\ChallengeResult.cs" />
     <Compile Include="Infraestructure\AutomaperWebProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -473,6 +476,7 @@
     <Compile Include="ViewModels\MovilizadoVM.cs" />
     <Compile Include="ViewModels\RolVM.cs" />
     <Compile Include="ViewModels\SeccionVM.cs" />
+    <Compile Include="ViewModels\StatusVM.cs" />
     <Compile Include="ViewModels\TelefonoVM.cs" />
     <Compile Include="ViewModels\UsuarioRolVM.cs" />
     <Compile Include="ViewModels\UsuarioVM.cs" />

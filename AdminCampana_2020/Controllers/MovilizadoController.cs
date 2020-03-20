@@ -4,6 +4,8 @@ using AdminCampana_2020.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,6 +18,7 @@ namespace AdminCampana_2020.Controllers
         IColoniaBusiness IcoloniaBusiness;
         IZonaBusiness IzonaBusiness;
         ISeccionBusiness IseccionBusiness;
+       
 
         public MovilizadoController(IMovilizadoBusiness _ImovilizadoBusiness, IColoniaBusiness _IcoloniaBusiness, IZonaBusiness _IzonaBusiness, ISeccionBusiness _IseccionBusiness
             )
@@ -31,57 +34,37 @@ namespace AdminCampana_2020.Controllers
         [AllowAnonymous]
         public ActionResult Registro()
         {
-            ViewBag.IdColonia = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
+            ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public ActionResult Registro([Bind(Include = "StrNombre,StrApellidoPaterno,StrApellidoMaterno,TelefonoVM,StrNumeroCelular,DireccionVM")]MovilizadoVM movilizadoVM, string IdColonia)
+        [Authorize]
+        public ActionResult Registro(MovilizadoVM movilizadoVM)
         {
-            var coloniaId = int.Parse(IdColonia);
+            try
+            {
+                if (movilizadoVM != null)
+                {
+                     var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
 
+                    movilizadoVM.idUsuario = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
 
-            movilizadoVM.DireccionVM.ColoniaVM = new ColoniaVM();
-            movilizadoVM.DireccionVM.ColoniaVM.Id = coloniaId;
-
-
-            if (ModelState.IsValid)
+                    MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
+                    AutoMapper.Mapper.Map(movilizadoVM, movilizadoDomainModel);
+                    ImovilizadoBusiness.AddUpdateMovilizado(movilizadoDomainModel);
+                }
+            }
+            catch (Exception ex)
             {
 
-                DireccionDomainModel direccionDM = new DireccionDomainModel();
-
-                //SeccionDomainModel seccionDM = new SeccionDomainModel();
-                ColoniaDomainModel coloniaDM = new ColoniaDomainModel();
-                //ZonaDomainModel zonaDM = new ZonaDomainModel();
-                MovilizadoDomainModel movilizadoDM = new MovilizadoDomainModel();
-                TelefonoDomainModel telefonoDM = new TelefonoDomainModel();
-
-
-                AutoMapper.Mapper.Map(movilizadoVM.DireccionVM, direccionDM);
-
-                //AutoMapper.Mapper.Map(movilizadoVM.DireccionVM.SeccionVM, seccionDM);
-                AutoMapper.Mapper.Map(movilizadoVM.DireccionVM.ColoniaVM, coloniaDM);
-                //AutoMapper.Mapper.Map(movilizadoVM.DireccionVM.ZonaVM, zonaDM);
-                AutoMapper.Mapper.Map(movilizadoVM.TelefonoVM, telefonoDM);
-
-                AutoMapper.Mapper.Map(movilizadoVM, movilizadoDM);
-
-                movilizadoDM.DireccionDomainModel = direccionDM;
-                //movilizadoDM.DireccionDomainModel.SeccionDomainModel = seccionDM;
-                movilizadoDM.DireccionDomainModel.ColoniaDomainModel = coloniaDM;
-                //movilizadoDM.DireccionDomainModel.ZonaDomainModel = zonaDM;
-                movilizadoDM.TelefonoDomainModel = telefonoDM;
-
-                ImovilizadoBusiness.AddUpdateMovilizado(movilizadoDM);
+                throw new Exception(ex.Message);
             }
 
-            ViewBag.IdColonia = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
-            return View("Registro");
+            return RedirectToAction("Registro","Movilizado");
         }
 
         [HttpGet]
-        [AllowAnonymous]
         [Authorize]
         public ActionResult Registros()
         {
@@ -96,73 +79,101 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public JsonResult Consultar()
-        {
-            return Json(ImovilizadoBusiness.GetAllMovilizados(), JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
         [Authorize]
-        public ActionResult Editar(int _id)
+        public ActionResult GetMovilizado(int id, int type)
         {
-
-
-            if (User.Identity.IsAuthenticated)
+            MovilizadoVM movilizadoVM = null;
+            MovilizadoDomainModel movilizadoDomainModel = null;
+            switch (type)
             {
-                MovilizadoDomainModel movilizadoDM = ImovilizadoBusiness.GetMovilizadoById(_id);
-                if (movilizadoDM != null)
-                {
-                    MovilizadoVM movilizadoVM = new MovilizadoVM();
-                    AutoMapper.Mapper.Map(movilizadoDM, movilizadoVM);
-                    TelefonoVM telefonoVM = new TelefonoVM();
-                    AutoMapper.Mapper.Map(movilizadoDM.TelefonoDomainModel, telefonoVM);
-                    movilizadoVM.TelefonoVM = telefonoVM;
-                    return View("Editar", movilizadoVM);
-                }
-                else
-                {
-                    return RedirectToAction("InternalServerError", "Error");
-                }
+                case 1:
+                  movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(id);
+                  movilizadoVM = new MovilizadoVM();
+                    AutoMapper.Mapper.Map(movilizadoDomainModel, movilizadoVM);
+
+                    return PartialView("_Display", movilizadoVM);
+                case 2:
+                    movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(id);
+                    movilizadoVM = new MovilizadoVM();
+                    AutoMapper.Mapper.Map(movilizadoDomainModel, movilizadoVM);
+                    ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
+                    return PartialView("_Update", movilizadoVM);
+                case 3:
+                    break;
+                default:
+                    break;
             }
-            return RedirectToAction("Login","Account");
+            return PartialView("");
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [Authorize]
-        public ActionResult Editar([Bind(Include = "Id,StrNombre,StrApellidoPaterno,StrApellidoMaterno,TelefonoVM")]MovilizadoVM movilizadoVM)
-        {
-            if (movilizadoVM != null && ModelState.IsValid)
-            {
-                MovilizadoDomainModel movilizadoDM = new MovilizadoDomainModel();
-                TelefonoDomainModel telefonoDM = new TelefonoDomainModel();
-                AutoMapper.Mapper.Map(movilizadoVM.TelefonoVM,telefonoDM);
-                AutoMapper.Mapper.Map(movilizadoVM,movilizadoDM);
-                movilizadoDM.TelefonoDomainModel = telefonoDM;
-                ImovilizadoBusiness.UpdateMovilizado(movilizadoDM);
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public JsonResult Consultar()
+        //{
+        //    return Json(ImovilizadoBusiness.GetAllMovilizados(), JsonRequestBehavior.AllowGet);
+        //}
 
-            }
-            return RedirectToAction("Registros", "Movilizado");
-        }
+        //[HttpGet]
+        //[AllowAnonymous]
+        //[Authorize]
+        //public ActionResult Editar(int _id)
+        //{
 
-        [HttpGet]
-        public JsonResult GetDatosDireccion()
-        {
-            SeccionVM seccionVM = new SeccionVM();
-            SeccionDomainModel seccionDM = new SeccionDomainModel();
 
-            seccionDM = IseccionBusiness.GetSeccionById(1);
-           
-            if (seccionDM != null)
-            {
-                seccionVM = new SeccionVM();
-                AutoMapper.Mapper.Map(seccionDM, seccionVM);
-            }
-           
-            return Json(seccionVM, JsonRequestBehavior.AllowGet);
-        }
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        MovilizadoDomainModel movilizadoDM = ImovilizadoBusiness.GetMovilizadoById(_id);
+        //        if (movilizadoDM != null)
+        //        {
+        //            MovilizadoVM movilizadoVM = new MovilizadoVM();
+        //            AutoMapper.Mapper.Map(movilizadoDM, movilizadoVM);
+        //            TelefonoVM telefonoVM = new TelefonoVM();
+        //            AutoMapper.Mapper.Map(movilizadoDM.TelefonoDomainModel, telefonoVM);
+        //            movilizadoVM.TelefonoVM = telefonoVM;
+        //            return View("Editar", movilizadoVM);
+        //        }
+        //        else
+        //        {
+        //            return RedirectToAction("InternalServerError", "Error");
+        //        }
+        //    }
+        //    return RedirectToAction("Login","Account");
+        //}
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[Authorize]
+        //public ActionResult Editar([Bind(Include = "Id,StrNombre,StrApellidoPaterno,StrApellidoMaterno,TelefonoVM")]MovilizadoVM movilizadoVM)
+        //{
+        //    if (movilizadoVM != null && ModelState.IsValid)
+        //    {
+        //        MovilizadoDomainModel movilizadoDM = new MovilizadoDomainModel();
+        //        TelefonoDomainModel telefonoDM = new TelefonoDomainModel();
+        //        AutoMapper.Mapper.Map(movilizadoVM.TelefonoVM,telefonoDM);
+        //        AutoMapper.Mapper.Map(movilizadoVM,movilizadoDM);
+        //        movilizadoDM.TelefonoDomainModel = telefonoDM;
+        //        ImovilizadoBusiness.UpdateMovilizado(movilizadoDM);
+
+        //    }
+        //    return RedirectToAction("Registros", "Movilizado");
+        //}
+
+        //[HttpGet]
+        //public JsonResult GetDatosDireccion()
+        //{
+        //    SeccionVM seccionVM = new SeccionVM();
+        //    SeccionDomainModel seccionDM = new SeccionDomainModel();
+
+        //    seccionDM = IseccionBusiness.GetSeccionById(1);
+
+        //    if (seccionDM != null)
+        //    {
+        //        seccionVM = new SeccionVM();
+        //        AutoMapper.Mapper.Map(seccionDM, seccionVM);
+        //    }
+
+        //    return Json(seccionVM, JsonRequestBehavior.AllowGet);
+        //}
 
 
     }

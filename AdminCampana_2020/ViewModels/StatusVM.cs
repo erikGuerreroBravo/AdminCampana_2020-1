@@ -5,12 +5,13 @@ using System.Web;
 
 namespace AdminCampana_2020.ViewModels
 {
-    public class SeccionVM
+    public class StatusVM
     {
         public int Id { get; set; }
-        public string StrNombre { get; set; }
+        public string StrValor { get; set; }
         public string StrDescripcion { get; set; }
-        public int idZona { get; set; }
-        public ZonaVM Zona { get; set; }
+
+        public List<UsuarioVM> Usuario { get; set; }
+        public List<MovilizadoVM> Movilizado { get; set; }
     }
 }

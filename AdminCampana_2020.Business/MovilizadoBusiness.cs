@@ -27,30 +27,27 @@ namespace AdminCampana_2020.Business
         /// </summary>
         /// <param name="personaDM">Entidad PersonaDM</param>
         /// <returns>una cadena con el valor de la operación</returns>
-        public string AddUpdateMovilizado(MovilizadoDomainModel personaDM)
+        public bool AddUpdateMovilizado(MovilizadoDomainModel personaDM)
         {
-            string resultado = string.Empty;
+            bool resultado = false;
             if (personaDM != null)
             {
 
                 Movilizado movilizado = movilizadoRepository.SingleOrDefault(p => p.id == personaDM.Id);
 
-                if (movilizado != null)
+                if (movilizado.id > 0)
                 {
                     movilizado.strNombre = personaDM.StrNombre;
                     movilizado.strApellidoPaterno = personaDM.StrApellidoPaterno;
                     movilizado.strApellidoMaterno = personaDM.StrApellidoMaterno;
                     movilizado.strEmail = personaDM.StrEmail;
-                    movilizado.Direccion = new Direccion();
-                    movilizado.Direccion.id = personaDM.Id;
-                    movilizado.Direccion.strCalle = personaDM.DireccionDomainModel.StrCalle;
-                    movilizado.Direccion.strNumeroInterior = personaDM.DireccionDomainModel.StrNumeroInterior;
-                    movilizado.Direccion.strNumeroExterior = personaDM.DireccionDomainModel.StrNumeroExterior;
-                    movilizado.Direccion.idColonia = personaDM.DireccionDomainModel.ColoniaDomainModel.Id;
-                    movilizado.Telefono = new Telefono();
-                    movilizado.Telefono.strNumeroCelular = personaDM.TelefonoDomainModel.StrNumeroCelular;
+                    movilizado.Direccion.strCalle = personaDM.Direccion.StrCalle;
+                    movilizado.Direccion.strNumeroExterior = personaDM.Direccion.StrNumeroExterior;
+                    movilizado.Direccion.idColonia = personaDM.Direccion.idColonia;
+                    movilizado.Telefono.strNumeroCelular = personaDM.Telefono.StrNumeroCelular;
+
                     movilizadoRepository.Update(movilizado);
-                    resultado = "Se Actualizo correctamente";
+                    resultado = true;
 
                 }
 
@@ -61,17 +58,20 @@ namespace AdminCampana_2020.Business
                     movilizado.strApellidoPaterno = personaDM.StrApellidoPaterno;
                     movilizado.strApellidoMaterno = personaDM.StrApellidoMaterno;
                     movilizado.strEmail = personaDM.StrEmail;
-                    movilizado.Direccion = new Direccion();
-                    movilizado.Direccion.id = personaDM.Id;
-                    movilizado.Direccion.strCalle = personaDM.DireccionDomainModel.StrCalle;
-                    movilizado.Direccion.strNumeroInterior = personaDM.DireccionDomainModel.StrNumeroInterior;
-                    movilizado.Direccion.strNumeroExterior = personaDM.DireccionDomainModel.StrNumeroExterior;
-                    movilizado.Direccion.idColonia = personaDM.DireccionDomainModel.ColoniaDomainModel.Id;
-
-                    movilizado.Telefono = new Telefono();
-                    movilizado.Telefono.strNumeroCelular = personaDM.TelefonoDomainModel.StrNumeroCelular;
+                    movilizado.idUsuario = personaDM.idUsuario;
+                    movilizado.Direccion = new Direccion
+                    {
+                        strCalle = personaDM.Direccion.StrCalle,
+                        strNumeroExterior = personaDM.Direccion.StrNumeroExterior,
+                        idColonia = personaDM.Direccion.idColonia
+                        
+                    };
+                    movilizado.Telefono = new Telefono
+                    {
+                        strNumeroCelular = personaDM.Telefono.StrNumeroCelular
+                    };
                     movilizadoRepository.Insert(movilizado);
-                    resultado = "Se Inserto de Forma Correcta";
+                    resultado = true;
                 }
 
             }
@@ -93,7 +93,7 @@ namespace AdminCampana_2020.Business
                     movilizado.strApellidoMaterno = movilizadoDM.StrApellidoMaterno;
                     movilizado.strEmail = movilizadoDM.StrEmail;
                     movilizado.Telefono = new Telefono();
-                    movilizado.Telefono.strNumeroCelular = movilizadoDM.TelefonoDomainModel.StrNumeroCelular;
+                    movilizado.Telefono.strNumeroCelular = movilizadoDM.Telefono.StrNumeroCelular;
                     movilizadoRepository.Update(movilizado);
                     resultado = "Se Actualizo correctamente";
                 }
@@ -129,10 +129,28 @@ namespace AdminCampana_2020.Business
                 personaDM.StrApellidoPaterno = movilizado.strApellidoPaterno;
                 personaDM.StrApellidoMaterno = movilizado.strApellidoMaterno;
                 personaDM.StrEmail = movilizado.strEmail;
-
-                TelefonoDomainModel telefonoDM = new TelefonoDomainModel();
-                telefonoDM.StrNumeroCelular = movilizado.Telefono.strNumeroCelular;
-                personaDM.TelefonoDomainModel = telefonoDM;
+                personaDM.Telefono = new TelefonoDomainModel
+                {
+                    StrNumeroCelular = movilizado.Telefono.strNumeroCelular
+                };
+                personaDM.Direccion = new DireccionDomainModel
+                {
+                    StrCalle = movilizado.Direccion.strCalle,
+                    StrNumeroExterior = movilizado.Direccion.strNumeroExterior,
+                    idColonia = movilizado.Direccion.idColonia.Value,
+                    Colonia = new ColoniaDomainModel
+                    {
+                        StrAsentamiento = movilizado.Direccion.Colonia.strAsentamiento,
+                        Seccion = new SeccionDomainModel
+                        {
+                            StrNombre = movilizado.Direccion.Colonia.Seccion.strNombre,
+                            Zona = new ZonaDomainModel
+                            {
+                                StrNombre = movilizado.Direccion.Colonia.Seccion.Zona.strNombre
+                            }
+                        }
+                    }
+                };
                 return personaDM;
             }
             else

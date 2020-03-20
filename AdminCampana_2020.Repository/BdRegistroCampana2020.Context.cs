@@ -29,7 +29,6 @@ namespace AdminCampana_2020.Repository
         public virtual DbSet<Colonia> Colonia { get; set; }
         public virtual DbSet<Direccion> Direccion { get; set; }
         public virtual DbSet<Meta> Meta { get; set; }
-        public virtual DbSet<Movilizado> Movilizado { get; set; }
         public virtual DbSet<Perfil> Perfil { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Seccion> Seccion { get; set; }
@@ -38,5 +37,6 @@ namespace AdminCampana_2020.Repository
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Usuario_Rol> Usuario_Rol { get; set; }
         public virtual DbSet<Zona> Zona { get; set; }
+        public virtual DbSet<Movilizado> Movilizado { get; set; }
     }
 }

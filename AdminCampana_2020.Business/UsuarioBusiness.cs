@@ -53,7 +53,11 @@ namespace AdminCampana_2020.Business
                         Clave = usuarioDM.Usuario.Clave,
                         ProviderKey = usuarioDM.Usuario.ProviderKey,
                         ProviderName = usuarioDM.Usuario.ProviderName,
-                        idPerfil = usuarioDM.Usuario.IdPerfil
+                        //idPerfil = usuarioDM.Usuario.IdPerfil,
+                        idStatus = usuarioDM.Usuario.IdStatus,
+                        idUsuario = usuarioDM.Usuario.Id
+                        
+                        
                     };
                     usuario.Id_rol = usuarioDM.IdRol;
                     usuarioRolRepository.Insert(usuario);
@@ -93,7 +97,7 @@ namespace AdminCampana_2020.Business
                         usuarioRolDM.Rol = rolDM;
                         rolesDM.Add(usuarioRolDM);
                     }
-                    usuarioDM.UsuarioRolDomainModels = rolesDM;
+                    usuarioDM.UsuarioRoles = rolesDM;
                 }
                 return usuarioDM;
             }
@@ -102,6 +106,57 @@ namespace AdminCampana_2020.Business
                 return usuarioDM;
             }
             
+        }
+
+        public List<UsuarioDomainModel> GetUsuarios()
+        {
+            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1).ToList();
+            List<UsuarioDomainModel> usuarioDomainModels = new List<UsuarioDomainModel>();
+
+            foreach (Usuario item in usuarios)
+            {
+                UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+                usuarioDomainModel.Nombres = item.Nombres;
+                usuarioDomainModel.Apellidos = item.Apellidos;
+                usuarioDomainModel.Email = item.Email;
+                foreach (var rol in item.Usuario_Rol)
+                {
+                    UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();
+                    usuarioRolDomainModel.Rol = new RolDomainModel
+                    {
+                        Nombre = rol.Rol.Nombre
+                    };
+                    usuarioDomainModel.UsuarioRoles = new List<UsuarioRolDomainModel>();
+                    usuarioDomainModel.UsuarioRoles.Add(usuarioRolDomainModel);
+                }
+                usuarioDomainModels.Add(usuarioDomainModel);
+            }
+
+            return usuarioDomainModels;
+        }
+
+        public UsuarioDomainModel GetUsuario(int id)
+        {
+            UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+            Usuario usuario = usuarioRepository.SingleOrDefault(p => p.Id == id);
+
+            usuarioDomainModel.Id = usuario.Id;
+            usuarioDomainModel.Nombres = usuario.Nombres;
+            usuarioDomainModel.Apellidos = usuario.Apellidos;
+            usuarioDomainModel.Email = usuario.Email;
+            foreach (var item in usuario.Usuario_Rol)
+            {
+                UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();
+
+                usuarioRolDomainModel.Rol = new RolDomainModel
+                {
+                    Nombre = item.Rol.Nombre
+                };
+                usuarioDomainModel.UsuarioRoles.Add(usuarioRolDomainModel);
+            }
+
+            return usuarioDomainModel;
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AdminCampana_2020.Business.Interface;
 using AdminCampana_2020.Domain;
+using AdminCampana_2020.Encript;
 using AdminCampana_2020.Enums;
 using AdminCampana_2020.ViewModels;
 using System;
@@ -38,9 +39,10 @@ namespace AdminCampana_2020.Controllers
 
             if (usuarioVM != null)
             {
-                usuarioVM.Usuario.idPerfil = (int)PerfilesEnum.Multinivel;
-                //var properties = ClaimsPrincipal.Current.Identities.First();
-                //usuarioVM.Usuario.Id = int.Parse(properties.Claims.First(i => i.Type == ClaimTypes.NameIdentifier).Value);
+                usuarioVM.Usuario.idStatus = (int)EnumStatus.ALTA;
+                usuarioVM.Usuario.Clave = Funciones.Encrypt(usuarioVM.Usuario.Clave);
+                var properties = ClaimsPrincipal.Current.Identities.First();
+                usuarioVM.Usuario.Id = int.Parse(properties.Claims.First(i => i.Type == ClaimTypes.NameIdentifier).Value);
                 UsuarioRolDomainModel usuarioDM = new UsuarioRolDomainModel();
                 AutoMapper.Mapper.Map(usuarioVM,usuarioDM);
                 usuarioBusiness.AddUpdateUsuarios(usuarioDM);
@@ -48,7 +50,35 @@ namespace AdminCampana_2020.Controllers
 
             return RedirectToAction("Create","Usuario");
         }
-        
+
+        [HttpGet]
+        public ActionResult Administrar()
+        {
+            List<UsuarioDomainModel> usuarioDomainModels = usuarioBusiness.GetUsuarios();
+            List<UsuarioVM> usuarioVMs = new List<UsuarioVM>();
+            AutoMapper.Mapper.Map(usuarioDomainModels, usuarioVMs);
+            return View(usuarioVMs);
+        }
+
+        //[HttpGet]
+        //public ActionResult GetUsuario(int id, int type)
+        //{
+        //    UsuarioVM usuarioVM = null;
+        //    UsuarioDomainModel
+        //    switch (type)
+        //    {
+        //        case 1:
+        //            break;
+        //        case 2:
+        //            break;
+        //        case 3:
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
+
+
 
     }
 }

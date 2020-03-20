@@ -11,5 +11,7 @@ namespace AdminCampana_2020.Business.Interface
     {
         UsuarioDomainModel ValidarLogin(string email, string password);
         bool AddUpdateUsuarios(UsuarioRolDomainModel usuarioDM);
+        List<UsuarioDomainModel> GetUsuarios();
+        UsuarioDomainModel GetUsuario(int id);
     }
 }

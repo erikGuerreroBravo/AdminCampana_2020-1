@@ -58,7 +58,6 @@
           <Property Name="strObservaciones" Type="varchar(max)" />
           <Property Name="idTelefono" Type="int" />
           <Property Name="idDireccion" Type="int" />
-          <Property Name="idEstrategia" Type="int" />
           <Property Name="strClaveElector" Type="varchar" MaxLength="22" />
           <Property Name="strCurp" Type="varchar" MaxLength="22" />
           <Property Name="idUsuario" Type="int" />
@@ -369,7 +368,6 @@
           <EntitySet Name="Colonia" EntityType="RC2020Model.Colonia" />
           <EntitySet Name="Direccion" EntityType="RC2020Model.Direccion" />
           <EntitySet Name="Meta" EntityType="RC2020Model.Meta" />
-          <EntitySet Name="Movilizado" EntityType="RC2020Model.Movilizado" />
           <EntitySet Name="Perfil" EntityType="RC2020Model.Perfil" />
           <EntitySet Name="Rol" EntityType="RC2020Model.Rol" />
           <EntitySet Name="Seccion" EntityType="RC2020Model.Seccion" />
@@ -386,25 +384,9 @@
             <End Role="Colonia" EntitySet="Colonia" />
             <End Role="Direccion" EntitySet="Direccion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Movilizado_Direccion" Association="RC2020Model.FK_Movilizado_Direccion">
-            <End Role="Direccion" EntitySet="Direccion" />
-            <End Role="Movilizado" EntitySet="Movilizado" />
-          </AssociationSet>
           <AssociationSet Name="FK_Meta_Rol" Association="RC2020Model.FK_Meta_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Meta" EntitySet="Meta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movilizado_Status" Association="RC2020Model.FK_Movilizado_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="Movilizado" EntitySet="Movilizado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movilizado_Telefono" Association="RC2020Model.FK_Movilizado_Telefono">
-            <End Role="Telefono" EntitySet="Telefono" />
-            <End Role="Movilizado" EntitySet="Movilizado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movilizado_Usuario" Association="RC2020Model.FK_Movilizado_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Movilizado" EntitySet="Movilizado" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Perfil" Association="RC2020Model.FK_Usuario_Perfil">
             <End Role="Perfil" EntitySet="Perfil" />
@@ -429,6 +411,23 @@
           <AssociationSet Name="FK_Usuario_Usuario" Association="RC2020Model.FK_Usuario_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Usuario1" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="Movilizado" EntityType="RC2020Model.Movilizado" />
+          <AssociationSet Name="FK_Movilizado_Direccion" Association="RC2020Model.FK_Movilizado_Direccion">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Movilizado" EntitySet="Movilizado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movilizado_Status" Association="RC2020Model.FK_Movilizado_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Movilizado" EntitySet="Movilizado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movilizado_Telefono" Association="RC2020Model.FK_Movilizado_Telefono">
+            <End Role="Telefono" EntitySet="Telefono" />
+            <End Role="Movilizado" EntitySet="Movilizado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movilizado_Usuario" Association="RC2020Model.FK_Movilizado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Movilizado" EntitySet="Movilizado" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Auditoria">
@@ -477,28 +476,6 @@
           <Property Name="idRol" Type="Int32" />
           <NavigationProperty Name="Rol" Relationship="RC2020Model.FK_Meta_Rol" FromRole="Meta" ToRole="Rol" />
         </EntityType>
-        <EntityType Name="Movilizado">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strNombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="strApellidoPaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="strApellidoMaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="strEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="strObservaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="idTelefono" Type="Int32" />
-          <Property Name="idDireccion" Type="Int32" />
-          <Property Name="idEstrategia" Type="Int32" />
-          <Property Name="strClaveElector" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
-          <Property Name="strCurp" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
-          <Property Name="idUsuario" Type="Int32" />
-          <Property Name="idStatus" Type="Int32" />
-          <NavigationProperty Name="Direccion" Relationship="RC2020Model.FK_Movilizado_Direccion" FromRole="Movilizado" ToRole="Direccion" />
-          <NavigationProperty Name="Status" Relationship="RC2020Model.FK_Movilizado_Status" FromRole="Movilizado" ToRole="Status" />
-          <NavigationProperty Name="Telefono" Relationship="RC2020Model.FK_Movilizado_Telefono" FromRole="Movilizado" ToRole="Telefono" />
-          <NavigationProperty Name="Usuario" Relationship="RC2020Model.FK_Movilizado_Usuario" FromRole="Movilizado" ToRole="Usuario" />
-        </EntityType>
         <EntityType Name="Perfil">
           <Key>
             <PropertyRef Name="id" />
@@ -535,8 +512,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strValor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="strDescripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Status" FromRole="Status" ToRole="Movilizado" />
           <NavigationProperty Name="Usuario" Relationship="RC2020Model.FK_Usuario_Status" FromRole="Status" ToRole="Usuario" />
+          <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Status" FromRole="Status" ToRole="Movilizado" />
         </EntityType>
         <EntityType Name="Telefono">
           <Key>
@@ -562,12 +539,12 @@
           <Property Name="idPerfil" Type="Int32" />
           <Property Name="idUsuario" Type="Int32" />
           <Property Name="idStatus" Type="Int32" />
-          <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Usuario" FromRole="Usuario" ToRole="Movilizado" />
           <NavigationProperty Name="Perfil" Relationship="RC2020Model.FK_Usuario_Perfil" FromRole="Usuario" ToRole="Perfil" />
           <NavigationProperty Name="Status" Relationship="RC2020Model.FK_Usuario_Status" FromRole="Usuario" ToRole="Status" />
           <NavigationProperty Name="Usuario_Rol" Relationship="RC2020Model.FK_Usuario_Rol_Usuario" FromRole="Usuario" ToRole="Usuario_Rol" />
           <NavigationProperty Name="Usuario1" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario" ToRole="Usuario1" />
           <NavigationProperty Name="Usuario2" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario1" ToRole="Usuario" />
+          <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Usuario" FromRole="Usuario" ToRole="Movilizado" />
         </EntityType>
         <EntityType Name="Usuario_Rol">
           <Key>
@@ -613,18 +590,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Movilizado_Direccion">
-          <End Type="RC2020Model.Direccion" Role="Direccion" Multiplicity="0..1" />
-          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Direccion">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Movilizado">
-              <PropertyRef Name="idDireccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Meta_Rol">
           <End Type="RC2020Model.Rol" Role="Rol" Multiplicity="0..1" />
           <End Type="RC2020Model.Meta" Role="Meta" Multiplicity="*" />
@@ -634,42 +599,6 @@
             </Principal>
             <Dependent Role="Meta">
               <PropertyRef Name="idRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movilizado_Status">
-          <End Type="RC2020Model.Status" Role="Status" Multiplicity="0..1" />
-          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Movilizado">
-              <PropertyRef Name="idStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movilizado_Telefono">
-          <End Type="RC2020Model.Telefono" Role="Telefono" Multiplicity="0..1" />
-          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Telefono">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Movilizado">
-              <PropertyRef Name="idTelefono" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movilizado_Usuario">
-          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movilizado">
-              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -745,6 +674,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Movilizado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strNombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="strApellidoPaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="strApellidoMaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="strEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="strObservaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="idTelefono" Type="Int32" />
+          <Property Name="idDireccion" Type="Int32" />
+          <Property Name="strClaveElector" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="strCurp" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="idUsuario" Type="Int32" />
+          <Property Name="idStatus" Type="Int32" />
+          <NavigationProperty Name="Direccion" Relationship="RC2020Model.FK_Movilizado_Direccion" FromRole="Movilizado" ToRole="Direccion" />
+          <NavigationProperty Name="Status" Relationship="RC2020Model.FK_Movilizado_Status" FromRole="Movilizado" ToRole="Status" />
+          <NavigationProperty Name="Telefono" Relationship="RC2020Model.FK_Movilizado_Telefono" FromRole="Movilizado" ToRole="Telefono" />
+          <NavigationProperty Name="Usuario" Relationship="RC2020Model.FK_Movilizado_Usuario" FromRole="Movilizado" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Movilizado_Direccion">
+          <End Type="RC2020Model.Direccion" Role="Direccion" Multiplicity="0..1" />
+          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movilizado">
+              <PropertyRef Name="idDireccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movilizado_Status">
+          <End Type="RC2020Model.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movilizado">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movilizado_Telefono">
+          <End Type="RC2020Model.Telefono" Role="Telefono" Multiplicity="0..1" />
+          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telefono">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movilizado">
+              <PropertyRef Name="idTelefono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movilizado_Usuario">
+          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movilizado">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -792,25 +790,6 @@
               <MappingFragment StoreEntitySet="Meta">
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="intValor" ColumnName="intValor" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Movilizado">
-            <EntityTypeMapping TypeName="RC2020Model.Movilizado">
-              <MappingFragment StoreEntitySet="Movilizado">
-                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="strCurp" ColumnName="strCurp" />
-                <ScalarProperty Name="strClaveElector" ColumnName="strClaveElector" />
-                <ScalarProperty Name="idEstrategia" ColumnName="idEstrategia" />
-                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
-                <ScalarProperty Name="idTelefono" ColumnName="idTelefono" />
-                <ScalarProperty Name="strObservaciones" ColumnName="strObservaciones" />
-                <ScalarProperty Name="strEmail" ColumnName="strEmail" />
-                <ScalarProperty Name="strApellidoMaterno" ColumnName="strApellidoMaterno" />
-                <ScalarProperty Name="strApellidoPaterno" ColumnName="strApellidoPaterno" />
-                <ScalarProperty Name="strNombre" ColumnName="strNombre" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -891,6 +870,24 @@
             <EntityTypeMapping TypeName="RC2020Model.Zona">
               <MappingFragment StoreEntitySet="Zona">
                 <ScalarProperty Name="strDescripcion" ColumnName="strDescripcion" />
+                <ScalarProperty Name="strNombre" ColumnName="strNombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movilizado">
+            <EntityTypeMapping TypeName="RC2020Model.Movilizado">
+              <MappingFragment StoreEntitySet="Movilizado">
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="strCurp" ColumnName="strCurp" />
+                <ScalarProperty Name="strClaveElector" ColumnName="strClaveElector" />
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="idTelefono" ColumnName="idTelefono" />
+                <ScalarProperty Name="strObservaciones" ColumnName="strObservaciones" />
+                <ScalarProperty Name="strEmail" ColumnName="strEmail" />
+                <ScalarProperty Name="strApellidoMaterno" ColumnName="strApellidoMaterno" />
+                <ScalarProperty Name="strApellidoPaterno" ColumnName="strApellidoPaterno" />
                 <ScalarProperty Name="strNombre" ColumnName="strNombre" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

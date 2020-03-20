@@ -22,12 +22,9 @@ namespace AdminCampana_2020.Domain
         //Objetos de las relaciones
 
         public PerfilDomainModel Perfil { get; set; }
-        public UsuarioDomainModel _UsuarioDomainModel { get; set; }
-        public StatusDomainModel StatusDomainModel { get; set; }
+        public StatusDomainModel Status { get; set; }
         
-        public List<UsuarioRolDomainModel> UsuarioRolDomainModels { get; set; }
-        public List<MovilizadoDomainModel> MovilizadoDomainModels { get; set; }
-        public List<UsuarioDomainModel> UsuarioDomainModels { get; set; }
+        public List<UsuarioRolDomainModel> UsuarioRoles { get; set; }
         
     }
 }

@@ -50,7 +50,7 @@ namespace AdminCampana_2020.Business
                 ZonaDomainModel zonaDM = new ZonaDomainModel();
                 zonaDM.Id = seccion.Zona.id;
                 zonaDM.StrNombre = seccion.Zona.strNombre;
-                seccionDM.ZonaDomainModel = zonaDM;            
+                seccionDM.Zona = zonaDM;            
                 return seccionDM;
             }
             else
