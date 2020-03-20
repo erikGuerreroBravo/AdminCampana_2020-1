@@ -5,10 +5,10 @@ using System.Web;
 
 namespace AdminCampana_2020.ViewModels
 {
-    public class EstrategiaVM
+    public class PerfilVM
     {
         public int Id { get; set; }
-        public string StrNombre { get; set; }
-        public string StrDescripcion { get; set; }
+        public string strValor { get; set; }
+        public string strDescripcion { get; set; }
     }
 }

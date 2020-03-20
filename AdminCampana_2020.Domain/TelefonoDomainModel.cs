@@ -12,5 +12,7 @@ namespace AdminCampana_2020.Domain
         public string StrNumeroCelular {get;set;}
         public string StrNumeroHogar { get; set; }
         public string StrNumeroOtro { get; set; }
+
+        public List<MovilizadoDomainModel> MovilizadoDomainModels { get; set; }
     }
 }

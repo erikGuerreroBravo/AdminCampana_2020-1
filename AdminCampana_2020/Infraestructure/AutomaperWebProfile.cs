@@ -14,37 +14,54 @@ namespace AdminCampana_2020.Infraestructure
 
         public AutomaperWebProfile()
         {
-            ///entidad persona
-            CreateMap<PersonaVM, PersonaDomainModel>();
-            CreateMap<PersonaDomainModel, PersonaVM>();
+            ///entidad movilizado
+            CreateMap<MovilizadoVM, MovilizadoDomainModel>();
+            CreateMap<MovilizadoDomainModel, MovilizadoVM>();
+            
             //entidad direccion
             CreateMap<DireccionVM, DireccionDomainModel>();
             CreateMap<DireccionDomainModel, DireccionVM>();
-            ///entidad telefono
+            
+            //entidad telefono
             CreateMap<TelefonoVM, TelefonoDomainModel>();
             CreateMap<TelefonoDomainModel, TelefonoVM>();
+            
             //entidad colonia
             CreateMap<ColoniaVM, ColoniaDomainModel>();
             CreateMap<ColoniaDomainModel, ColoniaVM>();
+            
             //seccion
             CreateMap<SeccionVM, SeccionDomainModel>();
             CreateMap<SeccionDomainModel, SeccionVM>();
+            
             //zona
             CreateMap<ZonaVM, ZonaDomainModel>();
             CreateMap<ZonaDomainModel, ZonaVM>();
-            //Estrategia
-            CreateMap<EstrategiaVM, EstrategiaDomainModel>();
-            CreateMap<EstrategiaDomainModel, EstrategiaVM>();
 
             //Usuario
             CreateMap<UsuarioVM, UsuarioDomainModel>();
             CreateMap<UsuarioDomainModel, UsuarioVM>();
+            
             //Roles
             CreateMap<RolVM, RolDomainModel>();
             CreateMap<RolDomainModel, RolVM>();
+            
             //UsuarioRoles
             CreateMap<UsuarioRolVM, UsuarioRolDomainModel>();
             CreateMap<UsuarioRolDomainModel, UsuarioRolVM>();
+
+            //Metas
+            CreateMap<MetaVM,MetaDomainModel>();
+            CreateMap<MetaDomainModel,MetaVM>();
+
+            //Perfil
+            CreateMap<PerfilVM, PerfilDomainModel>();
+            CreateMap<PerfilDomainModel, PerfilVM>();
+
+            //Status
+
+            CreateMap<StatusVM,StatusDomainModel>();
+            CreateMap<StatusDomainModel,StatusVM>();
 
         }
 

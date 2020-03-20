@@ -10,5 +10,8 @@ namespace AdminCampana_2020.Business.Interface
     public interface IUsuarioBusiness
     {
         UsuarioDomainModel ValidarLogin(string email, string password);
+        bool AddUpdateUsuarios(UsuarioRolDomainModel usuarioDM);
+        List<UsuarioDomainModel> GetUsuarios();
+        UsuarioDomainModel GetUsuario(int id);
     }
 }

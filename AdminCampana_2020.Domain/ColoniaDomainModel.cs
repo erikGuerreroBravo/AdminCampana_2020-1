@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdminCampana_2020.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,9 @@ namespace AdminCampana_2020.Domain
         public string StrCodigoPostal { get; set; }
         public string StrTipoDeAsentamiento { get; set; }
         public string StrAsentamiento { get; set; }
+
+        public SeccionDomainModel Seccion { get; set; }
+
+        public List<DireccionDomainModel> DireccionDomainModels { get; set; }
     }
 }

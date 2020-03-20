@@ -1,0 +1,119 @@
+﻿@model AdminCampana_2020.ViewModels.MovilizadoVM
+
+@{
+    //ViewBag.Title = "Registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Registro", "Movilizado", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <noscript>
+        <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
+    </noscript>
+    <div class="bs-container" style="min-height:960px;">
+        <section class="content-header">
+            <h1>
+                Datos Personales
+                <small>(Agregar)</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"> <i class="fa fa-dashboard"></i> Inicio </a></li>
+                <li> <a href="#">captura</a></li>
+                <li class="active"> Datos Personales </li>
+            </ol>
+        </section>
+        <br />
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">
+                            <label class="text-success emailtitleletter">
+                                <i class="text-success fa fa-graduation-cap"></i>
+                                Octavio Vargas Soto
+
+                            </label>&nbsp;
+
+                        </h5>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>Nombre:&nbsp;&nbsp;</label>
+                                    @Html.TextBoxFor(model => model.StrNombre, new { @class = "form-control input-sm", placeholder = "Nombre", required = "", id = "N" })
+                                    @Html.ValidationMessageFor(model => model.StrNombre, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido Paterno:&nbsp;&nbsp;</label>
+                                    @Html.TextBoxFor(model => model.StrApellidoPaterno, new { @class = "form-control input-sm", placeholder = "Apellido Paterno", required = "", id = "AP" })
+                                    @Html.ValidationMessageFor(model => model.StrApellidoPaterno, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido Materno:&nbsp;&nbsp;</label>
+                                    @Html.TextBoxFor(model => model.StrApellidoMaterno, new { @class = "form-control input-sm", placeholder = "Apellido Materno", required = "", id = "AM" })
+                                    @Html.ValidationMessageFor(model => model.StrApellidoMaterno, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefono Celular:&nbsp;&nbsp;</label>
+                                    @Html.TextBoxFor(model => model.Telefono.StrNumeroCelular, new { @class = "form-control input-sm", placeholder = "El Número Celular", required = "", type = "number", id = "Tel" })
+                                    @Html.ValidationMessageFor(model => model.Telefono.StrNumeroCelular, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Calle:&nbsp;&nbsp;</label>
+                                    @Html.TextBoxFor(model => model.Direccion.StrCalle, new { @class = "form-control input-sm", placeholder = "La Dirección:Calle", id = "Dir" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.StrCalle, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Colonia:&nbsp;&nbsp;</label>
+                                    @Html.DropDownListFor(model => model.Direccion.idColonia, null, new { @class = "form-control input-sm", id = "IdColonia" })
+                                </div>
+                                <div class="form-group">
+                                    <label>Número Ext:&nbsp;&nbsp;</label>
+                                    @Html.TextBoxFor(model => model.Direccion.StrNumeroExterior, new { @class = "form-control input-sm", placeholder = "La Dirección:Número Interior", id = "NumExt" })
+                                    @Html.ValidationMessageFor(model => model.Direccion.StrNumeroInterior, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Guardar" class="btn btn-sm btn-success" id="btnEnviar" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<link href="~/Content/toastr.css" rel="stylesheet" />
+
+@section ViewSpecificJavascript{
+    <script src="~/Scripts/toastr.js"></script>
+    <script src="~/Scripts/persona/message-confirmation.js?v=1"></script>
+    <script src="~/Content/js/validaciones.js?v=12"></script>
+    
+}
+
+<script>
+    $(document).ready(function () {
+      
+        $.getJSON("/Movilizado/GetDatosDireccion").done(function (response) {
+
+            console.log(response.ZonaVM);
+
+        });
+    });
+
+</script>
+

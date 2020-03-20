@@ -15,14 +15,11 @@ namespace AdminCampana_2020.Repository
     public partial class Auditoria
     {
         public int id { get; set; }
-        public Nullable<int> idAfiliado { get; set; }
-        public Nullable<int> idCoordinador { get; set; }
+        public Nullable<int> idMovilizado { get; set; }
+        public Nullable<int> idUsuario { get; set; }
         public string hora { get; set; }
         public string fecha { get; set; }
         public string operacion { get; set; }
         public string modulo { get; set; }
-    
-        public virtual Afiliado Afiliado { get; set; }
-        public virtual Persona Persona { get; set; }
     }
 }

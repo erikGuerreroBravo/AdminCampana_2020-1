@@ -17,8 +17,7 @@ namespace AdminCampana_2020.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Direccion()
         {
-            this.Persona = new HashSet<Persona>();
-            this.Afiliado = new HashSet<Afiliado>();
+            this.Movilizado = new HashSet<Movilizado>();
         }
     
         public int id { get; set; }
@@ -27,15 +26,9 @@ namespace AdminCampana_2020.Repository
         public string strNumeroExterior { get; set; }
         public Nullable<int> idColonia { get; set; }
         public string strObservacion { get; set; }
-        public Nullable<int> idSeccion { get; set; }
-        public Nullable<int> idZona { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona { get; set; }
         public virtual Colonia Colonia { get; set; }
-        public virtual Seccion Seccion { get; set; }
-        public virtual Zona Zona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Afiliado> Afiliado { get; set; }
+        public virtual ICollection<Movilizado> Movilizado { get; set; }
     }
 }

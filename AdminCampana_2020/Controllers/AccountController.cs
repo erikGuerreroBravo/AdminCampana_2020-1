@@ -67,9 +67,9 @@ namespace AdminCampana_2020.Controllers
             ///estos claims se almacenan en la cookie para identificar al usuario y sus atributos o permisos
 
             //ahora establñecemos los claims con los roles del usuario
-            if (userDM.UsuarioRolesDM != null && userDM.UsuarioRolesDM.Any())
+            if (userDM.UsuarioRoles != null && userDM.UsuarioRoles.Any())
             {
-                Claims.AddRange(userDM.UsuarioRolesDM.Select(p => new Claim(ClaimTypes.Role, p.Rol.Nombre)));
+                Claims.AddRange(userDM.UsuarioRoles.Select(p => new Claim(ClaimTypes.Role, p.Rol.Nombre)));
             }
             var Identity = new ClaimsIdentity(Claims, DefaultAuthenticationTypes.ApplicationCookie); //entonces ahora creamos una identidad basada en claims con sus roles permisos y nombre del usuario
             ///cuando el usuario se logea se crea una cookie de autenticacion 
@@ -80,7 +80,7 @@ namespace AdminCampana_2020.Controllers
 
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
-                returnUrl = Url.Action("Registros", "Persona");
+                returnUrl = Url.Action("Registros", "Movilizado");
             }
             Result = Redirect(returnUrl);
 

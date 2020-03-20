@@ -18,6 +18,8 @@ namespace AdminCampana_2020.Repository
         public Usuario()
         {
             this.Usuario_Rol = new HashSet<Usuario_Rol>();
+            this.Usuario1 = new HashSet<Usuario>();
+            this.Movilizado = new HashSet<Movilizado>();
         }
     
         public int Id { get; set; }
@@ -27,8 +29,18 @@ namespace AdminCampana_2020.Repository
         public string Clave { get; set; }
         public string ProviderKey { get; set; }
         public string ProviderName { get; set; }
+        public Nullable<int> idPerfil { get; set; }
+        public Nullable<int> idUsuario { get; set; }
+        public Nullable<int> idStatus { get; set; }
     
+        public virtual Perfil Perfil { get; set; }
+        public virtual Status Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario_Rol> Usuario_Rol { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario1 { get; set; }
+        public virtual Usuario Usuario2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movilizado> Movilizado { get; set; }
     }
 }

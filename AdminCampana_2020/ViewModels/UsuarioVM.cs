@@ -14,6 +14,13 @@ namespace AdminCampana_2020.ViewModels
         public string Clave { get; set; }
         public string ProviderName { get; set; }
         public string ProviderKey { get; set; }
-        public List<UsuarioVM> UsuarioRolesVM { get; set; }
+        public int idPerfil { get; set; }
+        public int idStatus { get; set; }
+
+        //Objetos de las relaciones
+
+        public PerfilVM Perfil { get; set; }
+        public StatusVM Status { get; set; }
+        public List<UsuarioRolVM> UsuarioRoles { get; set; }
     }
 }

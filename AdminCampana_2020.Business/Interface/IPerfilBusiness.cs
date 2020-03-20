@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AdminCampana_2020.Business.Interface
 {
-    public interface IEstrategiaBusiness
+    public interface IPerfilBusiness
     {
-        List<EstrategiaDomainModel> GetEstrategias();
+        List<PerfilDomainModel> GetAllPerfiles();
     }
 }

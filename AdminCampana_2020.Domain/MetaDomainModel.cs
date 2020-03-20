@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace AdminCampana_2020.Domain
 {
-    public class EstrategiaDomainModel
+    public class MetaDomainModel
     {
         public int Id { get; set; }
-        public string StrNombre { get; set; }
-        public string StrDescripcion { get; set; }
+        public int IntValor { get; set; }
+
+        public RolDomainModel RolDomainModel { get; set; }
     }
 }

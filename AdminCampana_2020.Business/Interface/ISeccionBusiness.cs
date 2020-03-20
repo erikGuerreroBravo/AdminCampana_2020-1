@@ -10,5 +10,6 @@ namespace AdminCampana_2020.Business.Interface
     public interface ISeccionBusiness
     {
         List<SeccionDomainModel> GetSeccion();
+        SeccionDomainModel GetSeccionById(int id);
     }
 }

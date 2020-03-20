@@ -22,13 +22,14 @@ namespace AdminCampana_2020
             container.RegisterType<IRolBusiness, RolBusiness>();
             container.RegisterType<IUsuarioRolBusiness, UsuarioRolBusiness>();
 
-            container.RegisterType<IPersonaBusiness, PersonaBusiness>();
+            container.RegisterType<IMovilizadoBusiness, MovilizadoBusiness>();
             container.RegisterType<IColoniaBusiness, ColoniaBusiness>();
             container.RegisterType<ISeccionBusiness, SeccionBusiness>();
             container.RegisterType<IZonaBusiness, ZonaBusiness>();
-            container.RegisterType<IEstrategiaBusiness, EstrategiaBusiness>();
 
             container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<IMetaBusiness, MetaBusiness>();
+            container.RegisterType<IPerfilBusiness, PerfilBusiness>();
             //DependencyResolver.SetResolver(new UnityDependencyResolver(container));
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

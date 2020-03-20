@@ -17,12 +17,15 @@ namespace AdminCampana_2020.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Rol()
         {
+            this.Meta = new HashSet<Meta>();
             this.Usuario_Rol = new HashSet<Usuario_Rol>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Meta> Meta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario_Rol> Usuario_Rol { get; set; }
     }

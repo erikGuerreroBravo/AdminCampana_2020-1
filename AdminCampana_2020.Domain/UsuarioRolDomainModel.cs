@@ -1,4 +1,6 @@
-﻿using AdminCampana_2020.Repository;
+﻿using System;
+using System.Collections.Generic;
+using AdminCampana_2020.Repository;
 
 namespace AdminCampana_2020.Domain
 {
@@ -7,8 +9,10 @@ namespace AdminCampana_2020.Domain
         public int Id { get; set; }
         public int IdUsuario { get; set; }
         public int IdRol { get; set; }
+        public DateTime DtaFecha { get; set; }
 
         public UsuarioDomainModel Usuario { get; set; }
         public RolDomainModel Rol { get; set; }
+
     }
 }
