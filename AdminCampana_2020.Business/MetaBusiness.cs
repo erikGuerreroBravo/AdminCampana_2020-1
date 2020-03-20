@@ -35,8 +35,8 @@ namespace AdminCampana_2020.Business
                 MetaDomainModel metaDM = new MetaDomainModel();
 
                 metaDM.Id = item.id;
-                metaDM.meta = item.meta1.Value;
-                metaDM.Rol = new RolDomainModel
+                metaDM.IntValor = item.intValor.Value;
+                metaDM.RolDomainModel = new RolDomainModel
                 {
                     Id = item.Rol.Id,
                     Nombre = item.Rol.Nombre
@@ -57,12 +57,11 @@ namespace AdminCampana_2020.Business
             {
                 Meta meta = metaRepository.SingleOrDefault(p => p.id == _meta.Id);
 
-                meta.meta1 = _meta.meta;
+                meta.intValor = _meta.IntValor;
 
                 metaRepository.Update(meta);
                 respuesta = true;
             }
-
             return respuesta;
         }
     }

@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace AdminCampana_2020.Business
 {
-    public class PerfiBusiness : IPerfilBusiness
+    public class PerfilBusiness : IPerfilBusiness
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly PerfilRepository perfilRepository;
 
-        public PerfiBusiness(IUnitOfWork unitOfWork) 
+        public PerfilBusiness(IUnitOfWork unitOfWork) 
         {
             this.unitOfWork = unitOfWork;
             perfilRepository = new PerfilRepository(unitOfWork);
@@ -23,31 +23,31 @@ namespace AdminCampana_2020.Business
 
         public List<PerfilDomainModel> GetAllPerfiles() 
         {
-            List<PerfilDomainModel> perfilDomainModels = new List<PerfilDomainModel>();
+            List<PerfilDomainModel> perfilesDM = new List<PerfilDomainModel>();
             List<Perfil> perfils = new List<Perfil>();
 
             perfils = perfilRepository.GetAll().ToList();
 
             foreach (Perfil item in perfils)
             {
-                PerfilDomainModel perfilDomainModel = new PerfilDomainModel();
+                PerfilDomainModel perfilDm = new PerfilDomainModel();
 
-                perfilDomainModel.Id = item.id;
-                perfilDomainModel.strDescripcion = item.strDescripcion;
-                perfilDomainModel.strValor = item.strValor;
+                perfilDm.Id = item.id;
+                perfilDm.StrDescripcion = item.strDescripcion;
+                perfilDm.StrValor = item.strValor;
 
-                perfilDomainModels.Add(perfilDomainModel);
+                perfilesDM.Add(perfilDm);
             }
 
-            PerfilDomainModel perfilDomainModel1 = new PerfilDomainModel();
+            PerfilDomainModel perfilDM = new PerfilDomainModel();
 
-            perfilDomainModel1.Id = 0;
-            perfilDomainModel1.strDescripcion = "Seleccionar";
-            perfilDomainModel1.strValor = "Seleccionar";
+            perfilDM.Id = 0;
+            perfilDM.StrDescripcion = "Seleccionar";
+            perfilDM.StrValor = "Seleccionar";
 
-            perfilDomainModels.Insert(0, perfilDomainModel1);
+            perfilesDM.Insert(0, perfilDM);
 
-            return perfilDomainModels;
+            return perfilesDM;
         }
     }
 }

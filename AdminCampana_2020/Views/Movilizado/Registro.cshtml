@@ -1,16 +1,16 @@
-﻿@model AdminCampana_2020.ViewModels.PersonaVM
+﻿@model AdminCampana_2020.ViewModels.MovilizadoVM
 
 @{
     //ViewBag.Title = "Registro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Registro", "Persona",FormMethod.Post))
+@using (Html.BeginForm("Registro", "Movilizado", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-<noscript>
-    <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
-</noscript>
+    <noscript>
+        <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
+    </noscript>
     <div class="bs-container" style="min-height:960px;">
         <section class="content-header">
             <h1>
@@ -47,24 +47,19 @@
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <div class="form-group">
                                     <label>Nombre:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.StrNombre, new { @class = "form-control input-sm", placeholder = "El Nombre", required = "", id = "N" })
+                                    @Html.TextBoxFor(model => model.StrNombre, new { @class = "form-control input-sm", placeholder = "Nombre", required = "", id = "N" })
                                     @Html.ValidationMessageFor(model => model.StrNombre, "", new { @class = "text-danger" })
 
                                 </div>
                                 <div class="form-group">
                                     <label>Apellido Paterno:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.StrApellidoPaterno, new { @class = "form-control input-sm", placeholder = "El Apellido Paterno", required = "", id = "AP" })
+                                    @Html.TextBoxFor(model => model.StrApellidoPaterno, new { @class = "form-control input-sm", placeholder = "Apellido Paterno", required = "", id = "AP" })
                                     @Html.ValidationMessageFor(model => model.StrApellidoPaterno, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label>Apellido Materno:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.StrApellidoMaterno, new { @class = "form-control input-sm", placeholder = "El Apellido Materno", required = "", id = "AM" })
+                                    @Html.TextBoxFor(model => model.StrApellidoMaterno, new { @class = "form-control input-sm", placeholder = "Apellido Materno", required = "", id = "AM" })
                                     @Html.ValidationMessageFor(model => model.StrApellidoMaterno, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label>Email:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.StrEmail, new { @class = "form-control input-sm", placeholder = "Tu Correo", required = "", id = "Correo" })
-                                    @Html.ValidationMessageFor(model => model.StrEmail, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label>Telefono Celular:&nbsp;&nbsp;</label>
@@ -81,28 +76,9 @@
                                     @Html.DropDownList("IdColonia", null, new { @class = "form-control input-sm", id = "IdColonia" })
                                 </div>
                                 <div class="form-group">
-                                    <label>Número Interior:&nbsp;&nbsp;</label>
+                                    <label>Número:&nbsp;&nbsp;</label>
                                     @Html.TextBoxFor(model => model.DireccionVM.StrNumeroInterior, new { @class = "form-control input-sm", placeholder = "La Dirección:Número Interior", id = "NumExt" })
                                     @Html.ValidationMessageFor(model => model.DireccionVM.StrNumeroInterior, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label>Número Exterior:&nbsp;&nbsp;</label>
-                                    @Html.TextBoxFor(model => model.DireccionVM.StrNumeroExterior, new { @class = "form-control input-sm", placeholder = "La Dirección:Número Exterior", id = "NumInt" })
-                                    @Html.ValidationMessageFor(model => model.DireccionVM.StrNumeroExterior, "", new { @class = "text-danger" })
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Sección:&nbsp;&nbsp;</label>
-                                    @Html.DropDownList("IdSeccion", null, new { @class = "form-control input-sm", id = "IdSeccion" })
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Zona de Color:&nbsp;&nbsp;</label>
-                                    @Html.DropDownList("IdZona", null, new { @class = "form-control input-sm", id = "IdZona" })
-                                </div>
-                                <div class="form-group">
-                                    <label>Estrategía:&nbsp;&nbsp;</label>
-                                    @Html.DropDownList("IdEstrategias", null, new { @class = "form-control input-sm", id = "IdEstrategias" })
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Guardar" class="btn btn-success" id="btnEnviar" />
@@ -127,5 +103,19 @@
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/persona/message-confirmation.js?v=1"></script>
     <script src="~/Content/js/validaciones.js?v=12"></script>
+    
 }
+    <script src="~/Scripts/jquery-1.7.js"></script>
+
+<script>
+    $(document).ready(function () {
+      
+        $.getJSON("/Movilizado/GetDatosDireccion").done(function (response) {
+
+            console.log(response.ZonaVM);
+
+        });
+    });
+
+</script>
 

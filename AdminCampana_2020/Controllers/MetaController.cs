@@ -12,11 +12,11 @@ namespace AdminCampana_2020.Controllers
     public class MetaController : Controller
     {
 
-        private IMetaBusiness metaBusiness;
+        private IMetaBusiness ImetaBusiness;
 
         public MetaController(IMetaBusiness metaBusiness)
         {
-            this.metaBusiness = metaBusiness;
+            this.ImetaBusiness = metaBusiness;
         }
 
         public ActionResult Create()
@@ -30,7 +30,7 @@ namespace AdminCampana_2020.Controllers
             List<MetaVM> metasVM = null;
             List<MetaDomainModel> metasDM = new List<MetaDomainModel>();
 
-            metasDM = metaBusiness.GetAllMetas();
+            metasDM = ImetaBusiness.GetAllMetas();
 
             if (metasDM.Count > 0)
             {
@@ -50,7 +50,7 @@ namespace AdminCampana_2020.Controllers
             {
                 MetaDomainModel metaDM = new MetaDomainModel();
                 AutoMapper.Mapper.Map(metaVm, metaDM);
-                metaBusiness.UpdateMeta(metaDM);
+                ImetaBusiness.UpdateMeta(metaDM);
             }
            
 

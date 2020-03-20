@@ -38,7 +38,7 @@ namespace AdminCampana_2020.Controllers
         public ActionResult Login(LoginVM loginView, string returnUrl)
         {
             ActionResult result; //esto se debe inicializar
-            //string clave = Funciones.Encrypt(loginView.Password); //encryptamos el password
+            string clave = Funciones.Encrypt(loginView.Password); //encryptamos el password
             UsuarioDomainModel usuarioDM = usuarioBusiness.ValidarLogin(loginView.Email, loginView.Password);
             if (usuarioDM != null)
             {
@@ -67,9 +67,9 @@ namespace AdminCampana_2020.Controllers
             ///estos claims se almacenan en la cookie para identificar al usuario y sus atributos o permisos
 
             //ahora establñecemos los claims con los roles del usuario
-            if (userDM.UsuarioRoles != null && userDM.UsuarioRoles.Any())
+            if (userDM.UsuarioRolDomainModels != null && userDM.UsuarioRolDomainModels.Any())
             {
-                Claims.AddRange(userDM.UsuarioRoles.Select(p => new Claim(ClaimTypes.Role, p.Rol.Nombre)));
+                Claims.AddRange(userDM.UsuarioRolDomainModels.Select(p => new Claim(ClaimTypes.Role, p.Rol.Nombre)));
             }
             var Identity = new ClaimsIdentity(Claims, DefaultAuthenticationTypes.ApplicationCookie); //entonces ahora creamos una identidad basada en claims con sus roles permisos y nombre del usuario
             ///cuando el usuario se logea se crea una cookie de autenticacion 
@@ -80,7 +80,7 @@ namespace AdminCampana_2020.Controllers
 
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
-                returnUrl = Url.Action("Registros", "Persona");
+                returnUrl = Url.Action("Registros", "Movilizado");
             }
             Result = Redirect(returnUrl);
 

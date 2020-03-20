@@ -14,9 +14,9 @@ namespace AdminCampana_2020.Infraestructure
 
         public AutomaperWebProfile()
         {
-            ///entidad persona
-            CreateMap<PersonaVM, PersonaDomainModel>();
-            CreateMap<PersonaDomainModel, PersonaVM>();
+            ///entidad movilizado
+            CreateMap<MovilizadoVM, MovilizadoDomainModel>();
+            CreateMap<MovilizadoDomainModel, MovilizadoVM>();
             
             //entidad direccion
             CreateMap<DireccionVM, DireccionDomainModel>();
@@ -37,10 +37,6 @@ namespace AdminCampana_2020.Infraestructure
             //zona
             CreateMap<ZonaVM, ZonaDomainModel>();
             CreateMap<ZonaDomainModel, ZonaVM>();
-            
-            //Estrategia
-            CreateMap<EstrategiaVM, EstrategiaDomainModel>();
-            CreateMap<EstrategiaDomainModel, EstrategiaVM>();
 
             //Usuario
             CreateMap<UsuarioVM, UsuarioDomainModel>();

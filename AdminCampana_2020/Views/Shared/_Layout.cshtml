@@ -46,7 +46,7 @@
     @Scripts.Render("~/Bundles/js")
     @RenderSection("ViewSpecificJavascript", required: false)
 </body>
-<script>
+@*<script>
     $(document).ready(function () {
 
         $.getJSON("/Meta/GetMetaEstablecida").done(function (response) {
@@ -55,7 +55,7 @@
 
             for (var i = 0; i < response.length; i++) {
 
-                let dom = "<div class='row'><div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'><label style='font-size:10px;text-align:left;'>" + response[i].Rol.Nombre + "</label></div><div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'><input type='text' class='form-control input-sm' id=" + response[i].Id + " value=" + response[i].meta + "></div><div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'><button class='btn btn-sm btn-success glyphicon glyphicon-refresh' onclick='Update("+response[i].Id+")' ></button></div></div><br>";
+                //let dom = "<div class='row'><div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'><label style='font-size:10px;text-align:left;'>" + response[i].Rol.Nombre + "</label></div><div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'><input type='text' class='form-control input-sm' id=" + response[i].Id + " value=" + response[i].meta + "></div><div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'><button class='btn btn-sm btn-success glyphicon glyphicon-refresh' onclick='Update("+response[i].Id+")' ></button></div></div><br>";
 
                 document.getElementById('progresos').innerHTML += dom;
             }
@@ -70,5 +70,5 @@
           debugger;
             $.post("/Meta/UpdateMeta",MetaVM);
         }
-</script>
+</script>*@
 </html>

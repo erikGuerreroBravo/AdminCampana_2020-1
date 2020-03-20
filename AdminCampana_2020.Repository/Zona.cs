@@ -17,7 +17,7 @@ namespace AdminCampana_2020.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Zona()
         {
-            this.Direccion = new HashSet<Direccion>();
+            this.Seccion = new HashSet<Seccion>();
         }
     
         public int id { get; set; }
@@ -25,6 +25,6 @@ namespace AdminCampana_2020.Repository
         public string strDescripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Direccion> Direccion { get; set; }
+        public virtual ICollection<Seccion> Seccion { get; set; }
     }
 }

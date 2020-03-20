@@ -10,6 +10,8 @@ namespace AdminCampana_2020.Domain
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public List<UsuarioDomainModel> UsuarioRolesDM { get; set; }
+
+        public List<UsuarioRolDomainModel> UsuarioRolDomainModels { get; set; }
+        public List<MetaDomainModel> MetaDomainModels { get; set; }
     }
 }

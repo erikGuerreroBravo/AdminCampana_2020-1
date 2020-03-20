@@ -10,5 +10,6 @@ namespace AdminCampana_2020.Business.Interface
     public interface IZonaBusiness
     {
         List<ZonaDomainModel> GetZonas();
+       // ZonaDomainModel GetZonaById(int id);
     }
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AdminCampana_2020.Repository
 {
-    public class EstrategiaRepository : BaseRepository<Estrategia>
+    public class StatusRepository : BaseRepository<Status>
     {
-        public EstrategiaRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public StatusRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }

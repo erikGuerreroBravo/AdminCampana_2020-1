@@ -9,7 +9,8 @@ namespace AdminCampana_2020.Domain
     public class MetaDomainModel
     {
         public int Id { get; set; }
-        public int meta { get; set; }
-        public RolDomainModel Rol { get; set; }
+        public int IntValor { get; set; }
+
+        public RolDomainModel RolDomainModel { get; set; }
     }
 }

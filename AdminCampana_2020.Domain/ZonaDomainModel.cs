@@ -11,5 +11,7 @@ namespace AdminCampana_2020.Domain
         public int Id { get; set; }
         public string StrNombre { get; set; }
         public string StrDescripcion { get; set; }
+
+        public List<SeccionDomainModel> SeccionDomainModels { get; set; }
     }
 }

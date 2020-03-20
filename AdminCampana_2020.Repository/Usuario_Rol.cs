@@ -17,6 +17,7 @@ namespace AdminCampana_2020.Repository
         public int Id { get; set; }
         public int Id_Usuario { get; set; }
         public int Id_rol { get; set; }
+        public Nullable<System.DateTime> dteFecha { get; set; }
     
         public virtual Rol Rol { get; set; }
         public virtual Usuario Usuario { get; set; }

@@ -53,7 +53,7 @@ namespace AdminCampana_2020.Business
                         Clave = usuarioDM.Usuario.Clave,
                         ProviderKey = usuarioDM.Usuario.ProviderKey,
                         ProviderName = usuarioDM.Usuario.ProviderName,
-                        idPerfil = usuarioDM.Usuario.idPerfil
+                        idPerfil = usuarioDM.Usuario.IdPerfil
                     };
                     usuario.Id_rol = usuarioDM.IdRol;
                     usuarioRolRepository.Insert(usuario);
@@ -93,7 +93,7 @@ namespace AdminCampana_2020.Business
                         usuarioRolDM.Rol = rolDM;
                         rolesDM.Add(usuarioRolDM);
                     }
-                    usuarioDM.UsuarioRoles = rolesDM;
+                    usuarioDM.UsuarioRolDomainModels = rolesDM;
                 }
                 return usuarioDM;
             }
