@@ -15,7 +15,7 @@ namespace AdminCampana_2020.Repository
     public partial class Meta
     {
         public int id { get; set; }
-        public Nullable<int> meta1 { get; set; }
+        public Nullable<int> intValor { get; set; }
         public Nullable<int> idRol { get; set; }
     
         public virtual Rol Rol { get; set; }

@@ -25,21 +25,18 @@ namespace AdminCampana_2020.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Persona> Persona { get; set; }
-        public virtual DbSet<Telefono> Telefono { get; set; }
-        public virtual DbSet<Colonia> Colonia { get; set; }
-        public virtual DbSet<Estrategia> Estrategia { get; set; }
-        public virtual DbSet<Seccion> Seccion { get; set; }
-        public virtual DbSet<Zona> Zona { get; set; }
-        public virtual DbSet<Afiliado> Afiliado { get; set; }
         public virtual DbSet<Auditoria> Auditoria { get; set; }
+        public virtual DbSet<Colonia> Colonia { get; set; }
+        public virtual DbSet<Direccion> Direccion { get; set; }
+        public virtual DbSet<Meta> Meta { get; set; }
+        public virtual DbSet<Movilizado> Movilizado { get; set; }
+        public virtual DbSet<Perfil> Perfil { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<Seccion> Seccion { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<Telefono> Telefono { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Usuario_Rol> Usuario_Rol { get; set; }
-        public virtual DbSet<Aliado> Aliado { get; set; }
-        public virtual DbSet<Meta> Meta { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Direccion> Direccion { get; set; }
-        public virtual DbSet<Perfil> Perfil { get; set; }
+        public virtual DbSet<Zona> Zona { get; set; }
     }
 }

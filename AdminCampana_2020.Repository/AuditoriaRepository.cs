@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace AdminCampana_2020.Repository
 {
-    public class PersonaRepository : BaseRepository<Persona>
+    public class AuditoriaRepository : BaseRepository<Auditoria>
     {
-        public PersonaRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public AuditoriaRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 
         }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace AdminCampana_2020.ViewModels
 {
-    public class PersonaVM
+    public class MovilizadoVM
     {
         public int Id { get; set; }
 
@@ -25,6 +25,5 @@ namespace AdminCampana_2020.ViewModels
         public string StrObservaciones { get; set; }
         public DireccionVM DireccionVM { get; set; }
         public TelefonoVM TelefonoVM { get; set; }
-        public EstrategiaVM EstrategiaVM { get; set; }
     }
 }

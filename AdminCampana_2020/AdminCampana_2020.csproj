@@ -433,14 +433,14 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Persona\Registro.cshtml" />
+    <Content Include="Views\Movilizado\Registro.cshtml" />
     <Content Include="Views\Shared\_Estrategia.cshtml" />
-    <Content Include="Views\Persona\Registros.cshtml" />
-    <Content Include="Views\Persona\Editar.cshtml" />
+    <Content Include="Views\Movilizado\Registros.cshtml" />
+    <Content Include="Views\Movilizado\Editar.cshtml" />
     <Content Include="Views\Graficas\Create.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Error\NoScript.cshtml" />
-    <Content Include="Views\Persona\Configuracion.cshtml" />
+    <Content Include="Views\Movilizado\Configuracion.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -456,7 +456,7 @@
     <Compile Include="Controllers\GraficasController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\MetaController.cs" />
-    <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\MovilizadoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Enums\PerfilesEnum.cs" />
     <Compile Include="Helpers\ChallengeResult.cs" />
@@ -467,11 +467,10 @@
     </Compile>
     <Compile Include="ViewModels\ColoniaVM.cs" />
     <Compile Include="ViewModels\DireccionVM.cs" />
-    <Compile Include="ViewModels\EstrategiaVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\MetaVM.cs" />
     <Compile Include="ViewModels\PerfilVM.cs" />
-    <Compile Include="ViewModels\PersonaVM.cs" />
+    <Compile Include="ViewModels\MovilizadoVM.cs" />
     <Compile Include="ViewModels\RolVM.cs" />
     <Compile Include="ViewModels\SeccionVM.cs" />
     <Compile Include="ViewModels\TelefonoVM.cs" />

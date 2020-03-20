@@ -27,13 +27,21 @@ namespace AdminCampana_2020.Business
         /// <returns>regresa una lista de colonias</returns>
         public List<ColoniaDomainModel> GetColonias()
         {
-            List<ColoniaDomainModel> colonias = null;
-            colonias = coloniaRepository.GetAll().Select(p => new ColoniaDomainModel
+            List<ColoniaDomainModel> colonias = new List<ColoniaDomainModel>();
+            try
             {
-                Id = p.id,
-                StrAsentamiento = p.strAsentamiento,
-                StrTipoDeAsentamiento = p.strTipoDeAsentamiento
-            }).ToList();
+                colonias = coloniaRepository.GetAll().Select(p => new ColoniaDomainModel
+                {
+                    Id = p.id,
+                    StrAsentamiento = p.strAsentamiento,
+                    StrTipoDeAsentamiento = p.strTipoDeAsentamiento
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+            
             return colonias;
         }
         

@@ -37,7 +37,26 @@ namespace AdminCampana_2020.Business
             return secciones;
         }
 
+        public SeccionDomainModel GetSeccionById(int id)
+        {
+            Seccion seccion = seccionRepository.SingleOrDefault(p => p.id == id);
 
+            if (seccion != null)
+            {
+                SeccionDomainModel  seccionDM = new SeccionDomainModel();
+                seccionDM.Id = seccion.id;
+                seccionDM.StrNombre = seccion.strNombre;
 
+                ZonaDomainModel zonaDM = new ZonaDomainModel();
+                zonaDM.Id = seccion.Zona.id;
+                zonaDM.StrNombre = seccion.Zona.strNombre;
+                seccionDM.ZonaDomainModel = zonaDM;            
+                return seccionDM;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

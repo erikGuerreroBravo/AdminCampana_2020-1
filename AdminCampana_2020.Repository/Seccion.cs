@@ -23,8 +23,10 @@ namespace AdminCampana_2020.Repository
         public int id { get; set; }
         public string strNombre { get; set; }
         public string strDescripcion { get; set; }
+        public Nullable<int> idZona { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Colonia> Colonia { get; set; }
+        public virtual Zona Zona { get; set; }
     }
 }
