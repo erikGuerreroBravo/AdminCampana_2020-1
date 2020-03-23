@@ -25,6 +25,10 @@ namespace AdminCampana_2020.Domain
         public StatusDomainModel Status { get; set; }
         
         public List<UsuarioRolDomainModel> UsuarioRoles { get; set; }
-        
+
+        //Auxiliar
+
+        public string NombreCompleto { get; set; }
+        public int idCambio { get; set; }
     }
 }

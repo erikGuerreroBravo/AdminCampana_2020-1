@@ -373,7 +373,6 @@
           <EntitySet Name="Seccion" EntityType="RC2020Model.Seccion" />
           <EntitySet Name="Status" EntityType="RC2020Model.Status" />
           <EntitySet Name="Telefono" EntityType="RC2020Model.Telefono" />
-          <EntitySet Name="Usuario" EntityType="RC2020Model.Usuario" />
           <EntitySet Name="Usuario_Rol" EntityType="RC2020Model.Usuario_Rol" />
           <EntitySet Name="Zona" EntityType="RC2020Model.Zona" />
           <AssociationSet Name="FK_Colonia_Seccion" Association="RC2020Model.FK_Colonia_Seccion">
@@ -388,10 +387,6 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Meta" EntitySet="Meta" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Perfil" Association="RC2020Model.FK_Usuario_Perfil">
-            <End Role="Perfil" EntitySet="Perfil" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Rol_Rol" Association="RC2020Model.FK_Usuario_Rol_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
@@ -399,18 +394,6 @@
           <AssociationSet Name="FK_Seccion_Zona" Association="RC2020Model.FK_Seccion_Zona">
             <End Role="Zona" EntitySet="Zona" />
             <End Role="Seccion" EntitySet="Seccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Status" Association="RC2020Model.FK_Usuario_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Rol_Usuario" Association="RC2020Model.FK_Usuario_Rol_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Usuario" Association="RC2020Model.FK_Usuario_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Usuario1" EntitySet="Usuario" />
           </AssociationSet>
           <EntitySet Name="Movilizado" EntityType="RC2020Model.Movilizado" />
           <AssociationSet Name="FK_Movilizado_Direccion" Association="RC2020Model.FK_Movilizado_Direccion">
@@ -425,9 +408,26 @@
             <End Role="Telefono" EntitySet="Telefono" />
             <End Role="Movilizado" EntitySet="Movilizado" />
           </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="RC2020Model.Usuario" />
           <AssociationSet Name="FK_Movilizado_Usuario" Association="RC2020Model.FK_Movilizado_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Movilizado" EntitySet="Movilizado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Perfil" Association="RC2020Model.FK_Usuario_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Status" Association="RC2020Model.FK_Usuario_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol_Usuario" Association="RC2020Model.FK_Usuario_Rol_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Usuario" Association="RC2020Model.FK_Usuario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Usuario1" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Auditoria">
@@ -512,8 +512,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strValor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="strDescripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuario" Relationship="RC2020Model.FK_Usuario_Status" FromRole="Status" ToRole="Usuario" />
           <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Status" FromRole="Status" ToRole="Movilizado" />
+          <NavigationProperty Name="Usuario" Relationship="RC2020Model.FK_Usuario_Status" FromRole="Status" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Telefono">
           <Key>
@@ -524,27 +524,6 @@
           <Property Name="strNumeroHogar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="strNumeroOtro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Telefono" FromRole="Telefono" ToRole="Movilizado" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Clave" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ProviderName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="idPerfil" Type="Int32" />
-          <Property Name="idUsuario" Type="Int32" />
-          <Property Name="idStatus" Type="Int32" />
-          <NavigationProperty Name="Perfil" Relationship="RC2020Model.FK_Usuario_Perfil" FromRole="Usuario" ToRole="Perfil" />
-          <NavigationProperty Name="Status" Relationship="RC2020Model.FK_Usuario_Status" FromRole="Usuario" ToRole="Status" />
-          <NavigationProperty Name="Usuario_Rol" Relationship="RC2020Model.FK_Usuario_Rol_Usuario" FromRole="Usuario" ToRole="Usuario_Rol" />
-          <NavigationProperty Name="Usuario1" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario" ToRole="Usuario1" />
-          <NavigationProperty Name="Usuario2" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario1" ToRole="Usuario" />
-          <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Usuario" FromRole="Usuario" ToRole="Movilizado" />
         </EntityType>
         <EntityType Name="Usuario_Rol">
           <Key>
@@ -602,18 +581,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_Perfil">
-          <End Type="RC2020Model.Perfil" Role="Perfil" Multiplicity="0..1" />
-          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Perfil">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idPerfil" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Rol_Rol">
           <End Type="RC2020Model.Rol" Role="Rol" Multiplicity="1" />
           <End Type="RC2020Model.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
@@ -635,42 +602,6 @@
             </Principal>
             <Dependent Role="Seccion">
               <PropertyRef Name="idZona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Status">
-          <End Type="RC2020Model.Status" Role="Status" Multiplicity="0..1" />
-          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Rol_Usuario">
-          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RC2020Model.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Usuario_Rol">
-              <PropertyRef Name="Id_Usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Usuario">
-          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="RC2020Model.Usuario" Role="Usuario1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Usuario1">
-              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -731,6 +662,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ProviderName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="idPerfil" Type="Int32" />
+          <Property Name="idUsuario" Type="Int32" />
+          <Property Name="idStatus" Type="Int32" />
+          <NavigationProperty Name="Movilizado" Relationship="RC2020Model.FK_Movilizado_Usuario" FromRole="Usuario" ToRole="Movilizado" />
+          <NavigationProperty Name="Perfil" Relationship="RC2020Model.FK_Usuario_Perfil" FromRole="Usuario" ToRole="Perfil" />
+          <NavigationProperty Name="Status" Relationship="RC2020Model.FK_Usuario_Status" FromRole="Usuario" ToRole="Status" />
+          <NavigationProperty Name="Usuario_Rol" Relationship="RC2020Model.FK_Usuario_Rol_Usuario" FromRole="Usuario" ToRole="Usuario_Rol" />
+          <NavigationProperty Name="Usuario1" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario" ToRole="Usuario1" />
+          <NavigationProperty Name="Usuario2" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario1" ToRole="Usuario" />
+        </EntityType>
         <Association Name="FK_Movilizado_Usuario">
           <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="0..1" />
           <End Type="RC2020Model.Movilizado" Role="Movilizado" Multiplicity="*" />
@@ -739,6 +691,54 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Movilizado">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Perfil">
+          <End Type="RC2020Model.Perfil" Role="Perfil" Multiplicity="0..1" />
+          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Status">
+          <End Type="RC2020Model.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol_Usuario">
+          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RC2020Model.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Usuario">
+          <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="RC2020Model.Usuario" Role="Usuario1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario1">
               <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -840,22 +840,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="RC2020Model.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
-                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="Clave" ColumnName="Clave" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuario_Rol">
             <EntityTypeMapping TypeName="RC2020Model.Usuario_Rol">
               <MappingFragment StoreEntitySet="Usuario_Rol">
@@ -890,6 +874,22 @@
                 <ScalarProperty Name="strApellidoPaterno" ColumnName="strApellidoPaterno" />
                 <ScalarProperty Name="strNombre" ColumnName="strNombre" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="RC2020Model.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

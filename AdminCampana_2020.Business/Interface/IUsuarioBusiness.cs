@@ -13,5 +13,6 @@ namespace AdminCampana_2020.Business.Interface
         bool AddUpdateUsuarios(UsuarioRolDomainModel usuarioDM);
         List<UsuarioDomainModel> GetUsuarios();
         UsuarioDomainModel GetUsuario(int id);
+        List<string> GetUsuariosByApellidos(string apellidos);
     }
 }

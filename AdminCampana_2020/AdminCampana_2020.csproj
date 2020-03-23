@@ -180,6 +180,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\priority-box.css" />
     <Content Include="Content\css\table-responsive.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
@@ -429,6 +430,8 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <Content Include="Scripts\jquery-1.7.js" />
     <Content Include="Scripts\jquery-1.7.min.js" />
+    <Content Include="Content\css\jquery-ui.min.css" />
+    <Content Include="Content\js\jquery-ui.min.js" />
     <Content Include="Scripts\persona\message-confirmation.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
@@ -445,6 +448,7 @@
     <Content Include="Views\Movilizado\_Display.cshtml" />
     <Content Include="Views\Movilizado\_Update.cshtml" />
     <Content Include="Views\Usuario\Administrar.cshtml" />
+    <Content Include="Views\Usuario\_Change.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -605,7 +609,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

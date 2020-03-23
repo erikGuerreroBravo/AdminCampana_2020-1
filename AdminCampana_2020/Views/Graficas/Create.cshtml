@@ -42,50 +42,243 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
+
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                Grafica de Pastel
+                                                Progreso General                                                
                                             </div>
                                         </div>
                                         <div class="panel-body">
-                                            <canvas id="pie" style="width:50px"></canvas>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <canvas id="chLineMetas" style="height:100px;"></canvas>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <canvas id="chRadarMetas" style="height:100px;"></canvas>
+                                                </div>
+                                            </div>                                         
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                Visualización de Datos
+                                                Progreso de Multinivel
                                             </div>
                                         </div>
                                         <div class="panel-body">
-                                            <div class="form-group">
-                                                <table class="table table-responsive">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sección #32</th>
-                                                            <th>Sección #33</th>
-                                                            <th>Sección #34</th>
-                                                            <th>Sección #35</th>
-                                                            <th>Sección #36</th>
-                                                            <th>Sección #37</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td style="background-color:rgba(255, 99, 132, 0.5);text-align:center">45</td>
-                                                            <td style="background-color:rgba(54, 162, 235, 0.5);text-align:center">23</td>
-                                                            <td style="background-color:rgba(255, 206, 86, 0.5);text-align:center">65</td>
-                                                            <td style="background-color:rgba(75, 192, 192, 0.5);text-align:center">76</td>
-                                                            <td style="background-color:rgba(153, 102, 255, 0.5);text-align:center">67</td>
-                                                            <td style="background-color:rgba(255, 159, 64, 0.5);text-align:center">54</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <canvas id="chBarMultinivel" style="width:50px;height:60px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Cumplimiento de Multinivel
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4 class="control-sidebar-subheading">
+                                                Progreso
+                                                <span class="pull-right-container">
+                                                    <span class="label label-danger pull-right" id="metaMultinivel"></span>
+                                                </span>
+                                            </h4>
+                                            <div class="progress progress-xxs">
+                                                <div class="progress-bar progress-bar-danger" id="progresoMultinivel">
+                                                </div>
+                                            </div>
+                                            Prioridad
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxRedMultinivel" title="Prioridad Alta">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxYellowMultinivel" title="Prioridad Media">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxGreenMultinivel"  title="Prioridad Baja">
+
+                                                    </div>
+                                                </div>
+                                            </div>                                 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Progreso de Planilla Ganadora
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <canvas id="chBarPlanillaGanadora" style="width:50px;height:60px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Cumplimiento de Planilla Ganadora
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4 class="control-sidebar-subheading">
+                                                Progreso
+
+                                                <span class="pull-right-container">
+                                                    <span class="label label-danger pull-right" id="metaPlanilla"></span>
+                                                </span>
+                                            </h4>
+                                            <div class="progress progress-xxs">
+                                                <div class="progress-bar progress-bar-danger" id="progresoPlanilla">
+
+                                                </div>
+                                            </div>
+                                            Prioridad
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxRedPlantilla" title="Prioridad Alta">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxYellowPlantilla" title="Prioridad Media">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div  id="boxGreenPlantilla" title="Prioridad Baja">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Progreso de Campaña
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <canvas id="chBarCampaña" style="width:50px;height:60px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Cumplimiento de Campaña
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4 class="control-sidebar-subheading">
+                                                Progreso
+
+                                                <span class="pull-right-container">
+                                                    <span class="label label-danger pull-right" id="metaCampaña"></span>
+                                                </span>
+                                            </h4>
+                                            <div class="progress progress-xxs">
+                                                <div class="progress-bar progress-bar-danger" id="progresoCampaña">
+
+                                                </div>
+                                            </div>
+                                            Prioridad
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxRedCampaña" title="Prioridad Alta">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxYellowCampaña" title="Prioridad Media">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxGreenCampaña" title="Prioridad Baja">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Progreso de en Campaña
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <canvas id="chBarEnCampaña" style="width:50px;height:60px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                Cumplimiento de en Campaña
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h4 class="control-sidebar-subheading">
+                                                Progreso
+
+                                                <span class="pull-right-container">
+                                                    <span class="label label-danger pull-right" id="metaEnCampaña"></span>
+                                                </span>
+                                            </h4>
+                                            <div class="progress progress-xxs">
+                                                <div class="progress-bar progress-bar-danger" id="progresoEnCampaña">
+
+                                                </div>
+                                            </div>
+                                            Prioridad
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxRedEnCampaña" title="Prioridad Alta">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxYellowEnCampaña" title="Prioridad Media">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxGreenEnCampaña" title="Prioridad Baja">
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -93,58 +286,53 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4 ">
+                                <div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                Grafica Lineal
+                                               Progreso de Redes Sociales
                                             </div>
                                         </div>
                                         <div class="panel-body">
-                                            <canvas id="line" style="width:50px"></canvas>
+                                            <canvas id="chBarRedesSociales" style="width:50px;height:60px;"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                Controles de Filtrado
+                                                Cumplimiento de Redes Sociales
                                             </div>
                                         </div>
                                         <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 30</label>
-                                                        <input type="text" class="form-control" id="30" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 31</label>
-                                                        <input type="text" class="form-control" id="31" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 32</label>
-                                                        <input type="text" class="form-control" id="32" />
+                                            <h4 class="control-sidebar-subheading">
+                                                Progreso
+
+                                                <span class="pull-right-container">
+                                                    <span class="label label-danger pull-right" id="metaRed"></span>
+                                                </span>
+                                            </h4>
+                                            <div class="progress progress-xxs">
+                                                <div class="progress-bar progress-bar-danger" id="progresoRed">
+
+                                                </div>
+                                            </div>
+                                              Prioridad
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxRedRedes" title="Prioridad Alta">
+
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 33</label>
-                                                        <input type="text" class="form-control" id="33" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 34</label>
-                                                        <input type="text" class="form-control" id="34" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 35</label>
-                                                        <input type="text" class="form-control" id="35" />
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxYellowRedes" title="Prioridad Media">
+
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <input type="button" id="btnLine" value="Calcular" class="btn btn-sm btn-success" />
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <div id="boxGreenRedes" title="Prioridad Baja">
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,71 +341,9 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                Grafica de Barras
-                                            </div>
-                                        </div>
-                                        <div class="panel-body">
-                                            <canvas id="bar" style="width:50px"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                Controles de Filtrado
-                                            </div>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 30</label>
-                                                        <input type="text" class="form-control" id="36" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 31</label>
-                                                        <input type="text" class="form-control" id="37" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 32</label>
-                                                        <input type="text" class="form-control" id="38" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 33</label>
-                                                        <input type="text" class="form-control" id="39" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 34</label>
-                                                        <input type="text" class="form-control" id="40" />
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>Sección 35</label>
-                                                        <input type="text" class="form-control" id="41" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <input type="button" id="btnBar" value="Calcular" class="btn btn-sm btn-success" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -230,136 +356,85 @@
     
     $(document).ready(function () {
 
-        var ctxpie = document.getElementById('pie').getContext('2d');
-        var ctxline = document.getElementById('line').getContext('2d');
-        var ctxbar = document.getElementById('bar').getContext('2d');
+        var ctxMetas = document.getElementById('chLineMetas').getContext('2d');
+        var ctxMetasRadar = document.getElementById('chRadarMetas').getContext('2d');
 
-        var pie = new Chart(ctxpie, {
-                type: 'pie',
-                data: {
-                    labels: ['32', '33', '34', '35', '36', '37'],
-                    datasets: [{
-                        label: 'Votos',
-                        data: [45,23,65,76,67,54],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                            }
-                        }]
-                    }
-                }
-        });
+        var ctxMultinivel = document.getElementById('chBarMultinivel').getContext('2d');
+        var ctxPlanillaGanadora = document.getElementById('chBarPlanillaGanadora').getContext('2d');
+        var ctxCampaña = document.getElementById('chBarCampaña').getContext('2d');
+        var ctxEnCampaña = document.getElementById('chBarEnCampaña').getContext('2d');
+        var ctxRedesSociales = document.getElementById('chBarRedesSociales').getContext('2d');
 
-        $('#btnLine').click(evt = () =>
-        {
-            let dataValue = [];
-            let dataValue2 = [];
+        $.getJSON("/Meta/GetMovilizados").done((response) => {
 
-            dataValue[0] = $('#30').val();
-            dataValue[1] = $('#31').val();
-            dataValue[2] = $('#32').val();
+            console.log(response)  
 
-            dataValue2[0] = $('#33').val();
-            dataValue2[1] = $('#34').val();
-            dataValue2[2] = $('#35').val();
-
-             var line = new Chart(ctxline, {
+            var Metas = new Chart(ctxMetas, {
                 type: 'line',
                 data: {
-                    labels: ['30', '31', '32'],
+                    labels: ['Multinivel',"Planilla Ganadora","Campaña","En Campaña","Redes Sociales"],
                     datasets: [{
-                        label: 'Secciones y Votos',
-                        data: dataValue,
+                        label: ['Balance General'],
+                        data: [response[1][0],response[1][1],response[1][2],response[1][3],response[1][4]],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)'
+                            'rgba(236, 112, 99, 0.2)',
+                            'rgba(165, 105, 189, 0.2)',
+                            'rgba(93, 173, 226, 0.2)',
+                            'rgba(69, 179, 157, 0.2)',
+                            'rgba(88, 214, 141 , 0.2)',
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)'
+                            'rgba(236, 112, 99, 1)',
+                            'rgba(165, 105, 189, 1)',
+                            'rgba(93, 173, 226, 1)',
+                            'rgba(69, 179, 157, 1)',
+                            'rgba(88, 214, 141 , 1)',
                         ],
-                        borderWidth: 1,
-                        fill:true
-                    },
-                    {
-                        label: 'Secciones y Votos',
-                        data: dataValue2,
-                        backgroundColor: [
-                            'rgba(244, 208, 63, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(244, 208, 63, 1)'
-                        ],
-                        borderWidth: 1,
-                        fill: true
-                    }
-                    ]
-                 }
-                 ,
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                            }
-                        }]
-                    }
+                        borderWidth: 2
+                    }]
                 }
             });
-        })
 
-        $('#btnBar').click(evt = () => {
+            var MetasRadar = new Chart(ctxMetasRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Multinivel', 'Planilla', 'Campaña', 'Equipo de Trabajo', 'Redes Sociales'],
+                    datasets: [
+                        {
+                        label: [ "Fuente de Votos"],
+                        data: [response[1][0],response[1][1],response[1][2],response[1][3],response[1][4]],
+                        backgroundColor: [
+                            'rgba(93, 173, 226, 0.2)',
+                            'rgba(93, 173, 226, 0.2)',
+                            'rgba(93, 173, 226, 0.2)',
+                            'rgba(93, 173, 226, 0.2)',
+                            'rgba(93, 173, 226, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(93, 173, 226, 1)',
+                            'rgba(93, 173, 226, 1)',
+                            'rgba(93, 173, 226, 1)',
+                            'rgba(93, 173, 226, 1)',
+                            'rgba(93, 173, 226, 1)',
+                        ],
+                    }]
+                },
+            });
 
-            let dataValue = [];
-
-            dataValue[0] = $('#36').val();
-            dataValue[1] = $('#37').val();
-            dataValue[2] = $('#38').val();
-            dataValue[3] = $('#39').val();
-            dataValue[4] = $('#40').val();
-            dataValue[5] = $('#41').val();
-
-             var bar = new Chart(ctxbar, {
+            var Multinivel = new Chart(ctxMultinivel, {
                 type: 'bar',
                 data: {
-                    labels: ['36', '37', '38', '39', '40', '41'],
+                    labels: ['Objetivo', 'Actual'],
                     datasets: [{
-                        label: 'Secciones y Votos',
-                        data: dataValue,
+                        label: 'Objetivo',
+                        data: [response[0][0], response[1][0]],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
+                            'rgba(54, 162, 235, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -368,13 +443,261 @@
                     scales: {
                         yAxes: [{
                             ticks: {
-                                beginAtZero: true,
+                                beginAtZero: true
                             }
                         }]
                     }
                 }
             });
-        })
+
+            var PlanillaGanadora = new Chart(ctxPlanillaGanadora, {
+                type: 'bar',
+                data: {
+                    labels: ['Objetivo', 'Actual'],
+                    datasets: [{
+                         label: 'Objetivo',
+                        data: [response[0][1], response[1][1]],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var Campaña = new Chart(ctxCampaña, {
+                type: 'bar',
+                data: {
+                     labels: ['Objetivo', 'Actual'],
+                    datasets: [{
+                         label: 'Objetivo',
+                        data: [response[0][2], response[1][2]],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var EnCampaña = new Chart(ctxEnCampaña, {
+                type: 'bar',
+                data: {
+                    labels: ['Objetivo', 'Actual'],
+                    datasets: [{
+                         label: 'Objetivo',
+                        data: [response[0][3], response[1][3]],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var RedesSociales = new Chart(ctxRedesSociales, {
+                type: 'bar',
+                data: {
+                    labels: ['Objetivo', 'Actual'],
+                    datasets: [{
+                         label: 'Objetivo',
+                        data: [response[0][4], response[1][4]],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            setPriority(response);
+        });
+
+
+        function setPriority(response)
+        {
+
+            let priorityMultinivel = [];
+            let priorityPlantilla = [];
+            let priorityCampaña = [];
+            let priorityEnCampaña = [];
+            let priorityRedes = [];
+
+            priorityMultinivel[0] = response[0][0] * .25;
+            priorityMultinivel[1] = response[0][0] * .50;
+            priorityMultinivel[2] = response[0][0] * .75;
+
+            priorityPlantilla[0] = response[0][1] * .25;
+            priorityPlantilla[1] = response[0][1] * .50;
+            priorityPlantilla[2] = response[0][1] * .75;
+
+            priorityCampaña[0] = response[0][2] * .25;
+            priorityCampaña[1] = response[0][2] * .50;
+            priorityCampaña[2] = response[0][2] * .75;
+
+            priorityEnCampaña[0] = response[0][3] * .25;
+            priorityEnCampaña[1] = response[0][3] * .50;
+            priorityEnCampaña[2] = response[0][3] * .75;
+
+            priorityRedes[0] = response[0][4] * .25;
+            priorityRedes[1] = response[0][4] * .50;
+            priorityRedes[2] = response[0][4] * .75;
+
+
+            let progres = 100 * response[1][0] / response[0][0];
+            $('#metaMultinivel').text(Math.trunc(progres)+"%");
+            $('#progresoMultinivel').css("width", progres+"%");
+
+            progres = 100 * response[1][1] / response[0][1];   
+            $('#metaPlanilla').text(Math.trunc(progres)+"%");
+            $('#progresoPlanilla').css("width", progres+"%");
+
+            progres = 100 * response[1][2] / response[0][2];       
+            $('#metaCampaña').text(Math.trunc(progres)+"%");
+            $('#progresoCampaña').css("width", progres+"%");
+
+            progres = 100 * response[1][3] / response[0][3];       
+            $('#metaEnCampaña').text(Math.trunc(progres)+"%");
+            $('#progresoEnCampaña').css("width", progres+"%");
+
+            progres = 100 * response[1][4] / response[0][4];       
+            $('#metaRed').text(Math.trunc(progres)+"%");
+            $('#progresoRed').css("width",progres+"%");
+  
+
+            //Multinivel
+            if (response[1][0] < priorityMultinivel[0]) {
+                $('#boxRedMultinivel').addClass("boxRed");
+                $('#boxYellowMultinivel').addClass("boxDefault");
+                $('#boxGreenMultinivel').addClass("boxDefault");
+            }else  if (response[1][0] >= priorityMultinivel[0] && response[1][0] < priorityMultinivel[1]) {
+                $('#boxRedMultinivel').addClass("boxDefault");
+                $('#boxYellowMultinivel').addClass("b0xYellow");
+                $('#boxGreenMultinivel').addClass("boxDefault");
+            }else  if (response[1][0] >= priorityMultinivel[2]) {
+                $('#boxRedMultinivel').addClass("boxDefault");
+                $('#boxYellowMultinivel').addClass("boxDefault");
+                $('#boxGreenMultinivel').addClass("boxGreen");
+            }
+
+            //PlanillaGanadora
+            if (response[1][1] < priorityPlantilla[0]) {
+                $('#boxRedPlantilla').addClass("boxRed");
+                $('#boxYellowPlantilla').addClass("boxDefault");
+                $('#boxGreenPlantilla').addClass("boxDefault");
+            }else  if (response[1][1] >= priorityPlantilla[0] && response[1][1] < priorityPlantilla[1]) {
+                $('#boxRedPlantilla').addClass("boxDefault");
+                $('#boxYellowPlantilla').addClass("boxYellow");
+                $('#boxGreenPlantilla').addClass("boxDefault");
+            }else  if (response[1][1] >= priorityPlantilla[2]) {
+                $('#boxRedPlantilla').addClass("boxDefault");
+                $('#boxYellowPlantilla').addClass("boxDefault");
+                $('#boxGreenPlantilla').addClass("boxGreen");
+            }
+
+            //Campaña
+            if (response[1][2] < priorityCampaña[0]) {
+                $('#boxRedCampaña').addClass("boxRed");
+                $('#boxYellowCampaña').addClass("boxDefault");
+                $('#boxGreenCampaña').addClass("boxDefault");
+            }else  if (response[1][2] >= priorityCampaña[0] && response[1][2] < priorityCampaña[1]) {
+                $('#boxRedCampaña').addClass("boxDefault");
+                $('#boxYellowCampaña').addClass("boxYellow");
+                $('#boxGreenCampaña').addClass("boxDefault");
+            }else  if (response[1][2] >= priorityCampaña[2]) {
+                $('#boxRedCampaña').addClass("boxDefault");
+                $('#boxYellowCampaña').addClass("boxDefault");
+                $('#boxGreenCampaña').addClass("boxGreen");
+            }
+
+            //EnCampaña
+            if (response[1][3] < priorityEnCampaña[0]) {
+                $('#boxRedEnCampaña').addClass("boxRed");
+                $('#boxYellowEnCampaña').addClass("boxDefault");
+                $('#boxGreenEnCampaña').addClass("boxDefault");
+            }else  if (response[1][3] >= priorityEnCampaña[0] && response[1][3] < priorityEnCampaña[1]) {
+                $('#boxRedEnCampaña').addClass("boxDefault");
+                $('#boxYellowEnCampaña').addClass("boxYellow");
+                $('#boxGreenEnCampaña').addClass("boxDefault");
+            }else  if (response[1][3] >= priorityEnCampaña[2]) {
+                $('#boxRedEnCampaña').addClass("boxDefault");
+                $('#boxYellowEnCampaña').addClass("boxDefault");
+                $('#boxGreenEnCampaña').addClass("boxGreen");
+            }
+
+             //Redes
+            if (response[1][4] < priorityRedes[0]) {
+                $('#boxRedRedes').addClass("boxRed");
+                $('#boxYellowRedes').addClass("boxDefault");
+                $('#boxGreenRedes').addClass("boxDefault");
+            }else  if (response[1][4] >= priorityRedes[0] && response[1][4] < priorityRedes[1]) {
+                $('#boxRedRedes').addClass("boxDefault");
+                $('#boxYellowRedes').addClass("boxYellow");
+                $('#boxGreenRedes').addClass("boxDefault");
+            }else  if (response[1][4] >= priorityRedes[2]) {
+                $('#boxRedRedes').addClass("boxDefault");
+                $('#boxYellowRedes').addClass("boxDefault");
+                $('#boxGreenRedes').addClass("boxGreen");
+            }
+
+        }
+           
     });
 
 </script>

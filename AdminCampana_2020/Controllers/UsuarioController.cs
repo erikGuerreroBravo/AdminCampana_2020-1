@@ -18,14 +18,17 @@ namespace AdminCampana_2020.Controllers
         private IUsuarioBusiness usuarioBusiness;
         private IPerfilBusiness perfilBusiness;
         private IRolBusiness rolBusiness;
+        private IMovilizadoBusiness movilizadoBusiness;
 
-        public UsuarioController(IUsuarioBusiness usuarioBusiness,IPerfilBusiness perfilBusiness, IRolBusiness rolBusiness)
+        public UsuarioController(IUsuarioBusiness usuarioBusiness, IPerfilBusiness perfilBusiness, IRolBusiness rolBusiness,IMovilizadoBusiness movilizadoBusiness)
         {
             this.usuarioBusiness = usuarioBusiness;
             this.perfilBusiness = perfilBusiness;
             this.rolBusiness = rolBusiness;
+            this.movilizadoBusiness = movilizadoBusiness;
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
@@ -33,6 +36,7 @@ namespace AdminCampana_2020.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(UsuarioRolVM usuarioVM)
         {
@@ -44,13 +48,14 @@ namespace AdminCampana_2020.Controllers
                 var properties = ClaimsPrincipal.Current.Identities.First();
                 usuarioVM.Usuario.Id = int.Parse(properties.Claims.First(i => i.Type == ClaimTypes.NameIdentifier).Value);
                 UsuarioRolDomainModel usuarioDM = new UsuarioRolDomainModel();
-                AutoMapper.Mapper.Map(usuarioVM,usuarioDM);
+                AutoMapper.Mapper.Map(usuarioVM, usuarioDM);
                 usuarioBusiness.AddUpdateUsuarios(usuarioDM);
             }
 
-            return RedirectToAction("Create","Usuario");
+            return RedirectToAction("Create", "Usuario");
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Administrar()
         {
@@ -60,25 +65,51 @@ namespace AdminCampana_2020.Controllers
             return View(usuarioVMs);
         }
 
-        //[HttpGet]
-        //public ActionResult GetUsuario(int id, int type)
-        //{
-        //    UsuarioVM usuarioVM = null;
-        //    UsuarioDomainModel
-        //    switch (type)
-        //    {
-        //        case 1:
-        //            break;
-        //        case 2:
-        //            break;
-        //        case 3:
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetUsuario(int id, int type)
+        {
+            UsuarioVM usuarioVM = null;
+            switch (type)
+            {
+                case 1:
+                    UsuarioDomainModel usuarioDomainModel = usuarioBusiness.GetUsuario(id);
+                    usuarioVM = new UsuarioVM();
+                    AutoMapper.Mapper.Map(usuarioDomainModel, usuarioVM);
+                    ViewBag.idCambio = new SelectList(usuarioBusiness.GetUsuarios(), "Id", "NombreCompleto");
+                    return PartialView("_Change", usuarioVM);
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
 
+            return PartialView("");
+        }
 
+        [HttpPost]
+        public ActionResult ChangeCoordinador(UsuarioVM usuarioVM)
+        {
+            UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+
+            AutoMapper.Mapper.Map(usuarioVM,usuarioDomainModel);
+            movilizadoBusiness.MigrarMovilizados(usuarioDomainModel);
+            return RedirectToAction("Administrar","Usuario");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetUsuariosByApellidos(string term)
+        {
+
+            List<string> usuarios = usuarioBusiness.GetUsuariosByApellidos(term);
+
+            var filtro = usuarios.Where(apellido => apellido.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0);
+
+            return Json(filtro, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

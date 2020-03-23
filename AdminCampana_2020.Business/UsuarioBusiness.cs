@@ -116,9 +116,11 @@ namespace AdminCampana_2020.Business
             foreach (Usuario item in usuarios)
             {
                 UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+                usuarioDomainModel.Id = item.Id;
                 usuarioDomainModel.Nombres = item.Nombres;
                 usuarioDomainModel.Apellidos = item.Apellidos;
                 usuarioDomainModel.Email = item.Email;
+                usuarioDomainModel.NombreCompleto = item.Nombres + item.Apellidos;
                 foreach (var rol in item.Usuario_Rol)
                 {
                     UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();
@@ -152,11 +154,27 @@ namespace AdminCampana_2020.Business
                 {
                     Nombre = item.Rol.Nombre
                 };
+                usuarioDomainModel.UsuarioRoles = new List<UsuarioRolDomainModel>();
                 usuarioDomainModel.UsuarioRoles.Add(usuarioRolDomainModel);
             }
 
             return usuarioDomainModel;
 
         }
+
+        public List<string> GetUsuariosByApellidos(string apellidos)
+        {
+            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1 && p.Apellidos.Contains(apellidos)).ToList();
+            List<string> usuarioDomainModels = new List<string>();
+
+            foreach (Usuario item in usuarios)
+            {
+                usuarioDomainModels.Add(item.Apellidos);
+            }
+
+            return usuarioDomainModels;
+        }
+
+      
     }
 }

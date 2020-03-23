@@ -34,9 +34,9 @@ namespace AdminCampana_2020.Repository
         public virtual DbSet<Seccion> Seccion { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Telefono> Telefono { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Usuario_Rol> Usuario_Rol { get; set; }
         public virtual DbSet<Zona> Zona { get; set; }
         public virtual DbSet<Movilizado> Movilizado { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

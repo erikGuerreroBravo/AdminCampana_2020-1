@@ -1,0 +1,25 @@
+﻿@model AdminCampana_2020.ViewModels.UsuarioVM
+
+@using (Html.BeginForm("ChangeCoordinador", "Usuario", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="form-group">
+                <label>Coordinador</label>
+                @Html.TextBoxFor(model => model.Apellidos, null, new { @class = "form-control input-sm", @readonly = true })
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="form-group">
+                <label>Nuevo Coordinador</label>
+                @Html.DropDownListFor(model => model.idCambio, null, new { @class = "form-control input-sm" })
+            </div>
+            @Html.HiddenFor(model => model.Id)
+        </div>
+    </div>
+    <div class="modal-footer" id="footer">
+        <button type="submit" class="btn btn-sm btn-success" id="btnSave">Guardar Cambios</button>
+    </div>
+
+}
+

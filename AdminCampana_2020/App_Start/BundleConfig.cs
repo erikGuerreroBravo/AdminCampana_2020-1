@@ -17,10 +17,12 @@ namespace AdminCampana_2020.App_Start
                 //.Include("~/Content/css/skins/skin-blue.css")
                 //.Include("~/Content/css/skins/.skin-green-light.css")
                 .Include("~/Content/css/skins/skin-green.css")
+                .Include("~/Content/css/jquery-ui.min.css")
                 );
 
             bundles.Add(new ScriptBundle("~/Bundles/js")
                 .Include("~/Content/js/plugins/jquery/jquery-3.3.1.js")
+               
                 .Include("~/Content/js/plugins/bootstrap/bootstrap.js")
                 .Include("~/Content/js/plugins/fastclick/fastclick.js")
                 .Include("~/Content/js/plugins/slimscroll/jquery.slimscroll.js")
@@ -31,6 +33,7 @@ namespace AdminCampana_2020.App_Start
                 .Include("~/Content/js/plugins/validator/validator.js")
                 .Include("~/Content/js/plugins/inputmask/jquery.inputmask.bundle.js")
                 .Include("~/Content/js/adminlte.js")
+                .Include("~/Content/js/jquery-ui.min.js")
                 .Include("~/Content/js/init.js"));
 
 #if DEBUG

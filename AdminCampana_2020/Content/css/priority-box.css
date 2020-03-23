@@ -1,0 +1,30 @@
+﻿
+
+
+.boxRed {
+    width: 40px;
+    height: 40px;
+    background-color: #EC7063;
+    border: solid 1px #85929E;
+}
+
+.boxYellow {
+    width: 40px;
+    height: 40px;
+    background-color: #F4D03F;
+    border: solid 1px #85929E;
+}
+
+.boxGreen {
+    width: 40px;
+    height: 40px;
+    background-color: #58D68D;
+    border: solid 1px #85929E;
+}
+
+.boxDefault {
+    width: 40px;
+    height: 40px;
+    background-color: #EAECEE;
+    border: solid 1px #85929E;
+}

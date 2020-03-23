@@ -22,5 +22,8 @@ namespace AdminCampana_2020.ViewModels
         public PerfilVM Perfil { get; set; }
         public StatusVM Status { get; set; }
         public List<UsuarioRolVM> UsuarioRoles { get; set; }
+
+        //Auxiliar
+        public int idCambio { get; set; }
     }
 }

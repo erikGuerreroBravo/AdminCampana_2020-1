@@ -35,21 +35,25 @@ namespace AdminCampana_2020.Business
 
                 Movilizado movilizado = movilizadoRepository.SingleOrDefault(p => p.id == personaDM.Id);
 
-                if (movilizado.id > 0)
+                if (movilizado != null)
                 {
-                    movilizado.strNombre = personaDM.StrNombre;
-                    movilizado.strApellidoPaterno = personaDM.StrApellidoPaterno;
-                    movilizado.strApellidoMaterno = personaDM.StrApellidoMaterno;
-                    movilizado.strEmail = personaDM.StrEmail;
-                    movilizado.Direccion.strCalle = personaDM.Direccion.StrCalle;
-                    movilizado.Direccion.strNumeroExterior = personaDM.Direccion.StrNumeroExterior;
-                    movilizado.Direccion.idColonia = personaDM.Direccion.idColonia;
-                    movilizado.Telefono.strNumeroCelular = personaDM.Telefono.StrNumeroCelular;
+                    if (movilizado.id > 0)
+                    {
+                        movilizado.strNombre = personaDM.StrNombre;
+                        movilizado.strApellidoPaterno = personaDM.StrApellidoPaterno;
+                        movilizado.strApellidoMaterno = personaDM.StrApellidoMaterno;
+                        movilizado.strEmail = personaDM.StrEmail;
+                        movilizado.Direccion.strCalle = personaDM.Direccion.StrCalle;
+                        movilizado.Direccion.strNumeroExterior = personaDM.Direccion.StrNumeroExterior;
+                        movilizado.Direccion.idColonia = personaDM.Direccion.idColonia;
+                        movilizado.Telefono.strNumeroCelular = personaDM.Telefono.StrNumeroCelular;
 
-                    movilizadoRepository.Update(movilizado);
-                    resultado = true;
+                        movilizadoRepository.Update(movilizado);
+                        resultado = true;
 
+                    }
                 }
+                
 
                 else
                 {
@@ -104,19 +108,45 @@ namespace AdminCampana_2020.Business
 
         public List<MovilizadoDomainModel> GetAllMovilizados()
         {
-            List<MovilizadoDomainModel> personas = null;
-            personas = movilizadoRepository.GetAll().Select(p => new MovilizadoDomainModel
+            List<MovilizadoDomainModel> personas = new List<MovilizadoDomainModel>();
+            List<Movilizado> movilizados = movilizadoRepository.GetAll().ToList();
+
+            foreach (Movilizado item in movilizados)
             {
-                Id = p.id,
-                StrNombre = p.strNombre,
-                StrApellidoPaterno = p.strApellidoPaterno,
-                StrApellidoMaterno = p.strApellidoMaterno,
-                StrEmail = p.strEmail,
-                
-            }).OrderByDescending(p=>p.StrNombre).ToList<MovilizadoDomainModel>();
+                MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
+
+                movilizadoDomainModel.Id = item.id;
+                movilizadoDomainModel.StrNombre = item.strNombre;
+                movilizadoDomainModel.StrApellidoPaterno = item.strApellidoPaterno;
+                movilizadoDomainModel.StrApellidoMaterno = item.strApellidoMaterno;
+                movilizadoDomainModel.StrEmail = item.strEmail;
+
+                movilizadoDomainModel.Usuario = new UsuarioDomainModel
+                {
+                    Id = item.Usuario.Id,
+                    Nombres = item.Usuario.Nombres,
+                    Apellidos = item.Usuario.Apellidos,
+                    //UsuarioRoles = item.Usuario.Usuario_Rol as List<UsuarioRolDomainModel>
+                };
+
+                foreach (var rol in item.Usuario.Usuario_Rol)
+                {
+                    UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();
+                    usuarioRolDomainModel.IdRol = rol.Id_rol;
+                    usuarioRolDomainModel.Rol = new RolDomainModel
+                    {
+                        Nombre = rol.Rol.Nombre
+                    };
+                    movilizadoDomainModel.Usuario.UsuarioRoles = new List<UsuarioRolDomainModel>();
+                    movilizadoDomainModel.Usuario.UsuarioRoles.Add(usuarioRolDomainModel);
+
+                }
+                personas.Add(movilizadoDomainModel);
+            }
+
+
             return personas;
         }
-
 
         public MovilizadoDomainModel GetMovilizadoById(int id)
         {
@@ -158,6 +188,31 @@ namespace AdminCampana_2020.Business
                 return null;
             }
 
+
+        }
+
+        public bool MigrarMovilizados(UsuarioDomainModel usuarioDomainModel)
+        {
+
+            bool respuesta = false;
+
+            if (usuarioDomainModel != null)
+            {
+                List<Movilizado> movilizado = movilizadoRepository.GetAll().Where(p => p.idUsuario == usuarioDomainModel.Id).ToList() ;
+
+                if (movilizado != null)
+                {
+                    foreach (var item in movilizado)
+                    {
+
+                        item.idUsuario = usuarioDomainModel.idCambio;
+                    }
+
+                    movilizadoRepository.UpdateAll(movilizado);
+                }
+            }
+
+            return respuesta;
 
         }
     }

@@ -31,7 +31,7 @@ namespace AdminCampana_2020.Controllers
 
         // GET: Movilizado
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult Registro()
         {
             ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
