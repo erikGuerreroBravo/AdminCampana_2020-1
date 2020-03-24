@@ -19,13 +19,13 @@
     <div class="bs-container" style="min-height:960px;">
         <section class="content-header">
             <h1>
-                Coordinadores
+                Usuarios
                 <small>(Agregar)</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"> <i class="fa fa-dashboard"></i> Inicio </a></li>
-                <li> <a href="#">Coordinador</a></li>
-                <li class="active"> Datos Personales </li>
+                <li> <a href="#">Usuarios</a></li>
+                <li class="active">Registrar</li>
             </ol>
         </section>
         <br />
@@ -80,15 +80,23 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12 cl-xs-12">
                                     <div class="form-group">
-                                        <label>Area:&nbsp;&nbsp;</label>
+                                        <label>Area:</label>
                                         @Html.DropDownList("IdRol", null, new { @class = "form-control input-sm", placeholder = "", required = "", id = "idPerfil" })
                                         @Html.ValidationMessageFor(model => model.IdRol, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12 cl-xs-12">
                                     <div class="form-group">
-                                        <br />
-                                        <input type="submit" value="Guardar" class="btn btn-sm btn-success" id="btnEnviar" />
+                                        <label>Perfil:</label>
+                                        @Html.DropDownListFor(model => model.Usuario.idPerfil, null, new { @class = "form-control input-sm", placeholder = "", required = "", id = "idPerfil" })
+                                        @Html.ValidationMessageFor(model => model.Usuario.idPerfil, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 col-lg-offset-10 col-md-offset-10">
+                                    <div class="form-group">
+                                        <input type="submit" value="Dar de Alta" class="btn btn-sm btn-success btn-block" id="btnEnviar" />
                                     </div>
                                 </div>
                             </div>
