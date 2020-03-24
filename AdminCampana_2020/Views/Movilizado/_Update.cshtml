@@ -1,6 +1,6 @@
 ﻿@model AdminCampana_2020.ViewModels.MovilizadoVM
 
-
+@using (Html.BeginForm("Registro","Movilizado",FormMethod.Post)) { 
 @Html.HiddenFor(model => model.Id)
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -35,3 +35,7 @@
 
     </div>
 </div>
+<div class="modal-footer" id="footer">
+    <button type="submit" class="btn btn-sm btn-success" id="btnSave">Guardar Cambios</button>
+</div>
+}

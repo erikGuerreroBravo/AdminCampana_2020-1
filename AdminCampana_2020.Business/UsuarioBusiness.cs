@@ -174,7 +174,7 @@ namespace AdminCampana_2020.Business
             return usuarioDomainModels;
         }
 
-        public bool UpdateUsuario(UsuarioDomainModel usuarioDM)
+        public bool BajaUsuario(UsuarioDomainModel usuarioDM)
         {
             bool resultado = false;
             if (usuarioDM != null)

@@ -79,8 +79,7 @@ namespace AdminCampana_2020.Controllers
                     AutoMapper.Mapper.Map(usuarioDomainModel, usuarioVM);
                     ViewBag.idCambio = new SelectList(usuarioBusiness.GetUsuarios(), "Id", "NombreCompleto");
                     return PartialView("_Change", usuarioVM);
-                case 2:
-                    break;                
+                case 2:             
                     UsuarioDomainModel usuarioDomain = usuarioBusiness.GetUsuario(id);
                     usuarioVM = new UsuarioVM();
                     AutoMapper.Mapper.Map(usuarioDomain, usuarioVM);
@@ -144,15 +143,10 @@ namespace AdminCampana_2020.Controllers
             {
                 if (usuarioVM != null)
                 {
-                    //var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
-
-                    //usuarioVM.Id = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
-                    usuarioVM.idStatus = (int)EnumStatus.BAJA;
                     UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
-                    AutoMapper.Mapper.Map(usuarioVM, usuarioDomainModel);
                     usuarioDomainModel = usuarioBusiness.GetUsuario(usuarioVM.Id);
                     usuarioDomainModel.IdStatus = (int)EnumStatus.BAJA;
-                    usuarioBusiness.UpdateUsuario(usuarioDomainModel);
+                    usuarioBusiness.BajaUsuario(usuarioDomainModel);
                 }
 
             }

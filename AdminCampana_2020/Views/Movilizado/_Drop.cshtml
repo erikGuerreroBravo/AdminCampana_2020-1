@@ -1,13 +1,18 @@
 ﻿
 @model AdminCampana_2020.ViewModels.MovilizadoVM
 
-
-@Html.HiddenFor(model => model.Id)
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="form-group">
-            <label>¿Está seguro que desea eliminar al usuario?</label>
-            @Html.TextBoxFor(model => model.StrNombre, null, new { @class = "form-control  input-sm", @readonly = "" })
+@using (Html.BeginForm("Eliminar", "Movilizado", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>¿Está seguro que desea eliminar al usuario?</label>
+                @Html.TextBoxFor(model => model.StrNombre, null, new { @class = "form-control  input-sm", @readonly = "" })
+            </div>
         </div>
     </div>
-</div>
+    <div class="modal-footer" id="footer">
+        <button type="submit" class="btn btn-sm btn-success" id="btnDelete">Elimnar</button>
+    </div>
+}

@@ -78,15 +78,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @using (Html.BeginForm("Eliminar", "Usuario", FormMethod.Post))
-            {
-                <div class="modal-body" id="data2">
+            <div class="modal-body" id="data">
 
-                </div>
-                <div class="modal-footer" id="footerdelete">
-                    <button type="submit" class="btn btn-sm btn-success" id="btnDelete">Elimnar</button>
-                </div>
-            }
+            </div>
         </div>
     </div>
 </div>
@@ -96,6 +90,7 @@
 
 
     function change(id) {
+        debugger;
         const url = "/Usuario/GetUsuario?id=" + id + "&&type=1";
         $('#data').load(url, function () {
             $('#exampleModalLongTitle').text("Transferir Movilizados");
@@ -113,7 +108,7 @@
     function drop(id) {
         const url = "/Usuario/GetUsuario?id=" + id + "&&type=3";
 
-        $('#data2').load(url, function () {
+        $('#data').load(url, function () {
 
             $('#modalData').modal("show");
         });
