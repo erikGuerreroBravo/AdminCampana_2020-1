@@ -1,5 +1,6 @@
 ﻿@model AdminCampana_2020.ViewModels.UsuarioVM
 
+@using (Html.BeginForm("Eliminar","Usuario",FormMethod.Post)) { 
 @Html.HiddenFor(model => model.Id)
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -9,5 +10,8 @@
         </div>
     </div>
 </div>
+<div class="modal-footer" id="footer">
+    <button type="submit" class="btn btn-sm btn-success" id="btnDelete">Elimnar</button>
+</div>
 
-
+}

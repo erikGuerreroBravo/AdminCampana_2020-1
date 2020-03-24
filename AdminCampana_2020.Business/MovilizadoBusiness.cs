@@ -109,7 +109,7 @@ namespace AdminCampana_2020.Business
         public List<MovilizadoDomainModel> GetAllMovilizados()
         {
             List<MovilizadoDomainModel> personas = new List<MovilizadoDomainModel>();
-            List<Movilizado> movilizados = movilizadoRepository.GetAll().ToList();
+            List<Movilizado> movilizados = movilizadoRepository.GetAll().Where(p => p.idStatus == 1).ToList();
 
             foreach (Movilizado item in movilizados)
             {
@@ -191,50 +191,6 @@ namespace AdminCampana_2020.Business
 
 
         }
-
-        //public MovilizadoDomainModel GetMovilizadoById(int id)
-        //{
-        //    Movilizado movilizado = movilizadoRepository.SingleOrDefault(p => p.id == id);
-        //    if (movilizado != null)
-        //    {
-        //        MovilizadoDomainModel personaDM = new MovilizadoDomainModel();
-        //        personaDM.Id = movilizado.id;
-        //        personaDM.StrNombre = movilizado.strNombre;
-        //        personaDM.StrApellidoPaterno = movilizado.strApellidoPaterno;
-        //        personaDM.StrApellidoMaterno = movilizado.strApellidoMaterno;
-        //        personaDM.StrEmail = movilizado.strEmail;
-        //        personaDM.Telefono = new TelefonoDomainModel
-        //        {
-        //            StrNumeroCelular = movilizado.Telefono.strNumeroCelular
-        //        };
-        //        personaDM.Direccion = new DireccionDomainModel
-        //        {
-        //            StrCalle = movilizado.Direccion.strCalle,
-        //            StrNumeroExterior = movilizado.Direccion.strNumeroExterior,
-        //            idColonia = movilizado.Direccion.idColonia.Value,
-        //            Colonia = new ColoniaDomainModel
-        //            {
-        //                StrAsentamiento = movilizado.Direccion.Colonia.strAsentamiento,
-        //                Seccion = new SeccionDomainModel
-        //                {
-        //                    StrNombre = movilizado.Direccion.Colonia.Seccion.strNombre,
-        //                    Zona = new ZonaDomainModel
-        //                    {
-        //                        StrNombre = movilizado.Direccion.Colonia.Seccion.Zona.strNombre
-        //                    }
-        //                }
-        //            }
-        //        };
-        //        return personaDM;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-
-
-        //}
-
         public bool MigrarMovilizados(UsuarioDomainModel usuarioDomainModel)
         {
 
@@ -258,6 +214,23 @@ namespace AdminCampana_2020.Business
 
             return respuesta;
 
+        }
+
+        public bool BajaMovilizado(MovilizadoDomainModel usuarioDM)
+        {
+            bool resultado = false;
+            if (usuarioDM != null)
+            {
+                Movilizado usuario = movilizadoRepository.SingleOrDefault(p => p.id == usuarioDM.Id);
+
+                if (usuarioDM.Id > 0)
+                {
+                    usuario.idStatus = usuarioDM.idStatus;
+                    movilizadoRepository.Update(usuario);
+                    resultado = true;
+                }
+            }
+            return resultado;
         }
     }
 }

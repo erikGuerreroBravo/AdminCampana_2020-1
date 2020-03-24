@@ -91,7 +91,6 @@ namespace AdminCampana_2020.Controllers
                   movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(id);
                   movilizadoVM = new MovilizadoVM();
                     AutoMapper.Mapper.Map(movilizadoDomainModel, movilizadoVM);
-
                     return PartialView("_Display", movilizadoVM);
                 case 2:
                     movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(id);
@@ -136,96 +135,20 @@ namespace AdminCampana_2020.Controllers
             {
                 if (movilizadoVM != null)
                 {
-                    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
 
-
-
-                    movilizadoVM.idUsuario = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
-                    movilizadoVM.idStatus = (int)EnumStatus.BAJA;
                     MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
-                    AutoMapper.Mapper.Map(movilizadoVM, movilizadoDomainModel);
                     movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(movilizadoVM.Id);
                     movilizadoDomainModel.idStatus = (int)EnumStatus.BAJA;
-                    ImovilizadoBusiness.AddUpdateMovilizado(movilizadoDomainModel);
+                    ImovilizadoBusiness.BajaMovilizado(movilizadoDomainModel);
                 }
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
 
             return RedirectToAction("Registros", "Movilizado");
         }
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public JsonResult Consultar()
-        //{
-        //    return Json(ImovilizadoBusiness.GetAllMovilizados(), JsonRequestBehavior.AllowGet);
-        //}
-
-        //[HttpGet]
-        //[AllowAnonymous]
-        //[Authorize]
-        //public ActionResult Editar(int _id)
-        //{
-
-
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        MovilizadoDomainModel movilizadoDM = ImovilizadoBusiness.GetMovilizadoById(_id);
-        //        if (movilizadoDM != null)
-        //        {
-        //            MovilizadoVM movilizadoVM = new MovilizadoVM();
-        //            AutoMapper.Mapper.Map(movilizadoDM, movilizadoVM);
-        //            TelefonoVM telefonoVM = new TelefonoVM();
-        //            AutoMapper.Mapper.Map(movilizadoDM.TelefonoDomainModel, telefonoVM);
-        //            movilizadoVM.TelefonoVM = telefonoVM;
-        //            return View("Editar", movilizadoVM);
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("InternalServerError", "Error");
-        //        }
-        //    }
-        //    return RedirectToAction("Login","Account");
-        //}
-
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[Authorize]
-        //public ActionResult Editar([Bind(Include = "Id,StrNombre,StrApellidoPaterno,StrApellidoMaterno,TelefonoVM")]MovilizadoVM movilizadoVM)
-        //{
-        //    if (movilizadoVM != null && ModelState.IsValid)
-        //    {
-        //        MovilizadoDomainModel movilizadoDM = new MovilizadoDomainModel();
-        //        TelefonoDomainModel telefonoDM = new TelefonoDomainModel();
-        //        AutoMapper.Mapper.Map(movilizadoVM.TelefonoVM,telefonoDM);
-        //        AutoMapper.Mapper.Map(movilizadoVM,movilizadoDM);
-        //        movilizadoDM.TelefonoDomainModel = telefonoDM;
-        //        ImovilizadoBusiness.UpdateMovilizado(movilizadoDM);
-
-        //    }
-        //    return RedirectToAction("Registros", "Movilizado");
-        //}
-
-        //[HttpGet]
-        //public JsonResult GetDatosDireccion()
-        //{
-        //    SeccionVM seccionVM = new SeccionVM();
-        //    SeccionDomainModel seccionDM = new SeccionDomainModel();
-
-        //    seccionDM = IseccionBusiness.GetSeccionById(1);
-
-        //    if (seccionDM != null)
-        //    {
-        //        seccionVM = new SeccionVM();
-        //        AutoMapper.Mapper.Map(seccionDM, seccionVM);
-        //    }
-
-        //    return Json(seccionVM, JsonRequestBehavior.AllowGet);
-        //}
-
-
+        
     }
 }

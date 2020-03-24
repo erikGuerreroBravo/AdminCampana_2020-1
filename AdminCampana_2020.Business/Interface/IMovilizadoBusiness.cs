@@ -14,5 +14,7 @@ namespace AdminCampana_2020.Business.Interface
         MovilizadoDomainModel GetMovilizadoById(int id);
         string UpdateMovilizado(MovilizadoDomainModel personaDM);
         bool MigrarMovilizados(UsuarioDomainModel usuarioDomainModel);
+
+        bool BajaMovilizado(MovilizadoDomainModel usuarioDM);
     }
 }
