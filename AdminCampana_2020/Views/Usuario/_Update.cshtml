@@ -1,0 +1,25 @@
+﻿@model AdminCampana_2020.ViewModels.UsuarioVM
+
+@using (Html.BeginForm("UpdateUsuario", "Usuario", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>Nombre(s)</label>
+                @Html.TextBoxFor(model => model.Nombres, new { @class = "form-control input-sm" })
+            </div>
+            <div class="form-group">
+                <label>Apellidos</label>
+                @Html.TextBoxFor(model => model.Apellidos, new { @class = "form-control input-sm" })
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control input-sm" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.Id)
+    </div>
+    <div class="modal-footer" id="footer">
+        <button type="submit" class="btn btn-sm btn-success" id="btnSave">Guardar Cambios</button>
+    </div>
+}

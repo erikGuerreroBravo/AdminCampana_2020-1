@@ -33,6 +33,7 @@ namespace AdminCampana_2020.Controllers
         public ActionResult Create()
         {
             ViewBag.idRol = new SelectList(rolBusiness.GetRoles(), "Id", "Nombre");
+            ViewData["Usuario.idPerfil"] = new SelectList(perfilBusiness.GetAllPerfiles(),"Id","StrValor");
             return View();
         }
 
@@ -80,6 +81,10 @@ namespace AdminCampana_2020.Controllers
                     return PartialView("_Change", usuarioVM);
                 case 2:
                     break;                
+                    UsuarioDomainModel usuarioDomain = usuarioBusiness.GetUsuario(id);
+                    usuarioVM = new UsuarioVM();
+                    AutoMapper.Mapper.Map(usuarioDomain, usuarioVM);
+                    return PartialView("_Update", usuarioVM);
                 case 3:
                     usuarioDomainModel = usuarioBusiness.GetUsuario(id);
                     usuarioVM = new UsuarioVM();
@@ -95,12 +100,27 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult ChangeCoordinador(UsuarioVM usuarioVM)
         {
             UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
 
             AutoMapper.Mapper.Map(usuarioVM,usuarioDomainModel);
             movilizadoBusiness.MigrarMovilizados(usuarioDomainModel);
+            return RedirectToAction("Administrar","Usuario");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult UpdateUsuario(UsuarioVM usuarioVM)
+        {
+            if (usuarioVM != null)
+            {
+                UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+                AutoMapper.Mapper.Map(usuarioVM,usuarioDomainModel);
+                usuarioBusiness.UpdateUsuario(usuarioDomainModel);
+            }
+
             return RedirectToAction("Administrar","Usuario");
         }
 

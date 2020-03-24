@@ -30,18 +30,17 @@ namespace AdminCampana_2020.Business
 
                 Usuario_Rol usuario = usuarioRolRepository.SingleOrDefault(p => p.Id == usuarioDM.Id);
 
-                if (usuarioDM.Id > 0)
+                if (usuario != null)
                 {
-                    usuario.Usuario.Nombres = usuarioDM.Usuario.Nombres;
-                    usuario.Usuario.Apellidos = usuarioDM.Usuario.Apellidos;
-                    usuario.Usuario.Email = usuarioDM.Usuario.Email;
-                    usuario.Usuario.Clave = usuarioDM.Usuario.Clave;
-                    usuario.Usuario.ProviderKey = usuarioDM.Usuario.ProviderKey;
-                    usuario.Usuario.ProviderName = usuarioDM.Usuario.ProviderName;
-                    usuarioRolRepository.Update(usuario);
-                    resultado = true;
-                }
-
+                    if (usuarioDM.Id > 0)
+                    {
+                        usuario.Usuario.Nombres = usuarioDM.Usuario.Nombres;
+                        usuario.Usuario.Apellidos = usuarioDM.Usuario.Apellidos;
+                        usuario.Usuario.Email = usuarioDM.Usuario.Email;
+                        usuarioRolRepository.Update(usuario);
+                        resultado = true;
+                    }
+                }            
                 else
                 {
                     usuario = new Usuario_Rol();
@@ -53,7 +52,7 @@ namespace AdminCampana_2020.Business
                         Clave = usuarioDM.Usuario.Clave,
                         ProviderKey = usuarioDM.Usuario.ProviderKey,
                         ProviderName = usuarioDM.Usuario.ProviderName,
-                        //idPerfil = usuarioDM.Usuario.IdPerfil,
+                        idPerfil = usuarioDM.Usuario.IdPerfil,
                         idStatus = usuarioDM.Usuario.IdStatus,
                         idUsuario = usuarioDM.Usuario.Id
                         
@@ -110,7 +109,7 @@ namespace AdminCampana_2020.Business
 
         public List<UsuarioDomainModel> GetUsuarios()
         {
-            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1).ToList();
+            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1 && p.idPerfil == 3).ToList();
             List<UsuarioDomainModel> usuarioDomainModels = new List<UsuarioDomainModel>();
 
             foreach (Usuario item in usuarios)
@@ -192,5 +191,30 @@ namespace AdminCampana_2020.Business
             return resultado;
         }
 
+        public bool UpdateUsuario(UsuarioDomainModel usuarioDomainModel)
+        {
+            bool respuesta = false;
+
+            if (usuarioDomainModel != null)
+            {
+                Usuario usuario = usuarioRepository.SingleOrDefault(p => p.Id == usuarioDomainModel.Id);
+
+                if (usuario != null)
+                {
+                    if (usuario.Id > 0)
+                    {
+                        usuario.Nombres = usuarioDomainModel.Nombres;
+                        usuario.Apellidos = usuarioDomainModel.Apellidos;
+                        usuario.Email = usuarioDomainModel.Email;
+                        usuarioRepository.Update(usuario);
+                        respuesta = true;
+                    }
+                }
+            }
+
+            return respuesta;
+        }
+
+      
     }
 }
