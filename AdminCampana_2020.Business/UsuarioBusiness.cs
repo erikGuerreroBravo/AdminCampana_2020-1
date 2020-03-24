@@ -130,9 +130,40 @@ namespace AdminCampana_2020.Business
             
         }
 
+
+        //Método para administrador y superadministrador
         public List<UsuarioDomainModel> GetUsuarios()
         {
-            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1 && p.idPerfil == 3).ToList();
+            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1).ToList();
+            List<UsuarioDomainModel> usuarioDomainModels = new List<UsuarioDomainModel>();
+
+            foreach (Usuario item in usuarios)
+            {
+                UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+                usuarioDomainModel.Id = item.Id;
+                usuarioDomainModel.Nombres = item.Nombres;
+                usuarioDomainModel.Apellidos = item.Apellidos;
+                usuarioDomainModel.Email = item.Email;
+                usuarioDomainModel.NombreCompleto = item.Nombres + item.Apellidos;
+                foreach (var rol in item.Usuario_Rol)
+                {
+                    UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();
+                    usuarioRolDomainModel.Rol = new RolDomainModel
+                    {
+                        Nombre = rol.Rol.Nombre
+                    };
+                    usuarioDomainModel.UsuarioRoles = new List<UsuarioRolDomainModel>();
+                    usuarioDomainModel.UsuarioRoles.Add(usuarioRolDomainModel);
+                }
+                usuarioDomainModels.Add(usuarioDomainModel);
+            }
+
+            return usuarioDomainModels;
+        }
+
+        public List<UsuarioDomainModel> GetUsuariosByCoordinador(int idCoordinador)
+        {
+            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1 && p.idUsuario == idCoordinador).ToList();
             List<UsuarioDomainModel> usuarioDomainModels = new List<UsuarioDomainModel>();
 
             foreach (Usuario item in usuarios)
