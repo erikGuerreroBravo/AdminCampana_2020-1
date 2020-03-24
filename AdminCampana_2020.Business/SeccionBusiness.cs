@@ -14,11 +14,13 @@ namespace AdminCampana_2020.Business
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly SeccionRepository seccionRepository;
+        private readonly ColoniaRepository coloniaRepository;
 
         public SeccionBusiness(IUnitOfWork _unitOfWork)
         {
             unitOfWork = _unitOfWork;
             seccionRepository = new SeccionRepository(unitOfWork);
+            coloniaRepository = new ColoniaRepository(unitOfWork);
         }
 
         /// <summary>
@@ -39,24 +41,32 @@ namespace AdminCampana_2020.Business
 
         public SeccionDomainModel GetSeccionById(int id)
         {
-            Seccion seccion = seccionRepository.SingleOrDefault(p => p.id == id);
-
-            if (seccion != null)
+            try
             {
-                SeccionDomainModel  seccionDM = new SeccionDomainModel();
-                seccionDM.Id = seccion.id;
-                seccionDM.StrNombre = seccion.strNombre;
+                Colonia colonia = coloniaRepository.SingleOrDefault(p => p.id == id);
 
-                ZonaDomainModel zonaDM = new ZonaDomainModel();
-                zonaDM.Id = seccion.Zona.id;
-                zonaDM.StrNombre = seccion.Zona.strNombre;
-                seccionDM.Zona = zonaDM;            
-                return seccionDM;
+                if (colonia != null)
+                {
+                    SeccionDomainModel seccionDM = new SeccionDomainModel();
+                    seccionDM.Id = colonia.Seccion.id;
+                    seccionDM.StrNombre = colonia.Seccion.strNombre;
+
+                    ZonaDomainModel zonaDM = new ZonaDomainModel();
+                    zonaDM.Id = colonia.Seccion.Zona.id;
+                    zonaDM.StrNombre = colonia.Seccion.Zona.strNombre;
+                    seccionDM.Zona = zonaDM;
+                    return seccionDM;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+
             }
+            return null;
         }
     }
 }

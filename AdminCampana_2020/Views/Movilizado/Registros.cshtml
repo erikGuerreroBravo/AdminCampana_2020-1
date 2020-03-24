@@ -77,13 +77,22 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @using (Html.BeginForm("Registro","Movilizado",FormMethod.Post))
+            @using (Html.BeginForm("Registro", "Movilizado", FormMethod.Post))
             {
                 <div class="modal-body" id="data">
 
                 </div>
                 <div class="modal-footer" id="footer">
                     <button type="submit" class="btn btn-sm btn-success" id="btnSave">Guardar Cambios</button>
+                </div>
+            }
+            @using (Html.BeginForm("Eliminar", "Movilizado", FormMethod.Post))
+            {
+                <div class="modal-body" id="data2">
+
+                </div>
+                <div class="modal-footer" id="footerdelete">
+                    <button type="submit" class="btn btn-sm btn-success" id="btnDelete"></button>
                 </div>
             }
         </div>
@@ -111,6 +120,15 @@
         });
     }
 
+    function drop(id) {
+        const url = "/Movilizado/GetMovilizado?id=" + id + "&&type=3";
+        $('#data2').load(url, function () {
+            $("#footer").hide(true);
+            $("#btnDelete").text("Eliminar");
+            $("#footerdelete").show(true);
+            $('#modalData').modal("show");
+        });
+    }
 </script>
 
 

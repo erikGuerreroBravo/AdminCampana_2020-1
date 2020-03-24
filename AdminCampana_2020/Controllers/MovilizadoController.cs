@@ -1,5 +1,6 @@
 ﻿using AdminCampana_2020.Business.Interface;
 using AdminCampana_2020.Domain;
+using AdminCampana_2020.Enums;
 using AdminCampana_2020.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -99,13 +100,63 @@ namespace AdminCampana_2020.Controllers
                     ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
                     return PartialView("_Update", movilizadoVM);
                 case 3:
-                    break;
+                    movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(id);
+                    movilizadoVM = new MovilizadoVM();
+                    AutoMapper.Mapper.Map(movilizadoDomainModel, movilizadoVM);
+                    return PartialView("_Drop", movilizadoVM);
                 default:
                     break;
             }
             return PartialView("");
         }
+        [HttpGet]
+        public JsonResult GetDatosMovilizado(int id)
+        {
 
+            SeccionVM seccionVM = new SeccionVM();
+            SeccionDomainModel seccionDM = new SeccionDomainModel();
+
+            seccionDM = IseccionBusiness.GetSeccionById(id);
+
+            if (seccionDM != null)
+            {
+                seccionVM = new SeccionVM();
+                AutoMapper.Mapper.Map(seccionDM, seccionVM);
+            }
+            ZonaVM zonaVM = new ZonaVM();
+
+
+            return Json(seccionVM, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult Eliminar(MovilizadoVM movilizadoVM)
+        {
+            try
+            {
+                if (movilizadoVM != null)
+                {
+                    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+
+
+
+                    movilizadoVM.idUsuario = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
+                    movilizadoVM.idStatus = (int)EnumStatus.BAJA;
+                    MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
+                    AutoMapper.Mapper.Map(movilizadoVM, movilizadoDomainModel);
+                    movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(movilizadoVM.Id);
+                    movilizadoDomainModel.idStatus = (int)EnumStatus.BAJA;
+                    ImovilizadoBusiness.AddUpdateMovilizado(movilizadoDomainModel);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
+            return RedirectToAction("Registros", "Movilizado");
+        }
         //[HttpGet]
         //[AllowAnonymous]
         //public JsonResult Consultar()

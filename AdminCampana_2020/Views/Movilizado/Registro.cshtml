@@ -75,6 +75,7 @@
                                     <label>Colonia:&nbsp;&nbsp;</label>
                                     @Html.DropDownListFor(model => model.Direccion.idColonia, null, new { @class = "form-control input-sm", id = "IdColonia" })
                                 </div>
+                                <div id="DatosColonia"></div>
                                 <div class="form-group">
                                     <label>Número Ext:&nbsp;&nbsp;</label>
                                     @Html.TextBoxFor(model => model.Direccion.StrNumeroExterior, new { @class = "form-control input-sm", placeholder = "La Dirección:Número Interior", id = "NumExt" })
@@ -104,7 +105,7 @@
     <script src="~/Content/js/validaciones.js?v=12"></script>
     
 }
-
+    <script src="~/Scripts/jquery-1.7.js"></script>
 <script>
     $(document).ready(function () {
       
@@ -115,5 +116,18 @@
         });
     });
 
-</script>
+    $('#IdColonia').change(function (e) {
+        $('DatosColonia').html('');
+        var idColonia = $(this).find('option:selected').val();
 
+        $.getJSON("/Movilizado/GetDatosMovilizado?id=" + idColonia).done(function (response) {
+
+            console.log(response);
+
+            $('#DatosColonia').html('<label>Sección:</label><div class="form-control input-sm"><div class="col-sm-6 col-md-6 col-lg-6"><label>' + response.StrNombre + '</label></div></div><br><label>Zona:</label><div class="form-control input-sm"><div class="col-sm-6 col-md-6 col-lg-6"><label>' + response.Zona.StrNombre + '</label></div></div><br>');
+
+        });
+    });
+
+
+</script>

@@ -99,7 +99,7 @@ namespace AdminCampana_2020.Business
                     movilizado.Telefono = new Telefono();
                     movilizado.Telefono.strNumeroCelular = movilizadoDM.Telefono.StrNumeroCelular;
                     movilizadoRepository.Update(movilizado);
-                    resultado = "Se Actualizo correctamente";
+                    resultado = "Se Actualizó correctamente";
                 }
             }
             return resultado;
@@ -151,6 +151,7 @@ namespace AdminCampana_2020.Business
         public MovilizadoDomainModel GetMovilizadoById(int id)
         {
             Movilizado movilizado = movilizadoRepository.SingleOrDefault(p => p.id == id);
+        
             if (movilizado != null)
             {
                 MovilizadoDomainModel personaDM = new MovilizadoDomainModel();
@@ -190,6 +191,49 @@ namespace AdminCampana_2020.Business
 
 
         }
+
+        //public MovilizadoDomainModel GetMovilizadoById(int id)
+        //{
+        //    Movilizado movilizado = movilizadoRepository.SingleOrDefault(p => p.id == id);
+        //    if (movilizado != null)
+        //    {
+        //        MovilizadoDomainModel personaDM = new MovilizadoDomainModel();
+        //        personaDM.Id = movilizado.id;
+        //        personaDM.StrNombre = movilizado.strNombre;
+        //        personaDM.StrApellidoPaterno = movilizado.strApellidoPaterno;
+        //        personaDM.StrApellidoMaterno = movilizado.strApellidoMaterno;
+        //        personaDM.StrEmail = movilizado.strEmail;
+        //        personaDM.Telefono = new TelefonoDomainModel
+        //        {
+        //            StrNumeroCelular = movilizado.Telefono.strNumeroCelular
+        //        };
+        //        personaDM.Direccion = new DireccionDomainModel
+        //        {
+        //            StrCalle = movilizado.Direccion.strCalle,
+        //            StrNumeroExterior = movilizado.Direccion.strNumeroExterior,
+        //            idColonia = movilizado.Direccion.idColonia.Value,
+        //            Colonia = new ColoniaDomainModel
+        //            {
+        //                StrAsentamiento = movilizado.Direccion.Colonia.strAsentamiento,
+        //                Seccion = new SeccionDomainModel
+        //                {
+        //                    StrNombre = movilizado.Direccion.Colonia.Seccion.strNombre,
+        //                    Zona = new ZonaDomainModel
+        //                    {
+        //                        StrNombre = movilizado.Direccion.Colonia.Seccion.Zona.strNombre
+        //                    }
+        //                }
+        //            }
+        //        };
+        //        return personaDM;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+
+
+        //}
 
         public bool MigrarMovilizados(UsuarioDomainModel usuarioDomainModel)
         {
