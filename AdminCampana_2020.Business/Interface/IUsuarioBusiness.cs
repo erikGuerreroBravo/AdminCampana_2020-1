@@ -17,5 +17,7 @@ namespace AdminCampana_2020.Business.Interface
 
         bool BajaUsuario(UsuarioDomainModel usuarioDM);
         bool UpdateUsuario(UsuarioDomainModel usuarioDomainModel);
+
+        bool AddUser(UsuarioDomainModel usuarioDomainModel);
     }
 }

@@ -35,8 +35,10 @@ namespace AdminCampana_2020.Controllers
         [Authorize]
         public ActionResult Registro()
         {
-            ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
-            return View();
+ 
+                ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
+                return View();
+          
         }
 
         [HttpPost]
@@ -50,7 +52,7 @@ namespace AdminCampana_2020.Controllers
                      var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
 
                     movilizadoVM.idUsuario = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
-
+                    movilizadoVM.idStatus = (int)EnumStatus.ALTA;
                     MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
                     AutoMapper.Mapper.Map(movilizadoVM, movilizadoDomainModel);
                     ImovilizadoBusiness.AddUpdateMovilizado(movilizadoDomainModel);
@@ -69,14 +71,27 @@ namespace AdminCampana_2020.Controllers
         [Authorize]
         public ActionResult Registros()
         {
-            if (User.Identity.IsAuthenticated)
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+
+            List<MovilizadoDomainModel> movilizadosDM = null; ImovilizadoBusiness.GetAllMovilizados();
+            List<MovilizadoVM> movilizadosVM = new List<MovilizadoVM>();
+            int id = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(p => p.Value).FirstOrDefault());
+            if (identity.IsInRole("MultiNivel") || identity.IsInRole("Planilla Ganadora") || identity.IsInRole("Campaña") || identity.IsInRole("En Campaña") || identity.IsInRole("Redes Sociales"))
             {
-                List<MovilizadoDomainModel> movilizadosDM = ImovilizadoBusiness.GetAllMovilizados();
-                List<MovilizadoVM> movilizadosVM = new List<MovilizadoVM>();
+                movilizadosDM = ImovilizadoBusiness.GetMovilizadosByCoordinador(id);
                 AutoMapper.Mapper.Map(movilizadosDM, movilizadosVM);
-                return View(movilizadosVM);
+            } else if (identity.IsInRole("Administrador") || identity.IsInRole("Super Administrador"))
+            {
+                movilizadosDM = ImovilizadoBusiness.GetAllMovilizados();
+                AutoMapper.Mapper.Map(movilizadosDM, movilizadosVM);
             }
-            return RedirectToAction("Login","Account");
+            else
+            {
+                movilizadosDM = ImovilizadoBusiness.GetAllMovilizados(id);
+                AutoMapper.Mapper.Map(movilizadosDM, movilizadosVM);
+            }
+               
+                return View(movilizadosVM);
         }
 
         [HttpGet]

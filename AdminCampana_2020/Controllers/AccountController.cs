@@ -65,7 +65,7 @@ namespace AdminCampana_2020.Controllers
             ///podemos crear un tipo de claims personalizado
             Claims.Add(new Claim("FullName", $"{userDM.Nombres} {userDM.Apellidos}"));
             ///estos claims se almacenan en la cookie para identificar al usuario y sus atributos o permisos
-
+            //Claims.Add(new Claim(ClaimTypes.Actor, userDM.Perfil.StrValor));
             //ahora establñecemos los claims con los roles del usuario
             if (userDM.UsuarioRoles != null && userDM.UsuarioRoles.Any())
             {

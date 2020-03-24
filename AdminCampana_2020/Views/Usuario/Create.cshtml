@@ -1,7 +1,9 @@
 ﻿@model AdminCampana_2020.ViewModels.UsuarioRolVM
-    @using AdminCampana_2020.Business;
+@using AdminCampana_2020.Business;
 @using AdminCampana_2020.Repository.Infraestructure.Contract;
 @using AdminCampana_2020.Repository.Infraestructure;
+@using System.Security.Claims
+@using System.Threading
 
 @{
     //ViewBag.Title = "Registro";
@@ -11,7 +13,7 @@
 
 @using (Html.BeginForm("Create", "Usuario", FormMethod.Post))
 {
-    
+      var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
     @Html.AntiForgeryToken()
     <noscript>
         <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
@@ -74,49 +76,64 @@
                                 <div class="col-lg-2 col-md-2 col-sm-12 cl-xs-12">
                                     <div class="form-group">
                                         <label>Contraseña:&nbsp;&nbsp;</label>
-                                        @Html.TextBoxFor(model => model.Usuario.Clave, new { type="password",@class = "form-control input-sm", placeholder = "********", required = "", id = "txtContraseña" })
+                                        @Html.TextBoxFor(model => model.Usuario.Clave, new { type = "password", @class = "form-control input-sm", placeholder = "********", required = "", id = "txtContraseña" })
                                         @Html.ValidationMessageFor(model => model.Usuario.Clave, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12 cl-xs-12">
-                                    <div class="form-group">
-                                        <label>Area:</label>
-                                        @Html.DropDownList("IdRol", null, new { @class = "form-control input-sm", placeholder = "", required = "", id = "idPerfil" })
-                                        @Html.ValidationMessageFor(model => model.IdRol, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12 cl-xs-12">
-                                    <div class="form-group">
-                                        <label>Perfil:</label>
-                                        @Html.DropDownListFor(model => model.Usuario.idPerfil, null, new { @class = "form-control input-sm", placeholder = "", required = "", id = "idPerfil" })
-                                        @Html.ValidationMessageFor(model => model.Usuario.idPerfil, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                @{
+
+
+                                    if (identity.IsInRole("Administrador") || identity.IsInRole("Super Administrador"))
+                                    {
+                                        <div class="col-lg-2 col-md-2 col-sm-12 cl-xs-12">
+                                            <div class="form-group">
+                                                <label>Area:</label>
+                                                @Html.DropDownList("IdRol", null, new { @class = "form-control input-sm", placeholder = "", required = "", id = "idPerfil" })
+                                                @Html.ValidationMessageFor(model => model.IdRol, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+                                @{
+                                    if (identity.IsInRole("MultiNivel") || identity.IsInRole("Planilla Ganadora")
+                                    || identity.IsInRole("Campaña") || identity.IsInRole("En Campaña") || identity.IsInRole("Redes Sociales"))
+                                    {
+                                        <div class="col-lg-2 col-md-2 col-sm-12 cl-xs-12">
+                                            <div class="form-group">
+                                                <label>Perfil:</label>
+                                                @Html.DropDownListFor(model => model.Usuario.idPerfil, null, new { @class = "form-control input-sm", placeholder = "", required = "", id = "idPerfil" })
+                                                @Html.ValidationMessageFor(model => model.Usuario.idPerfil, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
                             </div>
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 col-lg-offset-10 col-md-offset-10">
-                                    <div class="form-group">
-                                        <input type="submit" value="Dar de Alta" class="btn btn-sm btn-success btn-block" id="btnEnviar" />
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 col-lg-offset-10 col-md-offset-10">
+                                        <div class="form-group">
+                                            <input type="submit" value="Dar de Alta" class="btn btn-sm btn-success btn-block" id="btnEnviar" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
 
 
-}
+                                }
 
-<link href="~/Content/toastr.css" rel="stylesheet" />
+                                <link href="~/Content/toastr.css" rel="stylesheet" />
 
-@section ViewSpecificJavascript{
-    <script src="~/Scripts/toastr.js"></script>
-    <script src="~/Scripts/persona/message-confirmation.js?v=1"></script>
-    <script src="~/Content/js/validaciones.js?v=12"></script>
-}
+                                @section ViewSpecificJavascript{
+                                    <script src="~/Scripts/toastr.js"></script>
+                                    <script src="~/Scripts/persona/message-confirmation.js?v=1"></script>
+                                    <script src="~/Content/js/validaciones.js?v=12"></script>
+                                }
 

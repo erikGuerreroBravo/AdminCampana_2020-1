@@ -11,7 +11,7 @@ namespace AdminCampana_2020.Controllers
     public class GraficasController : Controller
     {
         // GET: Graficas
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador")]
         public ActionResult Create()
         {
             //delcaramos la variable claimsprincipal

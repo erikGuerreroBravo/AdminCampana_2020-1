@@ -63,6 +63,7 @@ namespace AdminCampana_2020.Business
                     movilizado.strApellidoMaterno = personaDM.StrApellidoMaterno;
                     movilizado.strEmail = personaDM.StrEmail;
                     movilizado.idUsuario = personaDM.idUsuario;
+                    movilizado.idStatus = personaDM.idStatus;
                     movilizado.Direccion = new Direccion
                     {
                         strCalle = personaDM.Direccion.StrCalle,
@@ -146,6 +147,89 @@ namespace AdminCampana_2020.Business
 
 
             return personas;
+        }
+
+        public List<MovilizadoDomainModel> GetAllMovilizados(int idUsuario)
+        {
+            List<MovilizadoDomainModel> personas = new List<MovilizadoDomainModel>();
+            List<Movilizado> movilizados = movilizadoRepository.GetAll().Where(p => p.idStatus == 1 && p.idUsuario == idUsuario).ToList();
+
+            foreach (Movilizado item in movilizados)
+            {
+                MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
+
+                movilizadoDomainModel.Id = item.id;
+                movilizadoDomainModel.StrNombre = item.strNombre;
+                movilizadoDomainModel.StrApellidoPaterno = item.strApellidoPaterno;
+                movilizadoDomainModel.StrApellidoMaterno = item.strApellidoMaterno;
+                movilizadoDomainModel.StrEmail = item.strEmail;
+
+                movilizadoDomainModel.Usuario = new UsuarioDomainModel
+                {
+                    Id = item.Usuario.Id,
+                    Nombres = item.Usuario.Nombres,
+                    Apellidos = item.Usuario.Apellidos,
+                    //UsuarioRoles = item.Usuario.Usuario_Rol as List<UsuarioRolDomainModel>
+                };
+
+                foreach (var rol in item.Usuario.Usuario_Rol)
+                {
+                    UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();
+                    usuarioRolDomainModel.IdRol = rol.Id_rol;
+                    usuarioRolDomainModel.Rol = new RolDomainModel
+                    {
+                        Nombre = rol.Rol.Nombre
+                    };
+                    movilizadoDomainModel.Usuario.UsuarioRoles = new List<UsuarioRolDomainModel>();
+                    movilizadoDomainModel.Usuario.UsuarioRoles.Add(usuarioRolDomainModel);
+
+                }
+                personas.Add(movilizadoDomainModel);
+            }
+
+
+            return personas;
+        }
+
+        public List<MovilizadoDomainModel> GetMovilizadosByCoordinador(int idCoordinador)
+        {
+            List<MovilizadoDomainModel> movilizadoDomainModels = new List<MovilizadoDomainModel>();
+
+            List<Movilizado> movilizados = movilizadoRepository.GetAll().Where(p => p.Usuario.idUsuario == idCoordinador).ToList();
+
+            foreach (Movilizado item in movilizados)
+            {
+                MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
+
+                movilizadoDomainModel.Id = item.id;
+                movilizadoDomainModel.StrNombre = item.strNombre;
+                movilizadoDomainModel.StrApellidoPaterno = item.strApellidoPaterno;
+                movilizadoDomainModel.StrApellidoMaterno = item.strApellidoMaterno;
+                movilizadoDomainModel.StrEmail = item.strEmail;
+
+                movilizadoDomainModel.Usuario = new UsuarioDomainModel
+                {
+                    Id = item.Usuario.Id,
+                    Nombres = item.Usuario.Nombres,
+                    Apellidos = item.Usuario.Apellidos,
+                };
+
+                foreach (var rol in item.Usuario.Usuario_Rol)
+                {
+                    UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();
+                    usuarioRolDomainModel.IdRol = rol.Id_rol;
+                    usuarioRolDomainModel.Rol = new RolDomainModel
+                    {
+                        Nombre = rol.Rol.Nombre
+                    };
+                    movilizadoDomainModel.Usuario.UsuarioRoles = new List<UsuarioRolDomainModel>();
+                    movilizadoDomainModel.Usuario.UsuarioRoles.Add(usuarioRolDomainModel);
+
+                }
+                movilizadoDomainModels.Add(movilizadoDomainModel);
+            }
+
+            return movilizadoDomainModels;
         }
 
         public MovilizadoDomainModel GetMovilizadoById(int id)
