@@ -67,6 +67,29 @@ namespace AdminCampana_2020.Business
             return resultado;
         }
 
+        public bool AddUser(UsuarioDomainModel usuarioDomainModel)
+        {
+            bool respuesta = false;
+
+            if (usuarioDomainModel != null)
+            {
+                Usuario usuario = new Usuario();
+
+                usuario.Nombres = usuarioDomainModel.Nombres;
+                usuario.Apellidos = usuarioDomainModel.Apellidos;
+                usuario.Email = usuarioDomainModel.Email;
+                usuario.Clave = usuarioDomainModel.Clave;
+                usuario.idPerfil = usuarioDomainModel.IdPerfil;
+                usuario.idStatus = usuarioDomainModel.IdStatus;
+                usuario.idUsuario = usuarioDomainModel.Id;
+
+                usuarioRepository.Insert(usuario);
+                respuesta = true;
+            }
+
+            return respuesta;
+        }
+
         public UsuarioDomainModel ValidarLogin(string email, string password)
         {
             UsuarioDomainModel usuarioDM = null;

@@ -16,5 +16,7 @@ namespace AdminCampana_2020.Business.Interface
         bool MigrarMovilizados(UsuarioDomainModel usuarioDomainModel);
 
         bool BajaMovilizado(MovilizadoDomainModel usuarioDM);
+        List<MovilizadoDomainModel> GetAllMovilizados(int idUsuario);
+        List<MovilizadoDomainModel> GetMovilizadosByCoordinador(int idCoordinador);
     }
 }

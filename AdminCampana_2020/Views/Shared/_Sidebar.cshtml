@@ -1,68 +1,65 @@
 ﻿@using WebHelpers.Mvc5
+@using System.Threading
+@using System.Security.Claims
+
 <aside class="main-sidebar">
     <section class="sidebar">
-        @* BEGIN Search *@
-        @*<form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
-        </form>*@
-        @* END Search *@
-        @* BEGIN Menu *@
-    <ul class="sidebar-menu" data-widget="tree">
-        @*<li class="header">HEADER</li>
-        <li class="@Url.IsLinkActive("Create", "Graficas")">
-            <a href="@Url.Action("Create", "Graficas")"><i class="fa fa-link"></i> <span>Graficación</span></a>
-        </li>
-        <li class="@Url.IsLinkActive("AnotherLink", "Home")">
-            <a href="@Url.Action("AnotherLink", "Home")"><i class="fa fa-link"></i> <span>Another Link</span></a>
-        </li>
-        <li class="@Url.IsLinkActive("Registro", "Persona")">
-            <a href="@Url.Action("Registro", "Persona")"><i class="fa fa-link"></i> <span>Registro</span></a>
-        </li>*@
-        <li class="treeview">
-            <a href="#">
-                <i class="fas fa-users"></i> <span>Movilizados</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="@Url.Action("Registro", "Movilizado")">Registro</a></li>
-                <li><a href="@Url.Action("Registros", "Movilizado")">Administración</a></li>
-            </ul>
-           
-        </li>
-        <li class="treeview">
-            <a href="#">
-                <i class="glyphicon glyphicon-user"></i> <span>Usuarios</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="@Url.Action("Create", "Usuario")">Agregar Usuario</a></li>
-                <li><a href="@Url.Action("Administrar", "Usuario")">Administrar Movilizadores</a></li>
-            </ul>
-        </li>
-        <li class="treeview">
-            <a href="#">
-                <i class="fas fa-chart-line"></i> <span>Panel de Control</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="@Url.Action("Create", "Graficas")">Dashboard</a></li>
-                <li><a href="@Url.Action("Create", "Impresion")">Impresión</a></li>
-            </ul>
-        </li>
-    </ul>
+        @{var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;} 
+        <ul class="sidebar-menu" data-widget="tree">
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fas fa-users"></i> <span>Movilizados</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Registro", "Movilizado")">Registro</a></li>
+                    <li><a href="@Url.Action("Registros", "Movilizado")">Administración</a></li>
+                </ul>
+
+            </li>
+            @{
+                if (identity.IsInRole("Administrador") || identity.IsInRole("Super Administrador") || identity.IsInRole("MultiNivel") || identity.IsInRole("Planilla Ganadora")
+                    || identity.IsInRole("Campaña") || identity.IsInRole("En Campaña") || identity.IsInRole("Redes Sociales"))
+                {
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-user"></i> <span>Usuarios</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Create", "Usuario")">Agregar Usuario</a></li>
+                            <li><a href="@Url.Action("Administrar", "Usuario")">Administrar Movilizadores</a></li>
+                        </ul>
+                    </li>
+                }
+
+            }
+
+            @{
+
+                if (identity.IsInRole("Administrador") || identity.IsInRole("Super Administrador"))
+                {
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fas fa-chart-line"></i> <span>Panel de Control</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Create", "Graficas")">Dashboard</a></li>
+                            <li><a href="@Url.Action("Create", "Impresion")">Impresión</a></li>
+                        </ul>
+                    </li>
+                }
+            }
+
+        </ul>
         @* END Menu *@
     </section>
 </aside>

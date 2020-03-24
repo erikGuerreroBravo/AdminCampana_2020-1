@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,26 +38,38 @@ namespace AdminCampana_2020.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador,MultiNivel,Planilla Ganadora,Campaña,En Campaña,Redes Sociales")]
         [HttpPost]
         public ActionResult Create(UsuarioRolVM usuarioVM)
         {
 
             if (usuarioVM != null)
             {
+                var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+
                 usuarioVM.Usuario.idStatus = (int)EnumStatus.ALTA;
                 usuarioVM.Usuario.Clave = Funciones.Encrypt(usuarioVM.Usuario.Clave);
                 var properties = ClaimsPrincipal.Current.Identities.First();
-                usuarioVM.Usuario.Id = int.Parse(properties.Claims.First(i => i.Type == ClaimTypes.NameIdentifier).Value);
-                UsuarioRolDomainModel usuarioDM = new UsuarioRolDomainModel();
-                AutoMapper.Mapper.Map(usuarioVM, usuarioDM);
-                usuarioBusiness.AddUpdateUsuarios(usuarioDM);
+                usuarioVM.Usuario.Id = int.Parse(properties.Claims.First(i => i.Type == ClaimTypes.NameIdentifier).Value);             
+
+                if (identity.IsInRole("Administrador") || identity.IsInRole("Super Administrador"))
+                {
+                    UsuarioRolDomainModel usuarioDM = new UsuarioRolDomainModel();
+                    AutoMapper.Mapper.Map(usuarioVM, usuarioDM);
+                    usuarioBusiness.AddUpdateUsuarios(usuarioDM);
+                } else
+                {
+                    UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+                    AutoMapper.Mapper.Map(usuarioVM.Usuario, usuarioDomainModel);
+                    usuarioBusiness.AddUser(usuarioDomainModel);
+                }
+                  
             }
 
             return RedirectToAction("Create", "Usuario");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador,MultiNivel,Planilla Ganadora,Campaña,En Campaña,Redes Sociales")]
         [HttpGet]
         public ActionResult Administrar()
         {
@@ -67,7 +80,7 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador,MultiNivel,Planilla Ganadora,Campaña,En Campaña,Redes Sociales")]
         public ActionResult GetUsuario(int id, int type)
         {
             UsuarioVM usuarioVM = null;
@@ -99,7 +112,7 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador,MultiNivel,Planilla Ganadora,Campaña,En Campaña,Redes Sociales")]
         public ActionResult ChangeCoordinador(UsuarioVM usuarioVM)
         {
             UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
@@ -110,7 +123,7 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador,MultiNivel,Planilla Ganadora,Campaña,En Campaña,Redes Sociales")]
         public ActionResult UpdateUsuario(UsuarioVM usuarioVM)
         {
             if (usuarioVM != null)
@@ -124,7 +137,7 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador,MultiNivel,Planilla Ganadora,Campaña,En Campaña,Redes Sociales")]
         public ActionResult GetUsuariosByApellidos(string term)
         {
 
@@ -136,7 +149,7 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Administrador,Super Administrador,MultiNivel,Planilla Ganadora,Campaña,En Campaña,Redes Sociales")]
         public ActionResult Eliminar(UsuarioVM usuarioVM)
         {
             try
