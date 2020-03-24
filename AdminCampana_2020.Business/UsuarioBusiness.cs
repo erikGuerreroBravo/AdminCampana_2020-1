@@ -174,6 +174,23 @@ namespace AdminCampana_2020.Business
             return usuarioDomainModels;
         }
 
+        public bool UpdateUsuario(UsuarioDomainModel usuarioDM)
+        {
+            bool resultado = false;
+            if (usuarioDM != null)
+            {
+                Usuario usuario = usuarioRepository.SingleOrDefault(p => p.Id == usuarioDM.Id);
+
+                if (usuarioDM.Id > 0)
+                {
+                    usuario.idStatus = usuarioDM.IdStatus;
+                    usuarioRepository.Update(usuario);
+                    resultado = true;
+                }
+            }
+            return resultado;
+        }
+
         public bool UpdateUsuario(UsuarioDomainModel usuarioDomainModel)
         {
             bool respuesta = false;

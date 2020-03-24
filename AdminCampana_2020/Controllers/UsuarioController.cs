@@ -80,11 +80,17 @@ namespace AdminCampana_2020.Controllers
                     ViewBag.idCambio = new SelectList(usuarioBusiness.GetUsuarios(), "Id", "NombreCompleto");
                     return PartialView("_Change", usuarioVM);
                 case 2:
+                    break;                
                     UsuarioDomainModel usuarioDomain = usuarioBusiness.GetUsuario(id);
                     usuarioVM = new UsuarioVM();
                     AutoMapper.Mapper.Map(usuarioDomain, usuarioVM);
                     return PartialView("_Update", usuarioVM);
                 case 3:
+                    usuarioDomainModel = usuarioBusiness.GetUsuario(id);
+                    usuarioVM = new UsuarioVM();
+                    AutoMapper.Mapper.Map(usuarioDomainModel, usuarioVM);
+                    return PartialView("_Drop", usuarioVM);                   
+                case 4:
                     break;
                 default:
                     break;
@@ -129,6 +135,36 @@ namespace AdminCampana_2020.Controllers
 
             return Json(filtro, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Eliminar(UsuarioVM usuarioVM)
+        {
+            try
+            {
+                if (usuarioVM != null)
+                {
+                    //var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+
+                    //usuarioVM.Id = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
+                    usuarioVM.idStatus = (int)EnumStatus.BAJA;
+                    UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+                    AutoMapper.Mapper.Map(usuarioVM, usuarioDomainModel);
+                    usuarioDomainModel = usuarioBusiness.GetUsuario(usuarioVM.Id);
+                    usuarioDomainModel.IdStatus = (int)EnumStatus.BAJA;
+                    usuarioBusiness.UpdateUsuario(usuarioDomainModel);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
+            return RedirectToAction("Administrar", "Usuario");
+        }
+
 
     }
 }
