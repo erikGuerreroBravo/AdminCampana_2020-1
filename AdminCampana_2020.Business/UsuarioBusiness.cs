@@ -52,7 +52,7 @@ namespace AdminCampana_2020.Business
                         Clave = usuarioDM.Usuario.Clave,
                         ProviderKey = usuarioDM.Usuario.ProviderKey,
                         ProviderName = usuarioDM.Usuario.ProviderName,
-                        idPerfil = usuarioDM.Usuario.IdPerfil,
+                        //idPerfil = usuarioDM.Usuario.IdPerfil,
                         idStatus = usuarioDM.Usuario.IdStatus,
                         idUsuario = usuarioDM.Usuario.Id
                         

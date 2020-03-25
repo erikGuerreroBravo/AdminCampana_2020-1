@@ -449,12 +449,9 @@
     <Content Include="Views\Movilizado\_Update.cshtml" />
     <Content Include="Views\Usuario\Administrar.cshtml" />
     <Content Include="Views\Usuario\_Change.cshtml" />
-
     <Content Include="Views\Movilizado\_Drop.cshtml" />
     <Content Include="Views\Usuario\_Drop.cshtml" />
-
     <Content Include="Views\Usuario\_Update.cshtml" />
-
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
