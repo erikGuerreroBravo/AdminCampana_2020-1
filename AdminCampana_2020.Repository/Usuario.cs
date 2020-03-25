@@ -32,6 +32,7 @@ namespace AdminCampana_2020.Repository
         public Nullable<int> idPerfil { get; set; }
         public Nullable<int> idUsuario { get; set; }
         public Nullable<int> idStatus { get; set; }
+        public string area_movilizador { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movilizado> Movilizado { get; set; }

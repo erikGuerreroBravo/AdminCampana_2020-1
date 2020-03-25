@@ -16,6 +16,7 @@ namespace AdminCampana_2020.ViewModels
         public string ProviderKey { get; set; }
         public int idPerfil { get; set; }
         public int idStatus { get; set; }
+        public string area_movilizador { get; set; }
 
         //Objetos de las relaciones
 

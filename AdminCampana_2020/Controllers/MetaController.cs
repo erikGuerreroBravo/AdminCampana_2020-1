@@ -14,11 +14,12 @@ namespace AdminCampana_2020.Controllers
 
         private IMetaBusiness ImetaBusiness;
         private IMovilizadoBusiness movilizadoBusiness;
-
-        public MetaController(IMetaBusiness metaBusiness, IMovilizadoBusiness movilizadoBusiness)
+        private IUsuarioBusiness usuarioBusiness;
+        public MetaController(IMetaBusiness metaBusiness, IMovilizadoBusiness movilizadoBusiness, IUsuarioBusiness usuarioBusiness)
         {
             this.ImetaBusiness = metaBusiness;
             this.movilizadoBusiness = movilizadoBusiness;
+            this.usuarioBusiness = usuarioBusiness;
         }
 
         public ActionResult Create()
@@ -71,6 +72,7 @@ namespace AdminCampana_2020.Controllers
 
             List<MovilizadoDomainModel> movilizados = movilizadoBusiness.GetAllMovilizados();
             List<MetaDomainModel> metas = ImetaBusiness.GetAllMetas();
+            //List<UsuarioDomainModel> usuarios = usuarioBusiness.GetUsuarios();
 
             if (movilizados != null && metas != null)
             {
@@ -84,26 +86,51 @@ namespace AdminCampana_2020.Controllers
 
                 for (int i = 0; i < movilizados.Count; i++)
                 {
-                    if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(1)).Contains(true))
+
+                    //NO BORRAR ESTE CODIGO
+
+                    //if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(1)).Contains(true))
+                    //{
+                    //    totalMovilizados[0]++;
+                    //}
+                    //else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(2)).Contains(true))
+                    //{
+                    //    totalMovilizados[1]++;
+                    //}
+                    //else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(3)).Contains(true))
+                    //{
+                    //    totalMovilizados[2]++;
+                    //}
+                    //else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(4)).Contains(true))
+                    //{
+                    //    totalMovilizados[3]++;
+                    //}
+                    //else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(5)).Contains(true))
+                    //{
+                    //    totalMovilizados[4]++;
+                    //}
+
+                    if (movilizados[i].Usuario.area_movilizador.Equals("MultiNivel"))
                     {
                         totalMovilizados[0]++;
                     }
-                    else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(2)).Contains(true))
+                    else if (movilizados[i].Usuario.area_movilizador.Equals("Planilla Ganadora"))
                     {
                         totalMovilizados[1]++;
                     }
-                    else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(3)).Contains(true))
+                    else if (movilizados[i].Usuario.area_movilizador.Equals("Campaña"))
                     {
                         totalMovilizados[2]++;
                     }
-                    else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(4)).Contains(true))
+                    else if (movilizados[i].Usuario.area_movilizador.Equals("En Campaña"))
                     {
                         totalMovilizados[3]++;
                     }
-                    else if (movilizados[i].Usuario.UsuarioRoles.Select(p => p.IdRol.Equals(5)).Contains(true))
+                    else if (movilizados[i].Usuario.area_movilizador.Equals("Redes Sociales"))
                     {
                         totalMovilizados[4]++;
                     }
+
                 }
 
                 dataDash = new int[][]

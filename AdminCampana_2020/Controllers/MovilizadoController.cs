@@ -35,10 +35,14 @@ namespace AdminCampana_2020.Controllers
         [Authorize]
         public ActionResult Registro()
         {
- 
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+            if (!identity.IsInRole("Administrador"))
+            {
                 ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
                 return View();
-          
+            }
+            return RedirectToAction("Registros","Movilizado");
+
         }
 
         [HttpPost]

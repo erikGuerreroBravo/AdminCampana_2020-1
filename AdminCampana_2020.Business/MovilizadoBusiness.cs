@@ -127,6 +127,7 @@ namespace AdminCampana_2020.Business
                     Id = item.Usuario.Id,
                     Nombres = item.Usuario.Nombres,
                     Apellidos = item.Usuario.Apellidos,
+                    area_movilizador = item.Usuario.area_movilizador
                     //UsuarioRoles = item.Usuario.Usuario_Rol as List<UsuarioRolDomainModel>
                 };
 

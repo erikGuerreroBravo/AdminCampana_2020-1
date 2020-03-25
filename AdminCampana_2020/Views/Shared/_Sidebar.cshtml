@@ -6,20 +6,24 @@
     <section class="sidebar">
         @{var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;} 
         <ul class="sidebar-menu" data-widget="tree">
+       
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fas fa-users"></i> <span>Movilizados</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @if (!identity.IsInRole("Administrador"))
+                            {
+                            <li><a href="@Url.Action("Registro", "Movilizado")">Registro</a></li>
+                            }
+                            <li><a href="@Url.Action("Registros", "Movilizado")">Administración</a></li>
+                        </ul>
 
-            <li class="treeview">
-                <a href="#">
-                    <i class="fas fa-users"></i> <span>Movilizados</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="@Url.Action("Registro", "Movilizado")">Registro</a></li>
-                    <li><a href="@Url.Action("Registros", "Movilizado")">Administración</a></li>
-                </ul>
+                    </li>
 
-            </li>
             @{
                 if (identity.IsInRole("Administrador") || identity.IsInRole("Super Administrador") || identity.IsInRole("MultiNivel") || identity.IsInRole("Planilla Ganadora")
                     || identity.IsInRole("Campaña") || identity.IsInRole("En Campaña") || identity.IsInRole("Redes Sociales"))

@@ -60,6 +60,28 @@ namespace AdminCampana_2020.Controllers
                 } else
                 {
                     UsuarioDomainModel usuarioDomainModel = new UsuarioDomainModel();
+
+                    if (identity.IsInRole("MultiNivel"))
+                    {
+                        usuarioVM.Usuario.area_movilizador = "MultiNivel";
+                    }
+                    else if (identity.IsInRole("Planilla Ganadora"))
+                    {
+                        usuarioVM.Usuario.area_movilizador = "Planilla Ganadora";
+                    }
+                    else if (identity.IsInRole("Campaña"))
+                    {
+                        usuarioVM.Usuario.area_movilizador = "Campaña";
+                    }
+                    else if (identity.IsInRole("En Campaña"))
+                    {
+                        usuarioVM.Usuario.area_movilizador = "En Campaña";
+                    }
+                    else if (identity.IsInRole("Redes Sociales"))
+                    {
+                        usuarioVM.Usuario.area_movilizador = "Redes Sociales";
+                    }
+
                     AutoMapper.Mapper.Map(usuarioVM.Usuario, usuarioDomainModel);
                     usuarioBusiness.AddUser(usuarioDomainModel);
                 }

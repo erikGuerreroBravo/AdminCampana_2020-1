@@ -118,6 +118,7 @@
           <Property Name="idPerfil" Type="int" />
           <Property Name="idUsuario" Type="int" />
           <Property Name="idStatus" Type="int" />
+          <Property Name="area_movilizador" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Usuario_Rol">
           <Key>
@@ -682,6 +683,7 @@
           <NavigationProperty Name="Usuario_Rol" Relationship="RC2020Model.FK_Usuario_Rol_Usuario" FromRole="Usuario" ToRole="Usuario_Rol" />
           <NavigationProperty Name="Usuario1" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario" ToRole="Usuario1" />
           <NavigationProperty Name="Usuario2" Relationship="RC2020Model.FK_Usuario_Usuario" FromRole="Usuario1" ToRole="Usuario" />
+          <Property Name="area_movilizador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Movilizado_Usuario">
           <End Type="RC2020Model.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -880,6 +882,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="RC2020Model.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="area_movilizador" ColumnName="area_movilizador" />
                 <ScalarProperty Name="idStatus" ColumnName="idStatus" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />

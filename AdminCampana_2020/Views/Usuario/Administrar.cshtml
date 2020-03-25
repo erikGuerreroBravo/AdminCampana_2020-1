@@ -38,7 +38,7 @@
                                         <th>Nombre(s)</th>
                                         <th>Apellidos</th>
                                         <th>Email</th>
-                                        <th>Roles</th>
+                                        @*<th>Roles</th>*@
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -49,10 +49,10 @@
                                             <td>@item.Nombres</td>
                                             <td>@item.Apellidos</td>
                                             <td>@item.Email</td>
-                                            @foreach (var rol in item.UsuarioRoles)
+                                            @*@foreach (var rol in item.UsuarioRoles)
                                             {
                                                 <td>@rol.Rol.Nombre</td>
-                                            }
+                                            }*@
 
                                             <td>
                                                 <button class="btn btn-sm btn-default" onclick="change(@item.Id)"><span class="fas fa-exchange-alt"></span></button>&nbsp;<button class="btn btn-sm btn-default" onclick="update(@item.Id)"><span class="fas fa-user-edit "></span></button>&nbsp;<button class="btn btn-sm btn-default" onclick="drop(@item.Id)"><span class="fas fa-user-times "></span></button>

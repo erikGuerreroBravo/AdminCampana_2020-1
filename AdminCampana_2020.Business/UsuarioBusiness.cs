@@ -82,6 +82,7 @@ namespace AdminCampana_2020.Business
                 usuario.idPerfil = usuarioDomainModel.IdPerfil;
                 usuario.idStatus = usuarioDomainModel.IdStatus;
                 usuario.idUsuario = usuarioDomainModel.Id;
+                usuario.area_movilizador = usuarioDomainModel.area_movilizador;
 
                 usuarioRepository.Insert(usuario);
                 respuesta = true;
@@ -134,7 +135,7 @@ namespace AdminCampana_2020.Business
         //Método para administrador y superadministrador
         public List<UsuarioDomainModel> GetUsuarios()
         {
-            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1).ToList();
+            List<Usuario> usuarios = usuarioRepository.GetAll(p => p.idStatus == 1 && p.idPerfil == 3).ToList();
             List<UsuarioDomainModel> usuarioDomainModels = new List<UsuarioDomainModel>();
 
             foreach (Usuario item in usuarios)
@@ -145,6 +146,7 @@ namespace AdminCampana_2020.Business
                 usuarioDomainModel.Apellidos = item.Apellidos;
                 usuarioDomainModel.Email = item.Email;
                 usuarioDomainModel.NombreCompleto = item.Nombres + item.Apellidos;
+                usuarioDomainModel.area_movilizador = item.area_movilizador;
                 foreach (var rol in item.Usuario_Rol)
                 {
                     UsuarioRolDomainModel usuarioRolDomainModel = new UsuarioRolDomainModel();

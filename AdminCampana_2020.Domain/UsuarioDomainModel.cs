@@ -18,6 +18,7 @@ namespace AdminCampana_2020.Domain
         public int IdPerfil { get; set; }
         public int IdUsuario { get; set; }
         public int IdStatus { get; set; }
+        public string area_movilizador { get; set; }
 
         //Objetos de las relaciones
 
