@@ -64,7 +64,7 @@ namespace AdminCampana_2020.Controllers
                 throw new Exception(ex.Message);
             }
 
-            return RedirectToAction("Registro","Movilizado");
+            return RedirectToAction("Registros","Movilizado");
         }
 
         [HttpGet]

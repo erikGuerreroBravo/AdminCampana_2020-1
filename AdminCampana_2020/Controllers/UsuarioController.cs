@@ -73,10 +73,24 @@ namespace AdminCampana_2020.Controllers
         [HttpGet]
         public ActionResult Administrar()
         {
-            List<UsuarioDomainModel> usuarioDomainModels = usuarioBusiness.GetUsuarios();
-            List<UsuarioVM> usuarioVMs = new List<UsuarioVM>();
-            AutoMapper.Mapper.Map(usuarioDomainModels, usuarioVMs);
-            return View(usuarioVMs);
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+
+            List<UsuarioDomainModel> usuariosDM = null; usuarioBusiness.GetUsuarios();
+            List<UsuarioVM> usuariosVM = new List<UsuarioVM>();
+
+            int id = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(p => p.Value).FirstOrDefault());
+            if (identity.IsInRole("MultiNivel") || identity.IsInRole("Planilla Ganadora") || identity.IsInRole("Campaña") || identity.IsInRole("En Campaña") || identity.IsInRole("Redes Sociales"))
+            {
+                usuariosDM = usuarioBusiness.GetUsuariosByCoordinador(id);
+                AutoMapper.Mapper.Map(usuariosDM, usuariosVM);
+            }
+            else if (identity.IsInRole("Administrador") || identity.IsInRole("Super Administrador"))
+            {
+                usuariosDM = usuarioBusiness.GetUsuarios();
+                AutoMapper.Mapper.Map(usuariosDM, usuariosVM);
+            }
+            
+            return View(usuariosVM);
         }
 
         [HttpGet]
