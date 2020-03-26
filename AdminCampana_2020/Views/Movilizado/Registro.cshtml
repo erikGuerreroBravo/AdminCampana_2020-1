@@ -1,4 +1,6 @@
 ﻿@model AdminCampana_2020.ViewModels.MovilizadoVM
+@using System.Security.Claims
+@using System.Threading
 
 @{
     //ViewBag.Title = "Registro";
@@ -7,6 +9,7 @@
 
 @using (Html.BeginForm("Registro", "Movilizado", FormMethod.Post))
 {
+    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
     @Html.AntiForgeryToken()
     <noscript>
         <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
@@ -31,7 +34,7 @@
                         <h5 class="box-title">
                             <label class="text-success emailtitleletter">
                                 <i class="text-success fa fa-graduation-cap"></i>
-                                Octavio Magaña Soto
+                                @identity.Claims.Where(p => p.Type == "FullName").Select(p => p.Value).FirstOrDefault()
 
                             </label>&nbsp;
 
@@ -103,12 +106,12 @@
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/persona/message-confirmation.js?v=1"></script>
     <script src="~/Content/js/validaciones.js?v=12"></script>
-    
+
 }
-    <script src="~/Scripts/jquery-1.7.js"></script>
+<script src="~/Scripts/jquery-1.7.js"></script>
 <script>
     $(document).ready(function () {
-      
+
         $.getJSON("/Movilizado/GetDatosDireccion").done(function (response) {
 
             console.log(response.ZonaVM);

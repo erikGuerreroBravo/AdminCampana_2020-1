@@ -38,8 +38,7 @@
                         <h5 class="box-title">
                             <label class="text-success emailtitleletter">
                                 <i class="text-success fa fa-graduation-cap"></i>
-                                Octavio Magaña Soto
-
+                                @identity.Claims.Where(p => p.Type == "FullName").Select(p => p.Value).FirstOrDefault()
                             </label>&nbsp;
 
                         </h5>

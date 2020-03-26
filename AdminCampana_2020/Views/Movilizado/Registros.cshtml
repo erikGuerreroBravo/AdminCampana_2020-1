@@ -1,7 +1,10 @@
 ﻿@model List<AdminCampana_2020.ViewModels.MovilizadoVM>
+@using System.Security.Claims
+@using System.Threading
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
 }
 <noscript>
     <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
@@ -10,7 +13,7 @@
 <div class="bs-container" style="min-height:960px;">
     <section class="content-header">
         <h1>
-           Administrar Movilizados
+            Administrar Movilizados
             <small>(Consultar)</small>
         </h1>
         <ol class="breadcrumb">
@@ -27,7 +30,7 @@
                     <h5 class="box-title">
                         <label class="text-success emailtitleletter">
                             <i class="text-success fa fa-graduation-cap"></i>
-                            Octavio Magaña Soto
+                            @identity.Claims.Where(p => p.Type == "FullName").Select(p => p.Value).FirstOrDefault()
                         </label>&nbsp;
                     </h5>
                     <div class="box-tools pull-right">
@@ -77,30 +80,26 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <div class="modal-body" id="data">
+            <div class="modal-body" id="data">
 
-                </div>
-              
+            </div>
+
         </div>
     </div>
 </div>
 
 <script>
 
-    function display(id)
-    {
+    function display(id) {
         const url = "/Movilizado/GetMovilizado?id=" + id + "&&type=1";
-        $('#data').load(url, function ()
-        {
+        $('#data').load(url, function () {
             $('#modalData').modal("show");
         });
     }
 
-    function update(id)
-    {
-         const url = "/Movilizado/GetMovilizado?id=" + id + "&&type=2";
-        $('#data').load(url, function ()
-        {
+    function update(id) {
+        const url = "/Movilizado/GetMovilizado?id=" + id + "&&type=2";
+        $('#data').load(url, function () {
             $('#modalData').modal("show");
         });
     }

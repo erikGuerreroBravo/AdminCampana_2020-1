@@ -1,6 +1,10 @@
 ﻿@model List<AdminCampana_2020.ViewModels.UsuarioVM>
+@using System.Security.Claims
+@using System.Threading
+
 
 <div class="bs-container" style="min-height:960px;">
+    @{var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;}
     <section class="content-header">
         <h1>
             Administrar Movilizadores
@@ -20,7 +24,7 @@
                     <h5 class="box-title">
                         <label class="text-success emailtitleletter">
                             <i class="text-success fa fa-graduation-cap"></i>
-                            Octavio Magaña Soto
+                            @identity.Claims.Where(p => p.Type == "FullName").Select(p => p.Value).FirstOrDefault();
                         </label>&nbsp;
                     </h5>
                     <div class="box-tools pull-right">
@@ -50,9 +54,9 @@
                                             <td>@item.Apellidos</td>
                                             <td>@item.Email</td>
                                             @*@foreach (var rol in item.UsuarioRoles)
-                                            {
-                                                <td>@rol.Rol.Nombre</td>
-                                            }*@
+                                                {
+                                                    <td>@rol.Rol.Nombre</td>
+                                                }*@
 
                                             <td>
                                                 <button class="btn btn-sm btn-default" onclick="change(@item.Id)"><span class="fas fa-exchange-alt"></span></button>&nbsp;<button class="btn btn-sm btn-default" onclick="update(@item.Id)"><span class="fas fa-user-edit "></span></button>&nbsp;<button class="btn btn-sm btn-default" onclick="drop(@item.Id)"><span class="fas fa-user-times "></span></button>
