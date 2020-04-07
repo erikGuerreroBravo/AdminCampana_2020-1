@@ -11,5 +11,12 @@ namespace AdminCampana_2020.Business.Interface
     {
         List<MetaDomainModel> GetAllMetas();
         bool UpdateMeta(MetaDomainModel _meta);
+        /// <summary>
+        /// Este metodo se encarga de contar cuantos movilizados se tienen hasta el momento
+        /// </summary>
+        /// <returns>
+        /// regresa el total de movilizados activos
+        /// </returns>
+        int CountMetaTotal();
     }
 }

@@ -65,5 +65,33 @@ namespace AdminCampana_2020.Business
             return respuesta;
         }
 
+        /// <summary>
+        /// Este metodo se encarga de contar cuantos movilizados se tienen hasta el momento
+        /// </summary>
+        /// <returns>
+        /// regresa el total de movilizados activos
+        /// </returns>
+        public int CountMetaTotal()
+        {
+            int total = 0;
+            try
+            {
+                List<Meta> metas = metaRepository.GetAll().ToList();
+                foreach (Meta meta in metas)
+                {
+                    total += meta.intValor.Value;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string mensajeErr = ex.Message;
+                return 0;
+            }
+            return total;
+        }
+
+
+
     }
 }
