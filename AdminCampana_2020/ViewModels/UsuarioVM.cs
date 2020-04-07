@@ -26,5 +26,7 @@ namespace AdminCampana_2020.ViewModels
 
         //Auxiliar
         public int idCambio { get; set; }
+        public int IdRol { get; set; }
+        public List<MovilizadoVM> MovilizadorVM { get; set; }
     }
 }

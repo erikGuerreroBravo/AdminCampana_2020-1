@@ -58,7 +58,7 @@ namespace AdminCampana_2020.Infraestructure
             CreateMap<PerfilVM, PerfilDomainModel>();
             CreateMap<PerfilDomainModel, PerfilVM>();
 
-            //Status
+            //StatusvM
 
             CreateMap<StatusVM,StatusDomainModel>();
             CreateMap<StatusDomainModel,StatusVM>();

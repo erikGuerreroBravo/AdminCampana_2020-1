@@ -21,5 +21,16 @@ namespace AdminCampana_2020.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult DuplicateData()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult NoEmailRecovery()
+        {
+            return View("NoEmailRecovery");
+        }
     }
 }
