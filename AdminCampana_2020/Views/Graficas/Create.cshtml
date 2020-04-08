@@ -1,12 +1,8 @@
-﻿<html>
-
-<head>
+﻿
     <!--Load the AJAX API-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
 
-<body>
     <noscript>
         <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
     </noscript>
@@ -29,8 +25,7 @@
                     <div class="box-header with-border">
                         <h5 class="box-title">
                             <label class="text-success emailtitleletter">
-                                <i class="text-success"></i>
-                                Bienvenido: @ViewBag.Usuario
+                                Bienvenido: @*@ViewBag.Usuario*@
                             </label>&nbsp;
 
                         </h5>
@@ -44,11 +39,13 @@
                         <div class="form-group">
 
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                @Html.Partial("p_General")
+                                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                Progreso General                                                
+                                                Progreso General
+
                                             </div>
                                         </div>
                                         <div class="panel-body">
@@ -59,15 +56,15 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                     <canvas id="chRadarMetas" style="height:100px;"></canvas>
                                                 </div>
-                                            </div>                                         
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
+                                </div>*@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-3">
+                                @Html.Partial("p_Multinivel")
+                                @*<div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
@@ -110,16 +107,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <div id="boxGreenMultinivel"  title="Prioridad Baja">
-                                                        
+                                                    <div id="boxGreenMultinivel" title="Prioridad Baja">
+
                                                     </div>
                                                 </div>
-                                            </div>                                 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
 
-                                <div class="col-lg-3">
+                                @Html.Partial("p_Planilla")
+                                @*<div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
@@ -164,19 +162,20 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <div  id="boxGreenPlantilla" title="Prioridad Baja">
+                                                    <div id="boxGreenPlantilla" title="Prioridad Baja">
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
 
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-3">
+                                @Html.Partial("p_Campaña")
+                                @*<div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
@@ -228,9 +227,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
 
-                                <div class="col-lg-3">
+                                @Html.Partial("p_EnCampaña")
+                                @*<div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
@@ -282,15 +282,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-3">
+                                @Html.Partial("P_RedesSociales")
+                                @*<div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                               Progreso de Redes Sociales
+                                                Progreso de Redes Sociales
                                             </div>
                                         </div>
                                         <div class="panel-body">
@@ -318,7 +319,7 @@
 
                                                 </div>
                                             </div>
-                                              Prioridad
+                                            Prioridad
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div id="boxRedRedes" title="Prioridad Alta">
@@ -338,7 +339,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
 
                         </div>
@@ -347,13 +348,12 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+
 
 
 <script>
-   
-    
+
+
     $(document).ready(function () {
 
         var ctxMetas = document.getElementById('chLineMetas').getContext('2d');
@@ -367,15 +367,15 @@
 
         $.getJSON("/Meta/GetMovilizados").done((response) => {
 
-            console.log(response)  
+            console.log(response)
 
             var Metas = new Chart(ctxMetas, {
                 type: 'line',
                 data: {
-                    labels: ['Multinivel',"Planilla Ganadora","Campaña","En Campaña","Redes Sociales"],
+                    labels: ['Multinivel', "Planilla Ganadora", "Campaña", "En Campaña", "Redes Sociales"],
                     datasets: [{
                         label: ['Balance General'],
-                        data: [response[1][0],response[1][1],response[1][2],response[1][3],response[1][4]],
+                        data: [response[1][0], response[1][1], response[1][2], response[1][3], response[1][4]],
                         backgroundColor: [
                             'rgba(236, 112, 99, 0.2)',
                             'rgba(165, 105, 189, 0.2)',
@@ -401,23 +401,23 @@
                     labels: ['Multinivel', 'Planilla', 'Campaña', 'Equipo de Trabajo', 'Redes Sociales'],
                     datasets: [
                         {
-                        label: [ "Fuente de Votos"],
-                        data: [response[1][0],response[1][1],response[1][2],response[1][3],response[1][4]],
-                        backgroundColor: [
-                            'rgba(93, 173, 226, 0.2)',
-                            'rgba(93, 173, 226, 0.2)',
-                            'rgba(93, 173, 226, 0.2)',
-                            'rgba(93, 173, 226, 0.2)',
-                            'rgba(93, 173, 226, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(93, 173, 226, 1)',
-                            'rgba(93, 173, 226, 1)',
-                            'rgba(93, 173, 226, 1)',
-                            'rgba(93, 173, 226, 1)',
-                            'rgba(93, 173, 226, 1)',
-                        ],
-                    }]
+                            label: ["Fuente de Votos"],
+                            data: [response[1][0], response[1][1], response[1][2], response[1][3], response[1][4]],
+                            backgroundColor: [
+                                'rgba(93, 173, 226, 0.2)',
+                                'rgba(93, 173, 226, 0.2)',
+                                'rgba(93, 173, 226, 0.2)',
+                                'rgba(93, 173, 226, 0.2)',
+                                'rgba(93, 173, 226, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(93, 173, 226, 1)',
+                                'rgba(93, 173, 226, 1)',
+                                'rgba(93, 173, 226, 1)',
+                                'rgba(93, 173, 226, 1)',
+                                'rgba(93, 173, 226, 1)',
+                            ],
+                        }]
                 },
             });
 
@@ -455,7 +455,7 @@
                 data: {
                     labels: ['Objetivo', 'Actual'],
                     datasets: [{
-                         label: 'Objetivo',
+                        label: 'Objetivo',
                         data: [response[0][1], response[1][1]],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -482,9 +482,9 @@
             var Campaña = new Chart(ctxCampaña, {
                 type: 'bar',
                 data: {
-                     labels: ['Objetivo', 'Actual'],
+                    labels: ['Objetivo', 'Actual'],
                     datasets: [{
-                         label: 'Objetivo',
+                        label: 'Objetivo',
                         data: [response[0][2], response[1][2]],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -513,7 +513,7 @@
                 data: {
                     labels: ['Objetivo', 'Actual'],
                     datasets: [{
-                         label: 'Objetivo',
+                        label: 'Objetivo',
                         data: [response[0][3], response[1][3]],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -542,7 +542,7 @@
                 data: {
                     labels: ['Objetivo', 'Actual'],
                     datasets: [{
-                         label: 'Objetivo',
+                        label: 'Objetivo',
                         data: [response[0][4], response[1][4]],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -570,8 +570,7 @@
         });
 
 
-        function setPriority(response)
-        {
+        function setPriority(response) {
 
             let priorityMultinivel = [];
             let priorityPlantilla = [];
@@ -601,36 +600,36 @@
 
 
             let progres = 100 * response[1][0] / response[0][0];
-            $('#metaMultinivel').text(Math.trunc(progres)+"%");
-            $('#progresoMultinivel').css("width", progres+"%");
+            $('#metaMultinivel').text(Math.trunc(progres) + "%");
+            $('#progresoMultinivel').css("width", progres + "%");
 
-            progres = 100 * response[1][1] / response[0][1];   
-            $('#metaPlanilla').text(Math.trunc(progres)+"%");
-            $('#progresoPlanilla').css("width", progres+"%");
+            progres = 100 * response[1][1] / response[0][1];
+            $('#metaPlanilla').text(Math.trunc(progres) + "%");
+            $('#progresoPlanilla').css("width", progres + "%");
 
-            progres = 100 * response[1][2] / response[0][2];       
-            $('#metaCampaña').text(Math.trunc(progres)+"%");
-            $('#progresoCampaña').css("width", progres+"%");
+            progres = 100 * response[1][2] / response[0][2];
+            $('#metaCampaña').text(Math.trunc(progres) + "%");
+            $('#progresoCampaña').css("width", progres + "%");
 
-            progres = 100 * response[1][3] / response[0][3];       
-            $('#metaEnCampaña').text(Math.trunc(progres)+"%");
-            $('#progresoEnCampaña').css("width", progres+"%");
+            progres = 100 * response[1][3] / response[0][3];
+            $('#metaEnCampaña').text(Math.trunc(progres) + "%");
+            $('#progresoEnCampaña').css("width", progres + "%");
 
-            progres = 100 * response[1][4] / response[0][4];       
-            $('#metaRed').text(Math.trunc(progres)+"%");
-            $('#progresoRed').css("width",progres+"%");
-  
+            progres = 100 * response[1][4] / response[0][4];
+            $('#metaRed').text(Math.trunc(progres) + "%");
+            $('#progresoRed').css("width", progres + "%");
+
 
             //Multinivel
             if (response[1][0] < priorityMultinivel[0]) {
                 $('#boxRedMultinivel').addClass("boxRed");
                 $('#boxYellowMultinivel').addClass("boxDefault");
                 $('#boxGreenMultinivel').addClass("boxDefault");
-            }else  if (response[1][0] >= priorityMultinivel[0] && response[1][0] < priorityMultinivel[1]) {
+            } else if (response[1][0] >= priorityMultinivel[0] && response[1][0] < priorityMultinivel[1]) {
                 $('#boxRedMultinivel').addClass("boxDefault");
                 $('#boxYellowMultinivel').addClass("boxYellow");
                 $('#boxGreenMultinivel').addClass("boxDefault");
-            }else  if (response[1][0] >= priorityMultinivel[2]) {
+            } else if (response[1][0] >= priorityMultinivel[2]) {
                 $('#boxRedMultinivel').addClass("boxDefault");
                 $('#boxYellowMultinivel').addClass("boxDefault");
                 $('#boxGreenMultinivel').addClass("boxGreen");
@@ -641,11 +640,11 @@
                 $('#boxRedPlantilla').addClass("boxRed");
                 $('#boxYellowPlantilla').addClass("boxDefault");
                 $('#boxGreenPlantilla').addClass("boxDefault");
-            }else  if (response[1][1] >= priorityPlantilla[0] && response[1][1] < priorityPlantilla[1]) {
+            } else if (response[1][1] >= priorityPlantilla[0] && response[1][1] < priorityPlantilla[1]) {
                 $('#boxRedPlantilla').addClass("boxDefault");
                 $('#boxYellowPlantilla').addClass("boxYellow");
                 $('#boxGreenPlantilla').addClass("boxDefault");
-            }else  if (response[1][1] >= priorityPlantilla[2]) {
+            } else if (response[1][1] >= priorityPlantilla[2]) {
                 $('#boxRedPlantilla').addClass("boxDefault");
                 $('#boxYellowPlantilla').addClass("boxDefault");
                 $('#boxGreenPlantilla').addClass("boxGreen");
@@ -656,11 +655,11 @@
                 $('#boxRedCampaña').addClass("boxRed");
                 $('#boxYellowCampaña').addClass("boxDefault");
                 $('#boxGreenCampaña').addClass("boxDefault");
-            }else  if (response[1][2] >= priorityCampaña[0] && response[1][2] < priorityCampaña[1]) {
+            } else if (response[1][2] >= priorityCampaña[0] && response[1][2] < priorityCampaña[1]) {
                 $('#boxRedCampaña').addClass("boxDefault");
                 $('#boxYellowCampaña').addClass("boxYellow");
                 $('#boxGreenCampaña').addClass("boxDefault");
-            }else  if (response[1][2] >= priorityCampaña[2]) {
+            } else if (response[1][2] >= priorityCampaña[2]) {
                 $('#boxRedCampaña').addClass("boxDefault");
                 $('#boxYellowCampaña').addClass("boxDefault");
                 $('#boxGreenCampaña').addClass("boxGreen");
@@ -671,33 +670,35 @@
                 $('#boxRedEnCampaña').addClass("boxRed");
                 $('#boxYellowEnCampaña').addClass("boxDefault");
                 $('#boxGreenEnCampaña').addClass("boxDefault");
-            }else  if (response[1][3] >= priorityEnCampaña[0] && response[1][3] < priorityEnCampaña[1]) {
+            } else if (response[1][3] >= priorityEnCampaña[0] && response[1][3] < priorityEnCampaña[1]) {
                 $('#boxRedEnCampaña').addClass("boxDefault");
                 $('#boxYellowEnCampaña').addClass("boxYellow");
                 $('#boxGreenEnCampaña').addClass("boxDefault");
-            }else  if (response[1][3] >= priorityEnCampaña[2]) {
+            } else if (response[1][3] >= priorityEnCampaña[2]) {
                 $('#boxRedEnCampaña').addClass("boxDefault");
                 $('#boxYellowEnCampaña').addClass("boxDefault");
                 $('#boxGreenEnCampaña').addClass("boxGreen");
             }
 
-             //Redes
+            //Redes
             if (response[1][4] < priorityRedes[0]) {
                 $('#boxRedRedes').addClass("boxRed");
                 $('#boxYellowRedes').addClass("boxDefault");
                 $('#boxGreenRedes').addClass("boxDefault");
-            }else  if (response[1][4] >= priorityRedes[0] && response[1][4] < priorityRedes[1]) {
+            } else if (response[1][4] >= priorityRedes[0] && response[1][4] < priorityRedes[1]) {
                 $('#boxRedRedes').addClass("boxDefault");
                 $('#boxYellowRedes').addClass("boxYellow");
                 $('#boxGreenRedes').addClass("boxDefault");
-            }else  if (response[1][4] >= priorityRedes[2]) {
+            } else if (response[1][4] >= priorityRedes[2]) {
                 $('#boxRedRedes').addClass("boxDefault");
                 $('#boxYellowRedes').addClass("boxDefault");
                 $('#boxGreenRedes').addClass("boxGreen");
             }
 
         }
-           
+
     });
+
+   
 
 </script>

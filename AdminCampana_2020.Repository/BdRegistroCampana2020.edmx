@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RC2020Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgendaActividades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strActividad" Type="varchar" MaxLength="500" />
+          <Property Name="strLugar" Type="varchar" MaxLength="500" />
+          <Property Name="strDescripcion" Type="varchar(max)" />
+          <Property Name="strHoraInicio" Type="varchar" MaxLength="50" />
+          <Property Name="strHoraTermino" Type="varchar" MaxLength="50" />
+          <Property Name="dteFecha" Type="date" />
+        </EntityType>
         <EntityType Name="Auditoria">
           <Key>
             <PropertyRef Name="id" />
@@ -294,6 +306,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RC2020ModelStoreContainer">
+          <EntitySet Name="AgendaActividades" EntityType="Self.AgendaActividades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colonia" EntityType="Self.Colonia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
@@ -430,6 +443,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Usuario1" EntitySet="Usuario" />
           </AssociationSet>
+          <EntitySet Name="AgendaActividades" EntityType="RC2020Model.AgendaActividades" />
         </EntityContainer>
         <EntityType Name="Auditoria">
           <Key>
@@ -745,6 +759,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AgendaActividades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strActividad" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="strLugar" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="strDescripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="strHoraInicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="strHoraTermino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dteFecha" Type="DateTime" Precision="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -893,6 +919,19 @@
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgendaActividades">
+            <EntityTypeMapping TypeName="RC2020Model.AgendaActividades">
+              <MappingFragment StoreEntitySet="AgendaActividades">
+                <ScalarProperty Name="dteFecha" ColumnName="dteFecha" />
+                <ScalarProperty Name="strHoraTermino" ColumnName="strHoraTermino" />
+                <ScalarProperty Name="strHoraInicio" ColumnName="strHoraInicio" />
+                <ScalarProperty Name="strDescripcion" ColumnName="strDescripcion" />
+                <ScalarProperty Name="strLugar" ColumnName="strLugar" />
+                <ScalarProperty Name="strActividad" ColumnName="strActividad" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

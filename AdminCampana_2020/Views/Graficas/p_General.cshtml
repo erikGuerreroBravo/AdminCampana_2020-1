@@ -1,0 +1,41 @@
+﻿
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  id="contenedor">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Progreso General
+                <div class="box-tools pull-right">
+                    <i class="fas fa-print" id="downloadGeneral"></i>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <canvas id="chLineMetas" style="height:100px;"></canvas>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <canvas id="chRadarMetas" style="height:100px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#downloadGeneral').click(() => {
+
+        let dataUrlLineMetas = document.getElementById("chLineMetas").toDataURL();
+        let dataUrlRadarMetas = document.getElementById("chRadarMetas").toDataURL();
+    
+        //let images64 = [dataUrlLineMetas, dataUrlRadarMetas];
+
+        $.ajax({
+            type: 'post',
+            data: { images64: dataUrlLineMetas },
+            url: "/Graficas/DocumentoGeneral"
+        });
+
+
+    });
+</script>

@@ -1,0 +1,93 @@
+﻿@*<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>*@
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<noscript>
+    <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
+</noscript>
+<div class="bs-container" style="min-height:960px;">
+    <section class="content-header">
+        <h1>
+            Agenda de Actividades
+            <small>(Admin)</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"> <i class="fa fa-dashboard"></i> Inicio </a></li>
+            <li> <a href="#">Analisis</a></li>
+            <li class="active"> Graficas </li>
+        </ol>
+    </section>
+    <br />
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h5 class="box-title">
+                        <label class="text-success emailtitleletter">
+                            Bienvenido:  <small><a href="#" id="btnAgregar">Agregar Actividad</a></small>
+                        </label>&nbsp;
+
+                    </h5>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body" id="fecha">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="dataUpdate">
+
+    </div>
+</div>
+
+<div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Agregar Evento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="data">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(() => {
+
+        $('#btnAgregar').click(() => {
+
+            $('#data').load("/AgendaActividades/AgregarActividades", () => {
+
+                $('#modalData').modal("show");
+
+            });
+        });
+
+        FillCalendar();
+
+       
+    });
+
+
+  
+
+    function FillCalendar() {
+        $.get("/AgendaActividades/AgendaActividades").done((response) => {
+            $('#fecha .row').remove();
+            $('#fecha').append(response);
+        });
+    }
+
+</script>

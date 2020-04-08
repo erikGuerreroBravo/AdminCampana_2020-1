@@ -1,0 +1,55 @@
+﻿<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="form-group">
+            <label>Actividad</label>
+            <input type="text" class="form-control form-control-sm" id="txtActividad" />
+        </div>
+        <div class="form-group">
+            <label>Lugar</label>
+            <input type="text" class="form-control form-control-sm" id="txtLugar" />
+        </div>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea class="form-control" rows="2" id="txtDescripcion"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Hora de Inicio</label>
+            <input type="time" class="form-control form-control-sm" id="txtHoraInicio" />
+        </div>
+        <div class="form-group">
+            <label>Hora de Termino</label>
+            <input type="time" class="form-control form-control-sm" id="txtHoraTermino" />
+        </div>
+        <div class="form-group">
+            <label>Fecha</label>
+            <input type="date" class="form-control form-control-sm" id="txtFecha" />
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-success btn-sm" id="btnEnviar" value="Agregar Evento"/>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $('#btnEnviar').click(function () {
+
+        let AgendaActividadesVM = {};
+
+        AgendaActividadesVM.strActividad = $('#txtActividad').val();
+        AgendaActividadesVM.strLugar = $('#txtLugar').val();
+        AgendaActividadesVM.strDescripcion = $('#txtDescripcion').val();
+        AgendaActividadesVM.strHoraInicio = $('#txtHoraInicio').val();
+        AgendaActividadesVM.strHoraTermino = $('#txtHoraTermino').val();
+        AgendaActividadesVM.dteFecha = $('#txtFecha').val();
+       
+        $.post("/AgendaActividades/AgregarActividades/", AgendaActividadesVM).done(() => {
+
+            FillCalendar();
+
+        });
+
+    });
+
+</script>
