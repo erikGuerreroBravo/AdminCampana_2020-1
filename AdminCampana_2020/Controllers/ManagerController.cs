@@ -26,7 +26,6 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpGet]
-        [Route("Manager/Visualizar")]
         [Authorize(Roles = "Super Administrador,Administrador")]
         public ActionResult Visualizacion()
         {
@@ -47,7 +46,6 @@ namespace AdminCampana_2020.Controllers
         }
 
         [HttpGet]
-        ///[Authorize]
         public JsonResult GetDatosUsuarioCoordinador(int idArea)
         {
            
@@ -61,11 +59,11 @@ namespace AdminCampana_2020.Controllers
         /// </summary>
         private AreasDomainModel GetDatosMovilizadosByAreas()
         {
-            string[] areas = new string[] { "Estructura Complementaria", "Planilla Ganadora", "Campaña", "En Campaña", "Redes Sociales" };
+            string[] areas = new string[] { "MultiNivel", "Planilla Ganadora", "Campaña", "En Campaña", "Redes Sociales" };
             AreasDomainModel areasDM = new AreasDomainModel();
             foreach (string item in areas)
             {
-                if (item.Equals("Estructura Complementaria"))
+                if (item.Equals("MultiNivel"))
                 {
                     areasDM.StrValorMultinivel = item;
                     areasDM.TotalMultinvel = movilizadoBusiness.TotalByAreaCoordinadores(item);

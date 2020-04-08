@@ -180,8 +180,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
+    <Content Include="Content\card-presentation.css" />
     <Content Include="Content\css\priority-box.css" />
     <Content Include="Content\css\table-responsive.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.foundation.css" />
+    <Content Include="Content\DataTableCss\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTableCss\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.material.css" />
+    <Content Include="Content\DataTableCss\dataTables.material.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.semanticui.css" />
+    <Content Include="Content\DataTableCss\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.uikit.css" />
+    <Content Include="Content\DataTableCss\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTableCss\jquery.dataTables.css" />
+    <Content Include="Content\DataTableCss\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTableCss\jquery.dataTables_themeroller.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -352,6 +372,25 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.7-vsdoc.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.dataTables.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.dataTables.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.material.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTableJs\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTableJs\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTableJs\jquery.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
@@ -432,6 +471,9 @@
     <Content Include="Scripts\jquery-1.7.min.js" />
     <Content Include="Content\css\jquery-ui.min.css" />
     <Content Include="Content\js\jquery-ui.min.js" />
+    <Content Include="Scripts\manager\consultar-coordinador.js" />
+    <Content Include="Scripts\movilizador\validate-movilizador-acceso-form.js" />
+    <Content Include="Scripts\movilizador\validate-movilizador-form.js" />
     <Content Include="Scripts\persona\message-confirmation.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
@@ -456,6 +498,7 @@
     <Content Include="Views\Account\SuccessRecoveryPassword.cshtml" />
     <Content Include="Views\Error\DuplicateData.cshtml" />
     <Content Include="Views\Error\NoEmailRecovery.cshtml" />
+    <Content Include="Views\Manager\Visualizacion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -628,7 +671,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Configuracion\" />
-    <Folder Include="Views\Manager\" />
     <Folder Include="Views\Meta\" />
   </ItemGroup>
   <ItemGroup>
