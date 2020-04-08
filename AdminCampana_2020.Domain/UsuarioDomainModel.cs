@@ -19,16 +19,13 @@ namespace AdminCampana_2020.Domain
         public int IdUsuario { get; set; }
         public int IdStatus { get; set; }
         public string area_movilizador { get; set; }
-
+        public int IdRol { get; set; }
         //Objetos de las relaciones
-
         public PerfilDomainModel Perfil { get; set; }
         public StatusDomainModel Status { get; set; }
-        
         public List<UsuarioRolDomainModel> UsuarioRoles { get; set; }
-
+        public List<MovilizadoDomainModel> Movilizados { get; set; }
         //Auxiliar
-
         public string NombreCompleto { get; set; }
         public int idCambio { get; set; }
     }

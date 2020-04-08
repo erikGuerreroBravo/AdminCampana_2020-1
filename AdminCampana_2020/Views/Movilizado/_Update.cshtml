@@ -18,19 +18,19 @@
         </div>
         <div class="form-group">
             <label>Telefono Celular:</label>
-            @Html.TextBoxFor(model => model.Telefono.StrNumeroCelular, null, new { @class = "form-control  input-sm" })
+            @Html.TextBoxFor(model => model.TelefonoVM.StrNumeroCelular, null, new { @class = "form-control  input-sm" })
         </div>
         <div class="form-group">
             <label>Calle:</label>
-            @Html.TextBoxFor(model => model.Direccion.StrCalle, null, new { @class = "form-control  input-sm" })
+            @Html.TextBoxFor(model => model.DireccionVM.StrCalle, null, new { @class = "form-control  input-sm" })
         </div>
         <div class="form-group">
             <label>Numero Ext:</label>
-            @Html.TextBoxFor(model => model.Direccion.StrNumeroExterior, null, new { @class = "form-control  input-sm" })
+            @Html.TextBoxFor(model => model.DireccionVM.StrNumeroExterior, null, new { @class = "form-control  input-sm" })
         </div>
         <div class="form-group">
             <label>Colonia:</label>
-            @Html.DropDownListFor(model => model.Direccion.idColonia, null, new { @class = "form-control  input-sm" })
+            @Html.DropDownListFor(model => model.DireccionVM.idColonia, null, new { @class = "form-control  input-sm" })
         </div>
 
     </div>

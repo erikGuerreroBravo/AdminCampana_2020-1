@@ -43,9 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgendaActividadesDomainModel.cs" />
+
+    <Compile Include="AreasDomainModel.cs" />
     <Compile Include="AuditoriaDomainModel.cs" />
     <Compile Include="ColoniaDomainModel.cs" />
+    <Compile Include="CoordinadorDomainModel.cs" />
     <Compile Include="DireccionDomainModel.cs" />
+    <Compile Include="EmailDomainModel.cs" />
     <Compile Include="MetaDomainModel.cs" />
     <Compile Include="PerfilDomainModel.cs" />
     <Compile Include="MovilizadoDomainModel.cs" />

@@ -38,7 +38,7 @@ namespace AdminCampana_2020.Controllers
             var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
             if (!identity.IsInRole("Administrador"))
             {
-                ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
+                ViewData["DireccionVM.IdColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
                 return View();
             }
             return RedirectToAction("Registros","Movilizado");
@@ -55,11 +55,24 @@ namespace AdminCampana_2020.Controllers
                 {
                      var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
 
-                    movilizadoVM.idUsuario = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
-                    movilizadoVM.idStatus = (int)EnumStatus.ALTA;
+                    movilizadoVM.IdUsuario = int.Parse(identity.Claims.Where(p => p.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault());
+                    movilizadoVM.IdStatus = (int)EnumStatus.ALTA;
                     MovilizadoDomainModel movilizadoDomainModel = new MovilizadoDomainModel();
                     AutoMapper.Mapper.Map(movilizadoVM, movilizadoDomainModel);
-                    ImovilizadoBusiness.AddUpdateMovilizado(movilizadoDomainModel);
+
+                    if (!ImovilizadoBusiness.ValidarExisteMovilizado(movilizadoDomainModel))
+                    {
+                        //IpersonaBusiness.AddUpdateMovilizado(movilizadoDM);
+                        ImovilizadoBusiness.AddUpdateMovilizado(movilizadoDomainModel);
+                    }
+                    else
+                    {
+                        return RedirectToAction("DuplicateData", "Error");
+                    }
+
+
+
+                    
                 }
             }
             catch (Exception ex)
@@ -115,7 +128,7 @@ namespace AdminCampana_2020.Controllers
                     movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(id);
                     movilizadoVM = new MovilizadoVM();
                     AutoMapper.Mapper.Map(movilizadoDomainModel, movilizadoVM);
-                    ViewData["Direccion.idColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
+                    ViewData["DireccionDomainModel.IdColonia"] = new SelectList(IcoloniaBusiness.GetColonias(), "id", "strAsentamiento");
                     return PartialView("_Update", movilizadoVM);
                 case 3:
                     movilizadoDomainModel = ImovilizadoBusiness.GetMovilizadoById(id);

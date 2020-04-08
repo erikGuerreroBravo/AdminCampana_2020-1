@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using AdminCampana_2020.Helpers;
 using System.Threading.Tasks;
+using AdminCampana_2020.Message.Recovery;
 
 namespace AdminCampana_2020.Controllers
 {
@@ -186,5 +187,51 @@ namespace AdminCampana_2020.Controllers
             }
             return Result;
         }
+
+      
+        [HttpGet]
+        [AllowAnonymous]
+        ///este metodo se encarga de recuperar la contraseña de una cuenta via email
+        public ActionResult RecoveryPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        ///este metodo se encarga de recuperar la contraseña de una cuenta via email
+        public ActionResult RecoveryPassword([Bind(Include = "FromEmail")]EmailVM emailVM)
+        {
+            if (!string.IsNullOrEmpty(emailVM.FromEmail))
+            {
+                UsuarioDomainModel usuarioDM = usuarioBusiness.ValidarEmailPasswordrecovery(emailVM.FromEmail.ToLower());
+                if (usuarioDM != null)
+                {
+                    emailVM.FromNombre = usuarioDM.Nombres + " " + usuarioDM.Apellidos;
+                    emailVM.Asunto = Recursos.RecursosAdmin.RECUPERACION_PASSWORD_MAIL;
+                    emailVM.Mensaje = Recursos.RecursosAdmin.MENSAJE_PASSWORD_RECOVERY + " Tu Password es: " + Funciones.Decrypt(usuarioDM.Clave);
+                    emailVM.FromEmail = usuarioDM.Email.ToLower();
+                    EmailDomainModel emailDM = new EmailDomainModel();
+                    RecoveryPassword recovery = new RecoveryPassword();
+                    AutoMapper.Mapper.Map(emailVM, emailDM);
+
+                    if (recovery.RecuperarPasswordAccount(emailDM))
+                    {
+                        return RedirectToAction("SuccessRecoveryPassword", "Account");//vista a donde se envia el mensaje de exito
+                    }
+                }
+            }
+            ///regresa a un page de error 
+            return RedirectToAction("NoEmailRecovery", "Error");
+        }
+
+
+        [HttpGet]
+        public ActionResult SuccessRecoveryPassword()
+        {
+            return View();
+        }
+
+
     }
 }

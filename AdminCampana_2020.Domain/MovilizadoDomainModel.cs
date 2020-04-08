@@ -14,11 +14,11 @@ namespace AdminCampana_2020.Domain
         public string StrApellidoMaterno{ get; set; }
         public string StrEmail { get; set; }
         public string StrObservaciones { get; set; }
-        public int idUsuario { get; set; }
+        public int IdUsuario { get; set; }
         public int idStatus { get; set; }
 
-        public DireccionDomainModel Direccion { get; set; }
-        public TelefonoDomainModel Telefono { get; set; }
+        public DireccionDomainModel DireccionDomainModel { get; set; }
+        public TelefonoDomainModel TelefonoDomainModel { get; set; }
         public UsuarioDomainModel Usuario { get; set; }
         public StatusDomainModel Status { get; set; }
     }

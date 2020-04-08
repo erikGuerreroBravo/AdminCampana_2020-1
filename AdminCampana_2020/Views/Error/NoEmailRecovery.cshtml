@@ -1,0 +1,28 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="error-page">
+    <h1 class="headline text-red">500</h1>
+    <div class="error-content">
+        <h3><i class="fa fa-warning text-red"></i> Oops! Algo salio mal al procesar tu solicitud.</h3>
+        <p>
+            El correo o email al que deseas enviar  tu password no se encuentra en nuestra base de datos, es muy probable que
+            no se encuentre una cuenta registrada con este correo, por favor verifica los siguientes elementos:
+        </p>
+        <ul class="todo-list">
+            <li class="list-group-item">1.- El email deberá ser de gmail preferentemente o deberá existir con algún proveedor de servicios de email</li>
+            <li class="list-group-item">2.- El usuario deberá ser miembro de la plataforma digital</li>
+            <li class="list-group-item">3.- el administrador debió, haber generado una cuenta previa con el email solicitado.</li>
+        </ul>
+        <p>Verifica que el usuario fue creado correctamente, de lo contrario acude con el administrador de la plataforma.</p>
+        
+        <br />
+              
+        <a href="@Url.Action("Login", "Account")" class="btn btn-default" role="button">Regresar</a>
+    </div>
+</div>
+
+

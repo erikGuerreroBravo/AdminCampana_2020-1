@@ -1,10 +1,12 @@
-﻿using AdminCampana_2020.Business.Interface;
+﻿using AdminCampana_2020.Business.Enum;
+using AdminCampana_2020.Business.Interface;
 using AdminCampana_2020.Domain;
 using AdminCampana_2020.Repository;
 using AdminCampana_2020.Repository.Infraestructure.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,11 +16,13 @@ namespace AdminCampana_2020.Business
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly MovilizadoRepository movilizadoRepository;
+        private readonly RolRepository rolRepository;
 
         public MovilizadoBusiness(IUnitOfWork _unitOfWork)
         {
             unitOfWork = _unitOfWork;
             movilizadoRepository = new MovilizadoRepository(unitOfWork);
+            rolRepository = new RolRepository(unitOfWork);
 
         }
 
@@ -43,10 +47,10 @@ namespace AdminCampana_2020.Business
                         movilizado.strApellidoPaterno = personaDM.StrApellidoPaterno;
                         movilizado.strApellidoMaterno = personaDM.StrApellidoMaterno;
                         movilizado.strEmail = personaDM.StrEmail;
-                        movilizado.Direccion.strCalle = personaDM.Direccion.StrCalle;
-                        movilizado.Direccion.strNumeroExterior = personaDM.Direccion.StrNumeroExterior;
-                        movilizado.Direccion.idColonia = personaDM.Direccion.idColonia;
-                        movilizado.Telefono.strNumeroCelular = personaDM.Telefono.StrNumeroCelular;
+                        movilizado.Direccion.strCalle = personaDM.DireccionDomainModel.StrCalle;
+                        movilizado.Direccion.strNumeroExterior = personaDM.DireccionDomainModel.StrNumeroExterior;
+                        movilizado.Direccion.idColonia = personaDM.DireccionDomainModel.IdColonia;
+                        movilizado.Telefono.strNumeroCelular = personaDM.TelefonoDomainModel.StrNumeroCelular;
 
                         movilizadoRepository.Update(movilizado);
                         resultado = true;
@@ -62,18 +66,18 @@ namespace AdminCampana_2020.Business
                     movilizado.strApellidoPaterno = personaDM.StrApellidoPaterno;
                     movilizado.strApellidoMaterno = personaDM.StrApellidoMaterno;
                     movilizado.strEmail = personaDM.StrEmail;
-                    movilizado.idUsuario = personaDM.idUsuario;
+                    movilizado.idUsuario = personaDM.IdUsuario;
                     movilizado.idStatus = personaDM.idStatus;
                     movilizado.Direccion = new Direccion
                     {
-                        strCalle = personaDM.Direccion.StrCalle,
-                        strNumeroExterior = personaDM.Direccion.StrNumeroExterior,
-                        idColonia = personaDM.Direccion.idColonia
+                        strCalle = personaDM.DireccionDomainModel.StrCalle,
+                        strNumeroExterior = personaDM.DireccionDomainModel.StrNumeroExterior,
+                        idColonia = personaDM.DireccionDomainModel.IdColonia
                         
                     };
                     movilizado.Telefono = new Telefono
                     {
-                        strNumeroCelular = personaDM.Telefono.StrNumeroCelular
+                        strNumeroCelular = personaDM.TelefonoDomainModel.StrNumeroCelular
                     };
                     movilizadoRepository.Insert(movilizado);
                     resultado = true;
@@ -83,6 +87,27 @@ namespace AdminCampana_2020.Business
             return resultado;
         }
 
+        public string UpdatePersonal(MovilizadoDomainModel personaDM)
+        {
+            string resultado = string.Empty;
+            if (personaDM != null)
+            {
+                Movilizado persona = movilizadoRepository.SingleOrDefault(p => p.id == personaDM.Id);
+
+                if (persona != null)
+                {
+                    persona.strNombre = personaDM.StrNombre;
+                    persona.strApellidoPaterno = personaDM.StrApellidoPaterno;
+                    persona.strApellidoMaterno = personaDM.StrApellidoMaterno;
+                    persona.strEmail = personaDM.StrEmail;
+                    persona.Telefono = new Telefono();
+                    persona.Telefono.strNumeroCelular = personaDM.TelefonoDomainModel.StrNumeroCelular;
+                    movilizadoRepository.Update(persona);
+                    resultado = "Se Actualizo correctamente";
+                }
+            }
+            return resultado;
+        }
 
         public string UpdateMovilizado(MovilizadoDomainModel movilizadoDM)
         {
@@ -98,7 +123,7 @@ namespace AdminCampana_2020.Business
                     movilizado.strApellidoMaterno = movilizadoDM.StrApellidoMaterno;
                     movilizado.strEmail = movilizadoDM.StrEmail;
                     movilizado.Telefono = new Telefono();
-                    movilizado.Telefono.strNumeroCelular = movilizadoDM.Telefono.StrNumeroCelular;
+                    movilizado.Telefono.strNumeroCelular = movilizadoDM.TelefonoDomainModel.StrNumeroCelular;
                     movilizadoRepository.Update(movilizado);
                     resultado = "Se Actualizó correctamente";
                 }
@@ -107,6 +132,47 @@ namespace AdminCampana_2020.Business
         }
 
 
+        public List<MovilizadoDomainModel> GetAllPersonas()
+        {
+            List<MovilizadoDomainModel> personas = null;
+            personas = movilizadoRepository.GetAll().Select(p => new MovilizadoDomainModel
+            {
+                Id = p.id,
+                StrNombre = p.strNombre,
+                StrApellidoPaterno = p.strApellidoPaterno,
+                StrApellidoMaterno = p.strApellidoMaterno,
+                StrEmail = p.strEmail,
+
+            }).OrderByDescending(p => p.StrNombre).ToList<MovilizadoDomainModel>();
+            return personas;
+        }
+
+
+        public MovilizadoDomainModel GetPersonaById(int id)
+        {
+            Movilizado persona = movilizadoRepository.SingleOrDefault(p => p.id == id);
+            if (persona != null)
+            {
+                MovilizadoDomainModel personaDM = new MovilizadoDomainModel();
+                personaDM.Id = persona.id;
+                personaDM.StrNombre = persona.strNombre;
+                personaDM.StrApellidoPaterno = persona.strApellidoPaterno;
+                personaDM.StrApellidoMaterno = persona.strApellidoMaterno;
+                personaDM.StrEmail = persona.strEmail;
+
+                TelefonoDomainModel telefonoDM = new TelefonoDomainModel();
+                telefonoDM.StrNumeroCelular = persona.Telefono.strNumeroCelular;
+                personaDM.TelefonoDomainModel = telefonoDM;
+                return personaDM;
+            }
+            else
+            {
+                return null;
+            }
+
+
+        }
+        
         public List<MovilizadoDomainModel> GetAllMovilizados()
         {
             List<MovilizadoDomainModel> personas = new List<MovilizadoDomainModel>();
@@ -245,16 +311,16 @@ namespace AdminCampana_2020.Business
                 personaDM.StrApellidoPaterno = movilizado.strApellidoPaterno;
                 personaDM.StrApellidoMaterno = movilizado.strApellidoMaterno;
                 personaDM.StrEmail = movilizado.strEmail;
-                personaDM.Telefono = new TelefonoDomainModel
+                personaDM.TelefonoDomainModel = new TelefonoDomainModel
                 {
                     StrNumeroCelular = movilizado.Telefono.strNumeroCelular
                 };
-                personaDM.Direccion = new DireccionDomainModel
+                personaDM.DireccionDomainModel = new DireccionDomainModel
                 {
                     StrCalle = movilizado.Direccion.strCalle,
                     StrNumeroExterior = movilizado.Direccion.strNumeroExterior,
-                    idColonia = movilizado.Direccion.idColonia.Value,
-                    Colonia = new ColoniaDomainModel
+                    IdColonia = movilizado.Direccion.idColonia.Value,
+                    ColoniaDomainModel = new ColoniaDomainModel
                     {
                         StrAsentamiento = movilizado.Direccion.Colonia.strAsentamiento,
                         Seccion = new SeccionDomainModel
@@ -317,5 +383,114 @@ namespace AdminCampana_2020.Business
             }
             return resultado;
         }
+
+        /// <summary>
+        /// Este metodo se encarga de consultar todos los roles de un movilizador sin incluir el rol de administrador o super administrador
+        /// </summary>
+        /// <returns>una lista de roles sin incluier el rol de administrador y super administrador</returns>
+        public List<RolDomainModel> ObtenerRolesMovilizador()
+        {
+
+            List<RolDomainModel> roles = new List<RolDomainModel>();
+            List<Rol> totalRoles = rolRepository.GetAll().Where(p => p.Nombre != "Administrador").ToList<Rol>();
+            foreach (var item in totalRoles)
+            {
+                if (item.Nombre != "Super Administrador")
+                {
+                    RolDomainModel rolDM = new RolDomainModel();
+                    rolDM.Id = item.Id;
+                    rolDM.Nombre = item.Nombre;
+                    roles.Add(rolDM);
+                }
+
+            }
+            RolDomainModel rolDomainModelBase = new RolDomainModel();
+            rolDomainModelBase.Id = 0;
+            rolDomainModelBase.Nombre = "Seleccionar";
+            roles.Insert(0, rolDomainModelBase);
+            return roles;
+        }
+
+        /// <summary>
+        /// Este metodo se encarga de consultar el total de registros pertenecientes a una area en especifico
+        /// </summary>
+        /// <returns>una cantidad total de registros</returns>
+        public int TotalByAreaCoordinadores(string area)
+        {
+            int total = 0;
+            try
+            {
+                var roles = rolRepository.GetAll().Where(p => p.Nombre == area).ToList();
+                foreach (var item in roles)
+                {
+                    foreach (var userRoles in item.Usuario_Rol)
+                    {
+                        foreach (var movilizado in userRoles.Usuario.Movilizado)
+                        {
+                            if (movilizado.idStatus == 1 && movilizado.Usuario.Perfil.strValor == Recursos.RecursosBusiness.COORDINADOR_AREA)
+                            {
+                                total++;
+                            }
+                        }
+                    }
+                }
+                return total;
+            }
+            catch (Exception ex)
+            {
+                string mensajeErr = ex.Message;
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Este metodo se encarga de verificar que no exista un registro duplicado
+        /// </summary>
+        /// <param name="movilizadoDM">la entidad a evalaur en bd</param>
+        /// <returns>true/false</returns>
+        public bool ValidarExisteMovilizado(MovilizadoDomainModel movilizadoDM)
+        {
+            bool respuesta = true;
+            try
+            {
+                Expression<Func<Movilizado, bool>> predicado = p => p.strNombre == movilizadoDM.StrNombre &&
+                 p.strApellidoPaterno == movilizadoDM.StrApellidoPaterno && p.strApellidoMaterno == movilizadoDM.StrApellidoMaterno &&
+                 p.Telefono.strNumeroCelular == movilizadoDM.TelefonoDomainModel.StrNumeroCelular
+                 && p.Direccion.strCalle == movilizadoDM.DireccionDomainModel.StrCalle
+                 && p.Direccion.strNumeroInterior == movilizadoDM.DireccionDomainModel.StrNumeroInterior
+                 && p.Direccion.idColonia == movilizadoDM.DireccionDomainModel.IdColonia && p.idStatus == (int)EnumStatus.Activo;
+                //retorno false si no encuentra a nadie con esos datos
+                respuesta = movilizadoRepository.Exists(predicado);
+            }
+            catch (Exception ex)
+            {
+                string mensajeErr = ex.Message;
+            }
+            return respuesta;
+        }
+
+
+        /// <summary>
+        /// Este metodo se encarga de contar cuantos movilizados se tienen hasta el momento
+        /// </summary>
+        /// <returns>
+        /// regresa el total de movilizados activos
+        /// </returns>
+        public int CountMovilizadosTotal()
+        {
+            try
+            {
+                return movilizadoRepository.GetAll().Count(p => p.idStatus == 1);
+            }
+            catch (Exception ex)
+            {
+                string mensajeErr = ex.Message;
+                return 0;
+            }
+        }
+
+
+
+
     }
 }

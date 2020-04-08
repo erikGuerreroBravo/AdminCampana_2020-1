@@ -186,8 +186,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
+    <Content Include="Content\card-presentation.css" />
     <Content Include="Content\css\priority-box.css" />
     <Content Include="Content\css\table-responsive.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTableCss\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.foundation.css" />
+    <Content Include="Content\DataTableCss\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTableCss\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.material.css" />
+    <Content Include="Content\DataTableCss\dataTables.material.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.semanticui.css" />
+    <Content Include="Content\DataTableCss\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTableCss\dataTables.uikit.css" />
+    <Content Include="Content\DataTableCss\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTableCss\jquery.dataTables.css" />
+    <Content Include="Content\DataTableCss\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTableCss\jquery.dataTables_themeroller.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -359,10 +379,32 @@
     <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.7-vsdoc.js" />
+
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
+
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.dataTables.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.dataTables.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.material.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTableJs\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTableJs\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTableJs\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTableJs\jquery.js" />
+
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
@@ -443,6 +485,9 @@
     <Content Include="Scripts\jquery-1.7.min.js" />
     <Content Include="Content\css\jquery-ui.min.css" />
     <Content Include="Content\js\jquery-ui.min.js" />
+    <Content Include="Scripts\manager\consultar-coordinador.js" />
+    <Content Include="Scripts\movilizador\validate-movilizador-acceso-form.js" />
+    <Content Include="Scripts\movilizador\validate-movilizador-form.js" />
     <Content Include="Scripts\persona\message-confirmation.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
@@ -463,6 +508,7 @@
     <Content Include="Views\Movilizado\_Drop.cshtml" />
     <Content Include="Views\Usuario\_Drop.cshtml" />
     <Content Include="Views\Usuario\_Update.cshtml" />
+
     <Content Include="Views\Graficas\p_General.cshtml" />
     <Content Include="Views\Graficas\p_Multinivel.cshtml" />
     <Content Include="Views\Graficas\p_Planilla.cshtml" />
@@ -473,6 +519,13 @@
     <Content Include="Views\AgendaActividades\_Agenda.cshtml" />
     <Content Include="Views\AgendaActividades\_Agregar.cshtml" />
     <Content Include="Views\AgendaActividades\_Editar.cshtml" />
+
+    <Content Include="Views\Account\RecoveryPassword.cshtml" />
+    <Content Include="Views\Account\SuccessRecoveryPassword.cshtml" />
+    <Content Include="Views\Error\DuplicateData.cshtml" />
+    <Content Include="Views\Error\NoEmailRecovery.cshtml" />
+    <Content Include="Views\Manager\Visualizacion.cshtml" />
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -487,6 +540,7 @@
     <Compile Include="Controllers\ConfiguracionController.cs" />
     <Compile Include="Controllers\GraficasController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\MetaController.cs" />
     <Compile Include="Controllers\MovilizadoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -497,9 +551,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
     <Compile Include="ViewModels\AgendaActividadesVM.cs" />
+
+    <Compile Include="Recursos\RecursosAdmin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursosAdmin.resx</DependentUpon>
+    </Compile>
+
     <Compile Include="ViewModels\ColoniaVM.cs" />
     <Compile Include="ViewModels\DireccionVM.cs" />
+    <Compile Include="ViewModels\EmailVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\MetaVM.cs" />
     <Compile Include="ViewModels\PerfilVM.cs" />
@@ -655,10 +718,20 @@
       <Project>{16486539-9151-41dd-b176-ae8e8225809a}</Project>
       <Name>AdminCampana_2020.Encript</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AdminCampana_2020.Message\AdminCampana_2020.Message.csproj">
+      <Project>{25e340b7-7009-4305-8ff4-f068edd1b186}</Project>
+      <Name>AdminCampana_2020.Message</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AdminCampana_2020.Repository\AdminCampana_2020.Repository.csproj">
       <Project>{7CE8DD96-ECF2-4247-8CE3-4611FD05D4E2}</Project>
       <Name>AdminCampana_2020.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Recursos\RecursosAdmin.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursosAdmin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
