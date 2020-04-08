@@ -1,23 +1,17 @@
-<<<<<<< HEAD
+
 ﻿@using System.Security.Claims
 @using System.Threading
 
-<html>
+@{
+    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+    }
 
-<head>
-    <!--Load the AJAX API-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
-@{var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;}
-<body>
-=======
+
 ﻿
     <!--Load the AJAX API-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
->>>>>>> impresion_graficas
     <noscript>
         <meta http-equiv="refresh" content="0;URL=@Url.Action("NoScript", "Error")" />
     </noscript>
@@ -40,12 +34,10 @@
                     <div class="box-header with-border">
                         <h5 class="box-title">
                             <label class="text-success emailtitleletter">
-<<<<<<< HEAD
+
                                 <i class="text-success"></i>
                                 Bienvenido:  @identity.Claims.Where(p => p.Type == "FullName").Select(p => p.Value).FirstOrDefault()
-=======
-                                Bienvenido: @*@ViewBag.Usuario*@
->>>>>>> impresion_graficas
+
                             </label>&nbsp;
 
                         </h5>
@@ -65,10 +57,7 @@
                                         <div class="panel-heading">
                                             <div class="panel-title">
                                                 Progreso General
-<<<<<<< HEAD
-=======
 
->>>>>>> impresion_graficas
                                             </div>
                                         </div>
                                         <div class="panel-body">
@@ -82,12 +71,12 @@
                                             </div>
                                         </div>
                                     </div>
-<<<<<<< HEAD
+
                                 </div>
 
-=======
+
                                 </div>*@
->>>>>>> impresion_graficas
+
                             </div>
 
                             <div class="row">
@@ -202,7 +191,7 @@
                             </div>
 
                             <div class="row">
-                                @Html.Partial("p_Campaña")
+                                @Html.Partial("p_Campania")
                                 @*<div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
@@ -257,7 +246,7 @@
                                     </div>
                                 </div>*@
 
-                                @Html.Partial("p_EnCampaña")
+                                @Html.Partial("p_EnCampania")
                                 @*<div class="col-lg-3">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
@@ -389,8 +378,8 @@
 
         var ctxMultinivel = document.getElementById('chBarMultinivel').getContext('2d');
         var ctxPlanillaGanadora = document.getElementById('chBarPlanillaGanadora').getContext('2d');
-        var ctxCampaña = document.getElementById('chBarCampaña').getContext('2d');
-        var ctxEnCampaña = document.getElementById('chBarEnCampaña').getContext('2d');
+        var ctxCampania = document.getElementById('chBarCampania').getContext('2d');
+        var ctxEnCampania = document.getElementById('chBarEnCampania').getContext('2d');
         var ctxRedesSociales = document.getElementById('chBarRedesSociales').getContext('2d');
 
         $.getJSON("/Meta/GetMovilizados").done((response) => {
@@ -507,7 +496,7 @@
                 }
             });
 
-            var Campaña = new Chart(ctxCampaña, {
+            var Campania = new Chart(ctxCampania, {
                 type: 'bar',
                 data: {
                     labels: ['Objetivo', 'Actual'],
@@ -536,7 +525,7 @@
                 }
             });
 
-            var EnCampaña = new Chart(ctxEnCampaña, {
+            var EnCampania = new Chart(ctxEnCampania, {
                 type: 'bar',
                 data: {
                     labels: ['Objetivo', 'Actual'],
@@ -602,8 +591,8 @@
 
             let priorityMultinivel = [];
             let priorityPlantilla = [];
-            let priorityCampaña = [];
-            let priorityEnCampaña = [];
+            let priorityCampania = [];
+            let priorityEnCampania = [];
             let priorityRedes = [];
 
             priorityMultinivel[0] = response[0][0] * .25;
@@ -614,13 +603,13 @@
             priorityPlantilla[1] = response[0][1] * .50;
             priorityPlantilla[2] = response[0][1] * .75;
 
-            priorityCampaña[0] = response[0][2] * .25;
-            priorityCampaña[1] = response[0][2] * .50;
-            priorityCampaña[2] = response[0][2] * .75;
+            priorityCampania[0] = response[0][2] * .25;
+            priorityCampania[1] = response[0][2] * .50;
+            priorityCampania[2] = response[0][2] * .75;
 
-            priorityEnCampaña[0] = response[0][3] * .25;
-            priorityEnCampaña[1] = response[0][3] * .50;
-            priorityEnCampaña[2] = response[0][3] * .75;
+            priorityEnCampania[0] = response[0][3] * .25;
+            priorityEnCampania[1] = response[0][3] * .50;
+            priorityEnCampania[2] = response[0][3] * .75;
 
             priorityRedes[0] = response[0][4] * .25;
             priorityRedes[1] = response[0][4] * .50;
@@ -630,35 +619,20 @@
             let progres = 100 * response[1][0] / response[0][0];
             $('#metaMultinivel').text(Math.trunc(progres) + "%");
             $('#progresoMultinivel').css("width", progres + "%");
-<<<<<<< HEAD
 
             progres = 100 * response[1][1] / response[0][1];
             $('#metaPlanilla').text(Math.trunc(progres) + "%");
             $('#progresoPlanilla').css("width", progres + "%");
 
             progres = 100 * response[1][2] / response[0][2];
-            $('#metaCampaña').text(Math.trunc(progres) + "%");
-            $('#progresoCampaña').css("width", progres + "%");
+            $('#metaCampania').text(Math.trunc(progres) + "%");
+            $('#progresoCampania').css("width", progres + "%");
 
             progres = 100 * response[1][3] / response[0][3];
-            $('#metaEnCampaña').text(Math.trunc(progres) + "%");
-            $('#progresoEnCampaña').css("width", progres + "%");
+            $('#metaEnCampania').text(Math.trunc(progres) + "%");
+            $('#progresoEnCampania').css("width", progres + "%");
 
-=======
 
-            progres = 100 * response[1][1] / response[0][1];
-            $('#metaPlanilla').text(Math.trunc(progres) + "%");
-            $('#progresoPlanilla').css("width", progres + "%");
-
-            progres = 100 * response[1][2] / response[0][2];
-            $('#metaCampaña').text(Math.trunc(progres) + "%");
-            $('#progresoCampaña').css("width", progres + "%");
-
-            progres = 100 * response[1][3] / response[0][3];
-            $('#metaEnCampaña').text(Math.trunc(progres) + "%");
-            $('#progresoEnCampaña').css("width", progres + "%");
-
->>>>>>> impresion_graficas
             progres = 100 * response[1][4] / response[0][4];
             $('#metaRed').text(Math.trunc(progres) + "%");
             $('#progresoRed').css("width", progres + "%");
@@ -695,33 +669,33 @@
             }
 
             //Campaña
-            if (response[1][2] < priorityCampaña[0]) {
-                $('#boxRedCampaña').addClass("boxRed");
-                $('#boxYellowCampaña').addClass("boxDefault");
-                $('#boxGreenCampaña').addClass("boxDefault");
-            } else if (response[1][2] >= priorityCampaña[0] && response[1][2] < priorityCampaña[1]) {
-                $('#boxRedCampaña').addClass("boxDefault");
-                $('#boxYellowCampaña').addClass("boxYellow");
-                $('#boxGreenCampaña').addClass("boxDefault");
-            } else if (response[1][2] >= priorityCampaña[2]) {
-                $('#boxRedCampaña').addClass("boxDefault");
-                $('#boxYellowCampaña').addClass("boxDefault");
-                $('#boxGreenCampaña').addClass("boxGreen");
+            if (response[1][2] < priorityCampania[0]) {
+                $('#boxRedCampania').addClass("boxRed");
+                $('#boxYellowCampania').addClass("boxDefault");
+                $('#boxGreenCampania').addClass("boxDefault");
+            } else if (response[1][2] >= priorityCampania[0] && response[1][2] < priorityCampania[1]) {
+                $('#boxRedCampania').addClass("boxDefault");
+                $('#boxYellowCampania').addClass("boxYellow");
+                $('#boxGreenCampania').addClass("boxDefault");
+            } else if (response[1][2] >= priorityCampania[2]) {
+                $('#boxRedCampania').addClass("boxDefault");
+                $('#boxYellowCampania').addClass("boxDefault");
+                $('#boxGreenCampania').addClass("boxGreen");
             }
 
             //EnCampaña
-            if (response[1][3] < priorityEnCampaña[0]) {
-                $('#boxRedEnCampaña').addClass("boxRed");
-                $('#boxYellowEnCampaña').addClass("boxDefault");
-                $('#boxGreenEnCampaña').addClass("boxDefault");
-            } else if (response[1][3] >= priorityEnCampaña[0] && response[1][3] < priorityEnCampaña[1]) {
-                $('#boxRedEnCampaña').addClass("boxDefault");
-                $('#boxYellowEnCampaña').addClass("boxYellow");
-                $('#boxGreenEnCampaña').addClass("boxDefault");
-            } else if (response[1][3] >= priorityEnCampaña[2]) {
-                $('#boxRedEnCampaña').addClass("boxDefault");
-                $('#boxYellowEnCampaña').addClass("boxDefault");
-                $('#boxGreenEnCampaña').addClass("boxGreen");
+            if (response[1][3] < priorityEnCampania[0]) {
+                $('#boxRedEnCampania').addClass("boxRed");
+                $('#boxYellowEnCampania').addClass("boxDefault");
+                $('#boxGreenEnCampania').addClass("boxDefault");
+            } else if (response[1][3] >= priorityEnCampania[0] && response[1][3] < priorityEnCampania[1]) {
+                $('#boxRedEnCampania').addClass("boxDefault");
+                $('#boxYellowEnCampania').addClass("boxYellow");
+                $('#boxGreenEnCampania').addClass("boxDefault");
+            } else if (response[1][3] >= priorityEnCampania[2]) {
+                $('#boxRedEnCampania').addClass("boxDefault");
+                $('#boxYellowEnCampania').addClass("boxDefault");
+                $('#boxGreenEnCampania').addClass("boxGreen");
             }
 
             //Redes

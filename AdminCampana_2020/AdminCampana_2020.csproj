@@ -466,8 +466,8 @@
     <Content Include="Views\Graficas\p_General.cshtml" />
     <Content Include="Views\Graficas\p_Multinivel.cshtml" />
     <Content Include="Views\Graficas\p_Planilla.cshtml" />
-    <Content Include="Views\Graficas\p_EnCampaña.cshtml" />
-    <Content Include="Views\Graficas\p_Campaña.cshtml" />
+    <Content Include="Views\Graficas\p_EnCampania.cshtml" />
+    <Content Include="Views\Graficas\p_Campania.cshtml" />
     <Content Include="Views\Graficas\p_RedesSociales.cshtml" />
     <Content Include="Views\AgendaActividades\Create.cshtml" />
     <Content Include="Views\AgendaActividades\_Agenda.cshtml" />
