@@ -48,6 +48,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -84,6 +87,9 @@
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -370,8 +376,15 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.7-vsdoc.js" />
+
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+
     <Content Include="Scripts\DataTableJs\dataTables.bootstrap.js" />
     <Content Include="Scripts\DataTableJs\dataTables.bootstrap.min.js" />
     <Content Include="Scripts\DataTableJs\dataTables.bootstrap4.js" />
@@ -391,6 +404,7 @@
     <Content Include="Scripts\DataTableJs\jquery.dataTables.js" />
     <Content Include="Scripts\DataTableJs\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTableJs\jquery.js" />
+
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
@@ -494,11 +508,24 @@
     <Content Include="Views\Movilizado\_Drop.cshtml" />
     <Content Include="Views\Usuario\_Drop.cshtml" />
     <Content Include="Views\Usuario\_Update.cshtml" />
+
+    <Content Include="Views\Graficas\p_General.cshtml" />
+    <Content Include="Views\Graficas\p_Multinivel.cshtml" />
+    <Content Include="Views\Graficas\p_Planilla.cshtml" />
+    <Content Include="Views\Graficas\p_EnCampania.cshtml" />
+    <Content Include="Views\Graficas\p_Campania.cshtml" />
+    <Content Include="Views\Graficas\p_RedesSociales.cshtml" />
+    <Content Include="Views\AgendaActividades\Create.cshtml" />
+    <Content Include="Views\AgendaActividades\_Agenda.cshtml" />
+    <Content Include="Views\AgendaActividades\_Agregar.cshtml" />
+    <Content Include="Views\AgendaActividades\_Editar.cshtml" />
+
     <Content Include="Views\Account\RecoveryPassword.cshtml" />
     <Content Include="Views\Account\SuccessRecoveryPassword.cshtml" />
     <Content Include="Views\Error\DuplicateData.cshtml" />
     <Content Include="Views\Error\NoEmailRecovery.cshtml" />
     <Content Include="Views\Manager\Visualizacion.cshtml" />
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -509,6 +536,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AgendaActividadesController.cs" />
     <Compile Include="Controllers\ConfiguracionController.cs" />
     <Compile Include="Controllers\GraficasController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -523,11 +551,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
+    <Compile Include="ViewModels\AgendaActividadesVM.cs" />
+
     <Compile Include="Recursos\RecursosAdmin.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RecursosAdmin.resx</DependentUpon>
     </Compile>
+
     <Compile Include="ViewModels\ColoniaVM.cs" />
     <Compile Include="ViewModels\DireccionVM.cs" />
     <Compile Include="ViewModels\EmailVM.cs" />

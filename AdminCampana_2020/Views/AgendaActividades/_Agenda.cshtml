@@ -1,0 +1,163 @@
+﻿
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group">
+            <div id="datepicker" class=""></div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="form-group">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Proximo Evento</th>
+                        <th>Fecha</th>
+                        <th>Lugar</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .event .ui-state-default {
+        background-color: greenyellow;
+        color: seagreen;
+    }
+</style>
+<script>
+
+    $('#datepicker').change(() => {
+
+        $('#dataUpdate div').remove();
+
+        let dateSelected = $('#datepicker').val();
+
+        $.getJSON("/AgendaActividades/ObtenerEventosPorFecha?fecha=" + dateSelected).done((response) => {
+
+
+            for (var i = 0; i < response.length; i++) {
+
+                let form = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">' +
+                    '<div class="panel panel-default">' +
+                    ' <div class="panel-heading">' +
+                    '<div class="panel-title" id="evento">' +
+                    'Datos del Evento' +
+                    ' </div>' +
+                    '</div>' +
+                    '<div class="panel-body">' +
+                    '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">' +
+                    ' <div class="form-group">' +
+                    '<label>Actividad</label>' +
+                    '<input type="text" class="form-control input-sm" id="txtActividad' + response[i].id + '"  name="'+response[i].id+'" />' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">' +
+                    '<div class="form-group">' +
+                    ' <label>Lugar</label>' +
+                    '<input type="text" class="form-control input-sm" id="txtLugar' + response[i].id + '" name="'+response[i].id+'"/>' +
+                    ' </div>' +
+                    '</div>' +
+                    ' <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">' +
+                    '<div class="form-group">' +
+                    ' <label>Descripción</label>' +
+                    '<input type="text" class="form-control input-sm" id="txtDescripcion' + response[i].id + '" name="'+response[i].id+'"/>' +
+                    ' </div>' +
+                    '</div>' +
+                    '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">' +
+                    '<div class="form-group">' +
+                    '<label>Hora de Inicio</label>' +
+                    '<input type="time" class="form-control input-sm" id="txtHoraInicio' + response[i].id + '" name="'+response[i].id+'"/>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">' +
+                    '<div class="form-group">' +
+                    ' <label>Hora de Termino</label>' +
+                    '<input type="time" class="form-control input-sm" id="txtHoraTermino' + response[i].id + '" name="'+response[i].id+'"/>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">' +
+                    ' <div class="form-group">' +
+                    '<label>Fecha</label>' +
+                    ' <input type="date" class="form-control input-sm" id="txtFecha' + response[i].id + '" name="'+response[i].id+'"/>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+
+               
+                $("#dataUpdate").append(form);
+                $('#txtActividad' + response[i].id).val(response[i].strActividad);
+                $('#txtLugar' + response[i].id).val(response[i].strLugar);
+                $('#txtDescripcion' + response[i].id).val(response[i].strDescripcion);
+                $('#txtHoraInicio' + response[i].id).val(response[i].strHoraInicio);
+                $('#txtHoraTermino' + response[i].id).val(response[i].strHoraTermino);
+                $('#txtFecha' + response[i].id).val(response[i].Fecha);
+               
+                $("input[type=text],input[type=date],input[type=time],input[type=time]").blur(function (response) {
+
+                    let id = response.target.attributes.name.value;
+
+                     AgendaActividadesVM = {};
+
+                    AgendaActividadesVM.id = id;
+                    AgendaActividadesVM.strActividad = $("#txtActividad"+id).val();
+                    AgendaActividadesVM.strLugar = $("#txtLugar" + id).val();
+                    AgendaActividadesVM.strDescripcion = $("#txtDescripcion" + id).val();
+                    AgendaActividadesVM.strHoraInicio = $("#txtHoraInicio"+id).val();
+                    AgendaActividadesVM.strHoraTermino = $("#txtHoraTermino"+id).val();
+                    AgendaActividadesVM.dteFecha = $("#txtFecha"+id).val();
+
+                    $.post("/AgendaActividades/ActualizarActividades", AgendaActividadesVM).done(function ()
+                    {
+                        FillCalendar();
+                    });
+                });
+
+            }
+        });
+
+    });
+
+
+
+    $(function () {
+
+        $.getJSON("/AgendaActividades/ObtenerProximosEventos").done((response) => {
+
+            for (var i = 0; i < response.length; i++) {
+                console.log(response[i].Fecha)
+                $('#dataTable').append("<tr><td> " + response[i].strActividad + " </td><td> " + response[i].Fecha + " </td><td> " + response[i].strLugar + " </td></tr>");
+            }
+
+        });
+
+
+        $.get("/AgendaActividades/ObtenerActividades").done(function (response) {
+
+            let fechas = [];
+
+            for (var i = 0; i < response.length; i++) {
+
+                fechas.push(response[i].Fecha);
+
+            }
+
+            $("#datepicker").datepicker({
+                dateFormat: 'yy-mm-dd',
+                numberOfMonths: 1,
+                beforeShowDay: function (date) {
+
+                    var formattedDate = jQuery.datepicker.formatDate("dd/mm/yy", date);
+                    return [true, (fechas.indexOf(formattedDate) == -1) ? "" : "event",];
+                }
+            });
+        });
+    })
+</script>

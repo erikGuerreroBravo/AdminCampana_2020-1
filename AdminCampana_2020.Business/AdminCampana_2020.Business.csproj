@@ -42,8 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgendaActividadesBusiness.cs" />
     <Compile Include="ColoniaBusiness.cs" />
+
+    <Compile Include="Interface\IAgendaActividadesBusiness.cs" />
+
     <Compile Include="Enum\EnumStatus.cs" />
+
     <Compile Include="Interface\IColoniaBusiness.cs" />
     <Compile Include="Interface\IMetaBusiness.cs" />
     <Compile Include="Interface\IPerfilBusiness.cs" />
