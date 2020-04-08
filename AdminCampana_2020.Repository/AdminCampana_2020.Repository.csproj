@@ -59,6 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgendaActividades.cs">
+      <DependentUpon>BdRegistroCampana2020.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AgendaActividadesRepository.cs" />
     <Compile Include="Auditoria.cs">
       <DependentUpon>BdRegistroCampana2020.tt</DependentUpon>
     </Compile>

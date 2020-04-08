@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgendaActividadesDomainModel.cs" />
     <Compile Include="AuditoriaDomainModel.cs" />
     <Compile Include="ColoniaDomainModel.cs" />
     <Compile Include="DireccionDomainModel.cs" />

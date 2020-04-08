@@ -63,6 +63,11 @@ namespace AdminCampana_2020.Infraestructure
             CreateMap<StatusVM,StatusDomainModel>();
             CreateMap<StatusDomainModel,StatusVM>();
 
+            //AgendaActividades
+
+            CreateMap<AgendaActividadesVM,AgendaActividadesDomainModel>();
+            CreateMap<AgendaActividadesDomainModel,AgendaActividadesVM>();
+
         }
 
         public static void Run()

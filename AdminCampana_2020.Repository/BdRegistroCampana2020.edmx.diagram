@@ -31,6 +31,7 @@
         <AssociationConnector Association="RC2020Model.FK_Usuario_Status" />
         <AssociationConnector Association="RC2020Model.FK_Usuario_Rol_Usuario" />
         <AssociationConnector Association="RC2020Model.FK_Usuario_Usuario" />
+        <EntityTypeShape EntityType="RC2020Model.AgendaActividades" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
